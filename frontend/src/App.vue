@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <div id="no-footer">
+  <div class="app">
+    <div class="content">
       <div id="nav">
         <router-link to="/">Home</router-link> |
         <router-link to="/user/login">My Account</router-link> |
@@ -9,10 +9,7 @@
       </div>
       <router-view />
     </div>
-
-    <div id="footer">
-      <Footer />
-    </div>
+    <Footer class="footer" />
   </div>
 </template>
 
@@ -28,14 +25,15 @@ export default {
 </script>
 
 <style>
-#app {
+.app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  position: relative;
-  min-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 #nav {
@@ -51,15 +49,12 @@ export default {
   color: #42b983;
 }
 
-#no-footer {
-  width: 100%;
-  padding-bottom: 2.5rem;
+.content {
+  flex: 1 0 auto;
 }
 
-#footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 2.5rem;
+.footer {
+  flex-shrink: 0;
+  padding-bottom: 15px;
 }
 </style>
