@@ -1,11 +1,13 @@
 <template>
   <div>
-    <h1>claw machine</h1>
+    <h3>claw machine</h3>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'ClawMachine',
+}
 </script>
 
 <style></style>
