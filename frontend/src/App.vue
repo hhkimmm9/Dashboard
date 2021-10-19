@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <div id="no-footer">
+  <div class="app">
+    <div class="content">
       <div id="nav">
         <router-link to="/">Home</router-link> |
         <router-link to="/user/login">My Account</router-link> |
@@ -10,7 +10,6 @@
       </div>
       <router-view />
     </div>
-
     <Footer />
   </div>
 </template>
@@ -27,7 +26,7 @@ export default {
 </script>
 
 <style>
-#app {
+.app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
