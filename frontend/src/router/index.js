@@ -9,6 +9,9 @@ import Todos from '../views/todos/Todos'
 import PostsList from '../views/posts/PostsList'
 import PostUpload from '../views/posts/PostUpload'
 import PostDetail from '../views/posts/PostDetail'
+import PortfolioList from '../views/portfolios/PortfolioList'
+import ClawMachine from '../views/portfolios/clawmachine/ClawMachine'
+import CampusMap from '../views/portfolios/campusmap/CampusMap'
 
 Vue.use(VueRouter)
 
@@ -57,6 +60,21 @@ const routes = [
     path: '/post/detail/:id',
     name: 'PostDetail',
     component: PostDetail,
+  },
+  {
+    path: '/portfolios',
+    name: 'PortfolioList',
+    component: PortfolioList,
+  },
+  {
+    path: '/portfolios/clawmachine',
+    name: 'ClawMachine',
+    component: ClawMachine,
+  },
+  {
+    path: '/portfolios/campusmap',
+    name: 'CampusMap',
+    component: CampusMap,
   },
 ]
 

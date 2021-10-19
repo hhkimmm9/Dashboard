@@ -6,10 +6,11 @@
         <router-link to="/user/login">My Account</router-link> |
         <router-link to="/todos">Todos</router-link> |
         <router-link to="/post">Market</router-link> |
+        <router-link to="/portfolios">Portfolios</router-link>
       </div>
       <router-view />
     </div>
-    <Footer class="footer" />
+    <Footer />
   </div>
 </template>
 
@@ -31,9 +32,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
 
 #nav {
@@ -49,12 +50,9 @@ export default {
   color: #42b983;
 }
 
-.content {
-  flex: 1 0 auto;
-}
-
-.footer {
-  flex-shrink: 0;
-  padding-bottom: 15px;
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>
