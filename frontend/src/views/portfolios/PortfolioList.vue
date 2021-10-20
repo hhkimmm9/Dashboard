@@ -19,5 +19,7 @@ export default {
 </script>
 
 <style>
-/*remove list dot  */
+ul {
+  list-style-type: none;
+}
 </style>
