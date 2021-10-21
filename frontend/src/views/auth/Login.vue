@@ -3,46 +3,46 @@
     <div v-if="!getIsSignedIn">
       <h1>Sign In</h1>
       <div class="form">
-        <b-form @submit="onSubmit">
-          <b-form-group id="input-group-1" label-for="input-1">
-            <b-form-input
-              id="input-1"
-              v-model="form.email"
-              type="email"
-              placeholder="Enter email"
-              required
-            ></b-form-input>
-          </b-form-group>
-
-          <b-form-group id="input-group-2" label-for="input-2">
-            <b-form-input
-              id="input-2"
-              v-model="form.password"
-              type="password"
-              placeholder="Enter password"
-              required
-            ></b-form-input>
-          </b-form-group>
-
-          <b-button type="submit" variant="outline-primary" class="button"
-            >Login</b-button
-          >
-
+        <form @submit="onSubmit">
+          <div class="form-group">
+            <div class="input-group">
+              <label for="input-1">E-mail</label>
+              <input
+                type="email"
+                id="input-1"
+                placeholder="Enter your e-mail..."
+                v-model="form.email"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="input-2">Password</label>
+              <input
+                type="password"
+                id="input-2"
+                placeholder="Enter your password..."
+                v-model="form.password"
+                required
+              />
+            </div>
+          </div>
+          <input type="submit" value="Sign in" />
           <div class="link-to-register">
             New to here?
             <router-link to="/user/register" class="button">
               Register
             </router-link>
           </div>
-        </b-form>
+        </form>
       </div>
     </div>
+
     <div v-if="getIsSignedIn">
       <h1>My Account</h1>
       <div class="button-group">
         <!-- TODO: this has to be a link to a profile edit page. -->
-        <b-button>Edit Profile</b-button>
-        <b-button @click="logoutHandler">Log Out</b-button>
+        <button>Edit Profile</button>
+        <button @click="logoutHandler">Log Out</button>
       </div>
     </div>
   </div>
@@ -91,21 +91,18 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  width: 30%;
+.form-group {
+  flex-direction: column;
 }
 
-.form {
-  margin-top: 25px;
+.input-group {
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  padding: 15px;
 }
 
-.button {
-  margin: 10px 5px;
-}
-
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  margin: 70px;
+.link-to-register {
+  margin-top: 10px;
 }
 </style>

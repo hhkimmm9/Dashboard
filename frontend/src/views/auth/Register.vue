@@ -2,52 +2,53 @@
   <div class="container">
     <h1>Register</h1>
     <div class="form">
-      <b-form @submit="onSubmit">
-        <b-form-group id="input-group-1" label-for="input-1">
-          <b-form-input
-            id="input-1"
-            v-model="form.email"
-            type="email"
-            placeholder="Enter email"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group id="input-group-2" label-for="input-2">
-          <b-form-input
-            id="input-2"
-            v-model="form.username"
-            placeholder="Enter username"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group id="input-group-3" label-for="input-3">
-          <b-form-input
-            id="input-3"
-            v-model="form.password"
-            type="password"
-            min="6"
-            placeholder="Enter password"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group id="input-group-4" label-for="input-4">
-          <b-form-input
-            id="input-4"
-            v-model="form.confirmPassword"
-            type="password"
-            min="6"
-            placeholder="To confirm your password"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-button type="submit" variant="outline-primary" id="button"
-          >Register</b-button
-        >
-      </b-form>
+      <form @submit="onSubmit">
+        <div class="form-group">
+          <div class="input-group">
+            <label for="input-1">E-mail</label>
+            <input
+              type="email"
+              id="input-1"
+              placeholder="Enter your e-mail..."
+              v-model="form.email"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="input-2">Username</label>
+            <input
+              type="text"
+              id="input-2"
+              placeholder="Enter your username..."
+              v-model="form.username"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="input-3">Password</label>
+            <input
+              type="password"
+              id="input-3"
+              placeholder="Enter your password..."
+              min="6"
+              v-model="form.password"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="input-4">Confirm Your Password</label>
+            <input
+              type="password"
+              id="input-4"
+              placeholder="Enter your password..."
+              min="6"
+              v-model="form.confirmPassword"
+              required
+            />
+          </div>
+        </div>
+        <input type="submit" value="Create" />
+      </form>
     </div>
   </div>
 </template>
@@ -72,8 +73,8 @@ export default {
   methods: {
     ...mapActions(['register']),
 
-    onSubmit(event) {
-      event.preventDefault()
+    onSubmit(e) {
+      e.preventDefault()
 
       // validation: if password === confirmPassword, when passed, vuex: dispatch the form data.
       // look for a library to validate the user input >> bootstrap-vue will do.
@@ -96,15 +97,10 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  width: 35%;
-}
-
-.form {
-  margin-top: 25px;
-}
-
-#button {
-  margin: 10px 5px;
+.input-group {
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  padding: 10px;
 }
 </style>
