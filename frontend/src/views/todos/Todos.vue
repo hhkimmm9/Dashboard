@@ -73,6 +73,10 @@ export default {
   width: 50%;
 }
 
+button {
+  margin-top: 10px;
+}
+
 .form {
   margin: 20px;
 }

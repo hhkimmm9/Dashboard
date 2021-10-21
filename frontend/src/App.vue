@@ -10,7 +10,7 @@
       </div>
       <router-view />
     </div>
-    <Footer />
+    <Footer class="footer" />
   </div>
 </template>
 
@@ -32,9 +32,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  position: relative;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 #nav {
@@ -50,9 +50,12 @@ export default {
   color: #42b983;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+.content {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+  padding-bottom: 15px;
 }
 </style>
