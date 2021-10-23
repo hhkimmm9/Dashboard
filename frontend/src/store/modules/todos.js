@@ -35,7 +35,7 @@ const actions = {
         {
           title: newTodo.title,
           description: newTodo.description,
-          urgent: newTodo.urgent,
+          flag: newTodo.flag,
         },
         config
       )
@@ -67,13 +67,11 @@ const actions = {
       .patch(
         `http://localhost:5000/api/todos/patch/${target._id}`,
         {
-          urgent: !target.urgent,
+          flag: !target.flag,
         },
         config
       )
-      .then((res) =>
-        commit('updateTodo', { ...target, urgent: !target.urgent })
-      )
+      .then((res) => commit('updateTodo', { ...target, flag: !target.flag }))
       .catch((err) => alert(err))
   },
 
