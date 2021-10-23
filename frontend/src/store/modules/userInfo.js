@@ -44,8 +44,6 @@ const actions = {
 }
 
 const mutations = {
-  // TODO: think about what state info should be stored.
-  // registeredUser: (state, regUser) => (state.userInfo = regUser),
   signedIn: (state, signStatus) => (state.signedIn = signStatus),
   setUserInfo: (state, userInfo) => (state.userInfo = userInfo),
   logout: (state) => ((state.signedIn = false), (userInfo = null)),

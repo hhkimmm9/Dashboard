@@ -19,8 +19,8 @@
 
     <!-- go-back button -->
     <div class="button-group">
-      <b-button to="/post">Go back</b-button>
-      <b-button @click="deletePostReq" v-if="poster">Delete Post</b-button>
+      <button to="/post">Go back</button>
+      <button @click="deletePostReq" v-if="poster">Delete Post</button>
     </div>
   </div>
 </template>
