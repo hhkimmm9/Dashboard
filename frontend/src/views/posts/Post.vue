@@ -1,18 +1,14 @@
 <template>
   <div id="container">
     <div @click="readPostDetail" class="post-card">
-      <b-card>
-        <div class="product-image">
-          <img src="../../../public/1554925025552.png" alt="" />
-        </div>
+      <img src="../../../public/_32357-top-nav-sale-OS.png" alt="temp img" />
 
-        <div class="product-details">
-          <h1>{{ postItem.title }}</h1>
-          <p>$ {{ postItem.price }}</p>
-          <p>{{ postItem.category }}</p>
-          <p>{{ postItem.description }}</p>
-        </div>
-      </b-card>
+      <div class="product-details">
+        <h1>{{ postItem.title }}</h1>
+        <p>$ {{ postItem.price }}</p>
+        <p>{{ postItem.category }}</p>
+        <p>{{ postItem.description }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -36,27 +32,18 @@ export default {
 <style scoped>
 .post-card {
   margin: 30px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  display: flex;
+}
+
+.post-card img {
+  width: 150px;
+  border: 1px solid #ccc;
 }
 
 .product-details {
-  position: relative;
+  margin-left: 30px;
   text-align: left;
-  /* overflow: hidden; */
-  /* padding: 30px; */
-  /* height: 100%; */
-  float: right;
-  width: 60%;
-  margin-top: 15px;
-}
-
-.product-image {
-  /* transition: all 0.3s ease-out; */
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  /* height: 100%; */
-  float: left;
-  width: 40%;
-  /* display: inline-block; */
 }
 </style>
