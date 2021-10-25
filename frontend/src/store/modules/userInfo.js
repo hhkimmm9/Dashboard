@@ -46,7 +46,7 @@ const actions = {
 const mutations = {
   signedIn: (state, signStatus) => (state.signedIn = signStatus),
   setUserInfo: (state, userInfo) => (state.userInfo = userInfo),
-  logout: (state) => ((state.signedIn = false), (userInfo = null)),
+  logout: (state) => ((state.signedIn = false), (state.userInfo = null)),
 }
 
 export default {

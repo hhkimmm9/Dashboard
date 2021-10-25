@@ -80,9 +80,6 @@ export default {
     logoutHandler() {
       this.logout()
       localStorage.removeItem('auth-token')
-      // this.clearTodos()
-      location.reload()
-      // clear state or refresh the page? which one would be a better practice?
     },
   },
 
