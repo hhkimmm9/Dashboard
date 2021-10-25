@@ -3,7 +3,7 @@
     <h1>Market</h1>
 
     <!-- Only if logged in -->
-    <b-button @click="clickHandler" v-if="signedIn">Post</b-button>
+    <button @click="clickHandler" v-if="signedIn">Post</button>
 
     <div v-for="post in getPosts" :key="post.id">
       <Post :postItem="post" />
@@ -50,7 +50,5 @@ export default {
 
 <style scoped>
 #container {
-  width: 80%;
-  margin: auto;
 }
 </style>

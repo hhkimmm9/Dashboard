@@ -1,33 +1,39 @@
 <template>
-  <div class="form">
-    <b-form @submit="onSubmit">
-      <b-form-group id="input-group-1" label-for="input-1">
-        <b-form-input
-          id="input-1"
+  <form @submit="onSubmit">
+    <div class="form-group">
+      <div class="input-group">
+        <label for="form-title">Title</label>
+        <input
+          type="text"
+          id="form-title"
+          placeholder="Enter title..."
           v-model="form.title"
-          placeholder="Enter title"
           required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-2" label-for="input-2">
-        <b-form-textarea
-          id="input-2"
+        />
+      </div>
+      <div class="input-group">
+        <label for="form-desc">Description</label>
+        <input
+          type="text"
+          id="form-dsec"
+          placeholder="Enter description..."
           v-model="form.description"
-          placeholder="Enter description"
-          rows="6"
-          no-resize
-          required
-        ></b-form-textarea>
-      </b-form-group>
-
-      <!-- TODO: OPTION SELECTOR: URGENT -->
-
-      <!-- TODO: DATE PICKER -->
-
-      <b-button type="submit" variant="outline-primary">Submit</b-button>
-    </b-form>
-  </div>
+          reqired
+        />
+      </div>
+      <div class="flag-group">
+        <input
+          type="checkbox"
+          id="form-flag"
+          name="form-flag"
+          value="flag"
+          v-model="form.flag"
+        />
+        <label for="form-flag">Flag</label>
+      </div>
+    </div>
+    <input type="submit" value="Add todo" />
+  </form>
 </template>
 
 <script>
@@ -41,7 +47,7 @@ export default {
       form: {
         title: '',
         description: '',
-        urgent: false,
+        flag: false,
       },
     }
   },
@@ -57,12 +63,25 @@ export default {
       this.addTodo({
         title: this.form.title,
         description: this.form.description,
-        urgent: this.form.urgent,
+        flag: this.form.flag,
       })
 
       this.form.title = ''
       this.form.description = ''
+      this.form.flag = false
     },
   },
 }
 </script>
+
+<style scoped>
+.input-group {
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.flag-group > label {
+  padding: 10px;
+}
+</style>

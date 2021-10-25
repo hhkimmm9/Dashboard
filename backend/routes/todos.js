@@ -23,7 +23,7 @@ router.post('/add', verify, (req, res) => {
   const newTodo = new Todo({
     title: req.body.title,
     description: req.body.description,
-    urgent: req.body.urgent,
+    flag: req.body.flag,
     userId: userId._id,
   })
 
@@ -50,7 +50,7 @@ router.patch('/patch/:id', verify, (req, res) => {
 
   Todo.updateOne(
     { _id: req.params.id, userId: userId._id },
-    { urgent: req.body.urgent }
+    { flag: req.body.flag }
   )
     .then((data) => res.json(data))
     .catch((err) => res.status(400).send('Error: ' + err))

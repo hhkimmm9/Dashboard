@@ -11,7 +11,7 @@ const todoSchema = new Schema(
       type: String,
       required: true,
     },
-    urgent: {
+    flag: {
       type: Boolean,
     },
     userId: {

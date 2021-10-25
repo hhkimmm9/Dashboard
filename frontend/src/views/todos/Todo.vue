@@ -1,7 +1,7 @@
 <template>
   <div
-    @dblclick="$emit('switchUrgent', todoItem)"
-    :class="[todoItem.urgent ? 'urgent' : '', 'todo']"
+    @dblclick="$emit('switchFlag', todoItem)"
+    :class="[todoItem.flag ? 'flag' : '', 'todo']"
   >
     <h4>
       {{ todoItem.title }}
@@ -29,7 +29,7 @@ export default {
   cursor: pointer;
 }
 
-.todo.urgent {
+.todo.flag {
   border-left: 5px solid red;
 }
 

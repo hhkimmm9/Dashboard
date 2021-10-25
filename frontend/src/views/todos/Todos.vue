@@ -14,7 +14,7 @@
     <!-- <div v-for="item in allTodos" :key="item.id" id="todoList"> -->
     <div v-for="item in allTodos" :key="item.id" id="todoList">
       <Todo
-        @switchUrgent="updateThenFetch"
+        @switchFlag="updateThenFetch"
         @deleteTodo="deleteTodo"
         :todoItem="item"
       />
@@ -53,6 +53,7 @@ export default {
 
     // what other ways to rerender the list after update them?
     async updateThenFetch(target) {
+      console.log(target)
       await this.updateTodo(target)
       this.fetchTodos()
     },
