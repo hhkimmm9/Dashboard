@@ -1,10 +1,10 @@
 <template>
-  <div id="container">
+  <div class="container">
     <!-- image of ths product -->
 
     <!-- detail of the product -->
-    <div id="postDetail">
-      <img src="../../../public/1554925025552.png" alt="temp image" />
+    <div class="postDetail">
+      <img src="../../../public/_32357-top-nav-sale-OS.png" alt="temp img" />
       <h1>
         {{ getPostDetail.title }}
       </h1>
@@ -19,7 +19,8 @@
 
     <!-- go-back button -->
     <div class="button-group">
-      <button to="/post">Go back</button>
+      <!-- TODO: this should look like a button -->
+      <router-link to="/post">Go back</router-link>
       <button @click="deletePostReq" v-if="poster">Delete Post</button>
     </div>
   </div>
@@ -64,18 +65,19 @@ export default {
 </script>
 
 <style scoped>
-#container {
-  width: 40%;
-  margin: auto;
+.container {
 }
 
-#postDetail {
-  margin: 50px;
+.postDetail {
+}
+
+.postDetail img {
+  width: 200px;
+  border: 1px solid #ccc;
 }
 
 .button-group {
   display: flex;
   justify-content: space-around;
-  margin: 120px;
 }
 </style>

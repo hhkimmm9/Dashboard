@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Post Ad</h1>
 
-    <form @submit="onSubmt">
+    <form @submit="onSubmit">
       <div class="input-group">
         <label for="post-title">Title</label>
         <input type="text" id="post-title" v-model="form.title" required />
@@ -26,7 +26,7 @@
         <input
           type="text"
           id="post-desc"
-          v-model="post.description"
+          v-model="form.description"
           required
           row="7"
         />
