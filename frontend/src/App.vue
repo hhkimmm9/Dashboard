@@ -5,6 +5,7 @@
         <router-link to="/">Home</router-link> |
         <router-link to="/user/login">My Account</router-link> |
         <router-link to="/todos">Todos</router-link> |
+        <router-link to="/lunchpicker">Today's lunch</router-link> |
         <router-link to="/post">Market</router-link> |
         <router-link to="/portfolios">Portfolios</router-link>
       </div>

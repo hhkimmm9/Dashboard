@@ -6,6 +6,7 @@ import About from '../views/About'
 import Login from '../views/auth/Login'
 import Register from '../views/auth/Register'
 import Todos from '../views/todos/Todos'
+import LunchPicker from '../views/LunchPicker'
 import PostsList from '../views/posts/PostsList'
 import PostUpload from '../views/posts/PostUpload'
 import PostDetail from '../views/posts/PostDetail'
@@ -45,6 +46,11 @@ const routes = [
     path: '/todos',
     name: 'Todos',
     component: Todos,
+  },
+  {
+    path: '/lunchpicker',
+    name: 'LunchPicker',
+    component: LunchPicker,
   },
   {
     path: '/post/',
