@@ -1,55 +1,55 @@
 <template>
   <div class="container">
-    <h1>Register</h1>
-    <div class="form">
-      <form @submit="onSubmit">
-        <div class="form-group">
-          <div class="input-group">
-            <label for="input-1">E-mail</label>
-            <input
-              type="email"
-              id="input-1"
-              placeholder="Enter your e-mail..."
-              v-model="form.email"
-              required
-            />
-          </div>
-          <div class="input-group">
-            <label for="input-2">Username</label>
-            <input
-              type="text"
-              id="input-2"
-              placeholder="Enter your username..."
-              v-model="form.username"
-              required
-            />
-          </div>
-          <div class="input-group">
-            <label for="input-3">Password</label>
-            <input
-              type="password"
-              id="input-3"
-              placeholder="Enter your password..."
-              min="6"
-              v-model="form.password"
-              required
-            />
-          </div>
-          <div class="input-group">
-            <label for="input-4">Confirm Your Password</label>
-            <input
-              type="password"
-              id="input-4"
-              placeholder="Enter your password..."
-              min="6"
-              v-model="form.confirmPassword"
-              required
-            />
-          </div>
+    <h2>Register</h2>
+
+    <form @submit="onSubmit">
+      <div id="input-field-group">
+        <div class="input-field">
+          <label for="input-1">E-mail</label>
+          <input
+            type="email"
+            id="input-1"
+            placeholder="Enter your e-mail..."
+            v-model="form.email"
+            required
+          />
         </div>
-        <input type="submit" value="Create" />
-      </form>
-    </div>
+        <div class="input-field">
+          <label for="input-2">Username</label>
+          <input
+            type="text"
+            id="input-2"
+            placeholder="Enter your username..."
+            v-model="form.username"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <label for="input-3">Password</label>
+          <input
+            type="password"
+            id="input-3"
+            placeholder="Enter your password..."
+            min="6"
+            v-model="form.password"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <label for="input-4">Confirm Your Password</label>
+          <input
+            type="password"
+            id="input-4"
+            placeholder="Enter your password..."
+            min="6"
+            v-model="form.confirmPassword"
+            required
+          />
+        </div>
+      </div>
+
+      <input type="submit" value="Create" />
+    </form>
   </div>
 </template>
 
@@ -97,10 +97,22 @@ export default {
 </script>
 
 <style scoped>
-.input-group {
-  flex-direction: column;
+form {
+  padding: 15px;
+}
+
+#input-field-group {
+  margin: 10px auto;
   width: 50%;
-  margin: auto;
-  padding: 10px;
+}
+
+.input-field {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+form > input {
+  margin: 20px;
 }
 </style>
