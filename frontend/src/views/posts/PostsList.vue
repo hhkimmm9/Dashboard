@@ -3,7 +3,7 @@
     <h1>Post List</h1>
 
     <!-- Only if logged in -->
-    <button @click="clickHandler" v-if="signedIn">Post</button>
+    <button v-if="signedIn" @click="clickHandler">Post</button>
 
     <div id="post-card" v-for="post in getPosts" :key="post.id">
       <PostCard :postItem="post" />
@@ -17,20 +17,17 @@ import PostCard from './PostCard'
 
 export default {
   name: 'PostList',
+
   data() {
     return {
       signedIn: false,
     }
   },
+
   components: {
     PostCard,
   },
-  methods: {
-    ...mapActions(['fetchPosts']),
-    clickHandler() {
-      this.$router.replace('/post/upload')
-    },
-  },
+
   mounted() {
     this.fetchPosts()
 
@@ -38,6 +35,14 @@ export default {
       this.signedIn = true
     }
   },
+
+  methods: {
+    ...mapActions(['fetchPosts']),
+    clickHandler() {
+      this.$router.replace('/post/upload')
+    },
+  },
+
   computed: mapGetters(['getPosts']),
 }
 </script>

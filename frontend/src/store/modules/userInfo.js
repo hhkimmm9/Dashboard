@@ -29,6 +29,7 @@ const actions = {
       })
       .then((res) => {
         localStorage.setItem('auth-token', res.data.authToken)
+
         commit('signedIn', res.data.isSignedIn)
         commit('setUserInfo', res.data.userInfo)
       })

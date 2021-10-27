@@ -3,6 +3,7 @@
     <h3>
       {{ getPostDetail.title }}
     </h3>
+
     <img src="../../../public/_32357-top-nav-sale-OS.png" alt="temp img" />
 
     <div id="post-detail">
@@ -23,12 +24,14 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'PostDetail',
+
   data() {
     return {
       id: this.$route.params.id,
       poster: false,
     }
   },
+
   async created() {
     await this.fetchPostDetail(this.$route.params.id)
 
@@ -39,6 +42,7 @@ export default {
       this.poster = true
     }
   },
+
   methods: {
     ...mapActions(['fetchPost', 'fetchPostDetail', 'deletePost']),
 
@@ -48,6 +52,7 @@ export default {
       this.$router.replace('/post')
     },
   },
+
   computed: mapGetters(['getPostDetail', 'getUserInfo']),
 }
 </script>

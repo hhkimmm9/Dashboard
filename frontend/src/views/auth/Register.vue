@@ -5,44 +5,44 @@
     <form @submit="onSubmit">
       <div id="input-field-group">
         <div class="input-field">
-          <label for="input-1">E-mail</label>
+          <label for="register-email">E-mail</label>
           <input
-            type="email"
-            id="input-1"
-            placeholder="Enter your e-mail..."
             v-model="form.email"
+            id="register-email"
+            placeholder="Enter your e-mail..."
+            type="email"
             required
           />
         </div>
         <div class="input-field">
-          <label for="input-2">Username</label>
+          <label for="register-username">Username</label>
           <input
-            type="text"
-            id="input-2"
-            placeholder="Enter your username..."
             v-model="form.username"
+            id="register-username"
+            placeholder="Enter your username..."
+            type="text"
             required
           />
         </div>
         <div class="input-field">
-          <label for="input-3">Password</label>
+          <label for="register-password">Password</label>
           <input
-            type="password"
-            id="input-3"
-            placeholder="Enter your password..."
-            min="6"
             v-model="form.password"
+            id="register-password"
+            placeholder="Enter your password..."
+            type="password"
+            min="6"
             required
           />
         </div>
         <div class="input-field">
-          <label for="input-4">Confirm Your Password</label>
+          <label for="register-confirm-password">Confirm Your Password</label>
           <input
-            type="password"
-            id="input-4"
-            placeholder="Enter your password..."
-            min="6"
             v-model="form.confirmPassword"
+            id="register-confirm-password"
+            placeholder="Enter your password..."
+            type="password"
+            min="6"
             required
           />
         </div>
@@ -75,7 +75,6 @@ export default {
 
     onSubmit(e) {
       e.preventDefault()
-
       // validation: if password === confirmPassword, when passed, vuex: dispatch the form data.
       // look for a library to validate the user input >> bootstrap-vue will do.
       if (this.form.password === this.form.confirmPassword) {

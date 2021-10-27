@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <h1>Todo List</h1>
-    <!-- TODO: only if logged in -->
+
+    <!-- TODO: make it available only if a user is signed in -->
     <Button
       @btn-click="toggleForm"
       :text="isSetToShow ? 'Hide Form' : 'Add Todo'"
@@ -31,21 +32,25 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'TodosList',
+
   components: {
     NewTodoForm,
     TodoCard,
     Button,
   },
+
   data() {
     return {
       isSetToShow: false,
     }
   },
+
   created() {
     if (localStorage.getItem('auth-token')) {
       this.fetchTodos()
     }
   },
+
   methods: {
     ...mapActions(['fetchTodos', 'deleteTodo', 'updateTodo']),
 
@@ -53,12 +58,14 @@ export default {
     toggleForm() {
       this.isSetToShow = !this.isSetToShow
     },
+
     // what other ways to rerender the list after update them?
     async updateThenFetch(target) {
       await this.updateTodo(target)
       this.fetchTodos()
     },
   },
+
   computed: mapGetters(['allTodos']),
 }
 </script>

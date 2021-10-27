@@ -1,29 +1,37 @@
 <template>
   <form @submit="onSubmit">
-    <div class="input-group">
-      <label for="form-title">Title</label>
-      <input
-        v-model="form.title"
-        placeholder="Enter title..."
-        id="form-title"
-        type="text"
-        required
-      />
+    <div class="input-field-group">
+      <div class="input-field">
+        <label for="todo-title">Title</label>
+        <input
+          v-model="form.title"
+          id="todo-title"
+          placeholder="Enter title..."
+          type="text"
+          required
+        />
+      </div>
+      <div class="input-field">
+        <label for="todo-desc">Description</label>
+        <input
+          v-model="form.description"
+          id="todo-dsec"
+          placeholder="Enter description..."
+          type="text"
+          reqired
+        />
+      </div>
+      <div class="flag-section">
+        <input
+          v-model="form.flag"
+          id="form-flag"
+          type="checkbox"
+          value="flag"
+        />
+        <label for="form-flag">Flag</label>
+      </div>
     </div>
-    <div class="input-group">
-      <label for="form-desc">Description</label>
-      <input
-        v-model="form.description"
-        placeholder="Enter description..."
-        id="form-dsec"
-        type="text"
-        reqired
-      />
-    </div>
-    <div class="flag-section">
-      <input v-model="form.flag" id="form-flag" type="checkbox" value="flag" />
-      <label for="form-flag">Flag</label>
-    </div>
+
     <input type="submit" value="Add todo" />
   </form>
 </template>
@@ -48,10 +56,9 @@ export default {
     ...mapActions(['addTodo']),
 
     //
-    onSubmit(event) {
-      event.preventDefault()
+    onSubmit(e) {
+      e.preventDefault()
       // alert(JSON.stringify(this.form))
-
       this.addTodo({
         title: this.form.title,
         description: this.form.description,
