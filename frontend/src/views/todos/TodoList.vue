@@ -7,13 +7,13 @@
       :text="isSetToShow ? 'Hide Form' : 'Add Todo'"
       :color="isSetToShow ? 'orange' : 'green'"
     />
-    <div v-if="isSetToShow">
-      <TodoForm />
+    <div id="todo-form" v-if="isSetToShow">
+      <NewTodoForm />
     </div>
 
     <!-- <div v-for="item in allTodos" :key="item.id" id="todoList"> -->
     <div v-for="item in allTodos" :key="item.id" id="todoList">
-      <Todo
+      <TodoCard
         @switchFlag="updateThenFetch"
         @deleteTodo="deleteTodo"
         :todoItem="item"
@@ -23,17 +23,17 @@
 </template>
 
 <script>
-import TodoForm from './TodoForm'
-import Todo from './Todo'
+import NewTodoForm from './NewTodoForm'
+import TodoCard from './TodoCard'
 import Button from '../../components/Button'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: 'Todos',
+  name: 'TodosList',
 
   components: {
-    TodoForm,
-    Todo,
+    NewTodoForm,
+    TodoCard,
     Button,
   },
 
@@ -53,7 +53,6 @@ export default {
 
     // what other ways to rerender the list after update them?
     async updateThenFetch(target) {
-      console.log(target)
       await this.updateTodo(target)
       this.fetchTodos()
     },
@@ -71,11 +70,11 @@ export default {
 
 <style scoped>
 .container {
-  width: 50%;
+  width: 100%;
 }
 
 button {
-  margin-top: 10px;
+  padding: 3px 7px;
 }
 
 .form {

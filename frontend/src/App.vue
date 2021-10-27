@@ -36,6 +36,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background: rgb(250, 250, 250);
 }
 
 #nav {

@@ -1,25 +1,17 @@
 <template>
   <div class="container">
-    <!-- image of ths product -->
+    <h3>
+      {{ getPostDetail.title }}
+    </h3>
+    <img src="../../../public/_32357-top-nav-sale-OS.png" alt="temp img" />
 
-    <!-- detail of the product -->
-    <div class="postDetail">
-      <img src="../../../public/_32357-top-nav-sale-OS.png" alt="temp img" />
-      <h1>
-        {{ getPostDetail.title }}
-      </h1>
-      <p>
-        {{ getPostDetail.category }}
-      </p>
-      <p>$ {{ getPostDetail.price }}</p>
-      <p>
-        {{ getPostDetail.description }}
-      </p>
+    <div id="post-detail">
+      <p>Category: {{ getPostDetail.category }}</p>
+      <p>Price: ${{ getPostDetail.price }}</p>
+      <p id="desc-p">Description: {{ getPostDetail.description }}</p>
     </div>
 
-    <!-- go-back button -->
     <div class="button-group">
-      <!-- TODO: this should look like a button -->
       <router-link to="/post">Go back</router-link>
       <button @click="deletePostReq" v-if="poster">Delete Post</button>
     </div>
@@ -31,26 +23,12 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'PostDetail',
-
   data() {
     return {
       id: this.$route.params.id,
       poster: false,
     }
   },
-
-  methods: {
-    ...mapActions(['fetchPost', 'fetchPostDetail', 'deletePost']),
-
-    deletePostReq(id) {
-      this.deletePost(this.getPostDetail._id)
-
-      this.$router.replace('/post')
-    },
-  },
-
-  computed: mapGetters(['getPostDetail', 'getUserInfo']),
-
   async created() {
     await this.fetchPostDetail(this.$route.params.id)
 
@@ -61,23 +39,36 @@ export default {
       this.poster = true
     }
   },
+  methods: {
+    ...mapActions(['fetchPost', 'fetchPostDetail', 'deletePost']),
+
+    deletePostReq(id) {
+      this.deletePost(this.getPostDetail._id)
+
+      this.$router.replace('/post')
+    },
+  },
+  computed: mapGetters(['getPostDetail', 'getUserInfo']),
 }
 </script>
 
 <style scoped>
-.container {
-}
-
-.postDetail {
-}
-
-.postDetail img {
-  width: 200px;
+.container > img {
+  width: 45%;
   border: 1px solid #ccc;
+  margin: 15px;
+}
+
+#post-detail {
+  width: 80%;
+  margin: 10px auto;
 }
 
 .button-group {
+  margin: 40px auto;
+  width: 70%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 </style>

@@ -1,39 +1,39 @@
 <template>
   <div class="container">
-    <h1>Post Ad</h1>
+    <h3>Post Ad</h3>
 
     <form @submit="onSubmit">
-      <div class="input-group">
-        <label for="post-title">Title</label>
-        <input type="text" id="post-title" v-model="form.title" required />
+      <div class="input-field-group">
+        <div class="input-field">
+          <label for="post-title">Title</label>
+          <input v-model="form.title" id="post-title" type="text" required />
+        </div>
+        <div class="input-field">
+          <label for="post-price">Price</label>
+          <input v-model="form.price" id="post-price" type="text" required />
+        </div>
+        <div class="input-field">
+          <label for="post-category">Categories</label>
+          <select v-model="form.category">
+            <option disabled value="">Please select one</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+          </select>
+        </div>
+        <div class="input-field">
+          <label for="post-desc">Description</label>
+          <textarea
+            v-model="form.description"
+            id="post-desc"
+            rows="4"
+            required
+          />
+        </div>
       </div>
-      <div class="input-group">
-        <label for="post-price">Price</label>
-        <input type="text" id="post-price" v-model="form.price" required />
-      </div>
-      <div class="input-group">
-        <label for="post-category">Categories</label>
-        <!-- TODO: give it options -->
-        <input
-          type="text"
-          id="post-category"
-          v-model="form.categories"
-          required
-        />
-      </div>
-      <div class="input-group">
-        <label for="post-desc">Description</label>
-        <input
-          type="text"
-          id="post-desc"
-          v-model="form.description"
-          required
-          row="7"
-        />
-      </div>
+
       <input type="submit" value="Add post" />
     </form>
-    <hr />
   </div>
 </template>
 
@@ -41,7 +41,7 @@
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'Upload',
+  name: 'PostUpload',
 
   data() {
     return {
@@ -51,15 +51,6 @@ export default {
         category: null,
         description: '',
       },
-      categories: [
-        { text: 'Category', value: null },
-        'Audio',
-        'Books',
-        'Clothing',
-        'Electronics',
-        'Furniture',
-        'Sporting Goods',
-      ],
     }
   },
 
@@ -81,19 +72,22 @@ export default {
 </script>
 
 <style scoped>
-.fileChoose {
-  margin-bottom: 15px;
+form {
+  padding: 15px;
 }
 
-.input-group {
-  margin: 15px 0;
+.input-field-group {
+  margin: 10px auto;
+  width: 70%;
 }
 
-#post-title {
-  width: 100%;
+.input-field {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-#post-price {
-  width: 100%;
+form > input {
+  margin: 20px;
 }
 </style>

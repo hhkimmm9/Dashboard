@@ -1,47 +1,47 @@
 <template>
   <div class="container">
     <div v-if="!getIsSignedIn">
-      <h1>Sign In</h1>
-      <div class="form">
-        <form @submit="onSubmit">
-          <div class="form-group">
-            <div class="input-group">
-              <label for="input-1">E-mail</label>
-              <input
-                type="email"
-                id="input-1"
-                placeholder="Enter your e-mail..."
-                v-model="form.email"
-                required
-              />
-            </div>
-            <div class="input-group">
-              <label for="input-2">Password</label>
-              <input
-                type="password"
-                id="input-2"
-                placeholder="Enter your password..."
-                v-model="form.password"
-                required
-              />
-            </div>
+      <h2>Sign In</h2>
+
+      <form @submit="onSubmit">
+        <div id="input-field-group">
+          <div class="input-field">
+            <label for="input-1">E-mail</label>
+            <input
+              type="email"
+              id="input-1"
+              placeholder="Enter your e-mail..."
+              v-model="form.email"
+              required
+            />
           </div>
-          <input type="submit" value="Sign in" />
-          <div class="link-to-register">
-            New to here?
-            <router-link to="/user/register" class="button">
-              Register
-            </router-link>
+          <div class="input-field">
+            <label for="input-2">Password</label>
+            <input
+              type="password"
+              id="input-2"
+              placeholder="Enter your password..."
+              v-model="form.password"
+              required
+            />
           </div>
-        </form>
-      </div>
+        </div>
+
+        <input type="submit" value="Sign in" />
+
+        <div id="link-to-register">
+          New to here?
+          <router-link to="/user/register" class="button">
+            Register
+          </router-link>
+        </div>
+      </form>
     </div>
 
     <div v-if="getIsSignedIn">
       <h1>My Account</h1>
       <div class="button-group">
-        <!-- TODO: this has to be a link to a profile edit page. -->
-        <button>Edit Profile</button>
+        <router-link to="/user/profile/edit">Edit Profile</router-link>
         <button @click="logoutHandler">Log Out</button>
       </div>
     </div>
@@ -88,18 +88,26 @@ export default {
 </script>
 
 <style scoped>
-.form-group {
-  flex-direction: column;
-}
-
-.input-group {
-  flex-direction: column;
-  width: 50%;
-  margin: auto;
+form {
   padding: 15px;
 }
 
-.link-to-register {
-  margin-top: 10px;
+#input-field-group {
+  margin: 10px auto;
+  width: 50%;
+}
+
+.input-field {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+form > input {
+  margin: 20px;
+}
+
+#link-to-register {
+  margin: 10px;
 }
 </style>
