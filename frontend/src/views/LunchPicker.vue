@@ -107,14 +107,10 @@ export default {
   font-family: 'Muli', sans-serif;
   background-color: #2b88f0;
   padding: 15px;
-
-  /* width: 500px; */
 }
 
 h3 {
   color: #fff;
-  /* margin: 10px 0 20px; */
-  /* text-align: center; */
 }
 
 p {
