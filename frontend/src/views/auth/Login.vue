@@ -6,22 +6,22 @@
       <form @submit="onSubmit">
         <div id="input-field-group">
           <div class="input-field">
-            <label for="input-1">E-mail</label>
+            <label for="login-email">E-mail</label>
             <input
-              type="email"
-              id="input-1"
-              placeholder="Enter your e-mail..."
               v-model="form.email"
+              id="login-email"
+              placeholder="Enter your e-mail..."
+              type="email"
               required
             />
           </div>
           <div class="input-field">
-            <label for="input-2">Password</label>
+            <label for="login-password">Password</label>
             <input
-              type="password"
-              id="input-2"
-              placeholder="Enter your password..."
               v-model="form.password"
+              id="login-password"
+              placeholder="Enter your password..."
+              type="password"
               required
             />
           </div>
