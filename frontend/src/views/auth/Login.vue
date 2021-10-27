@@ -88,6 +88,10 @@ export default {
 </script>
 
 <style scoped>
+.container > div {
+  padding: 10px;
+}
+
 form {
   padding: 15px;
 }
@@ -109,5 +113,12 @@ form > input {
 
 #link-to-register {
   margin: 10px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-around;
+  margin: 50px auto;
+  width: 50%;
 }
 </style>

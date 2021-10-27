@@ -11,8 +11,9 @@
       <NewTodoForm />
     </div>
 
-    <!-- <div v-for="item in allTodos" :key="item.id" id="todoList"> -->
-    <div v-for="item in allTodos" :key="item.id" id="todoList">
+    <hr />
+
+    <div id="todoList" v-for="item in allTodos" :key="item.id">
       <TodoCard
         @switchFlag="updateThenFetch"
         @deleteTodo="deleteTodo"
@@ -30,19 +31,21 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'TodosList',
-
   components: {
     NewTodoForm,
     TodoCard,
     Button,
   },
-
   data() {
     return {
       isSetToShow: false,
     }
   },
-
+  created() {
+    if (localStorage.getItem('auth-token')) {
+      this.fetchTodos()
+    }
+  },
   methods: {
     ...mapActions(['fetchTodos', 'deleteTodo', 'updateTodo']),
 
@@ -50,20 +53,12 @@ export default {
     toggleForm() {
       this.isSetToShow = !this.isSetToShow
     },
-
     // what other ways to rerender the list after update them?
     async updateThenFetch(target) {
       await this.updateTodo(target)
       this.fetchTodos()
     },
   },
-
-  created() {
-    if (localStorage.getItem('auth-token')) {
-      this.fetchTodos()
-    }
-  },
-
   computed: mapGetters(['allTodos']),
 }
 </script>
@@ -71,17 +66,18 @@ export default {
 <style scoped>
 .container {
   width: 100%;
+  padding: 10px;
+}
+
+form {
+  padding: 10px;
 }
 
 button {
-  padding: 3px 7px;
-}
-
-.form {
-  margin: 20px;
+  margin: 10px;
 }
 
 #todoList {
-  margin-top: 20px;
+  margin: 30px auto;
 }
 </style>

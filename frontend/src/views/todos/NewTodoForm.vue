@@ -68,16 +68,21 @@ export default {
 
 <style scoped>
 .input-group {
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 10px;
+  margin: 10px auto;
+  width: 70%;
+}
+
+.flag-section {
+  margin: 0 auto;
 }
 
 .flag-section > label {
-  padding: 5px;
+  margin: 10px;
 }
 
 form > input {
-  padding: 3px;
+  margin: 5px;
 }
 </style>
