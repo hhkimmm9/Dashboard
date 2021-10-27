@@ -2,7 +2,7 @@
   <div @click="readPostDetail" class="post-card">
     <img src="../../../public/_32357-top-nav-sale-OS.png" alt="temp img" />
 
-    <div class="product-details">
+    <div class="product-detail">
       <h1>{{ postItem.title }}</h1>
       <p>Price: ${{ postItem.price }}</p>
       <p>Category: {{ postItem.category }}</p>
@@ -39,7 +39,7 @@ export default {
   border: 1px solid #ccc;
 }
 
-.product-details {
+.product-detail {
   width: 100%;
   margin: 10px;
   padding: 10px;
