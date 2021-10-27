@@ -5,7 +5,8 @@ import Home from '../views/Home'
 import About from '../views/About'
 import Login from '../views/auth/Login'
 import Register from '../views/auth/Register'
-import Todos from '../views/todos/Todos'
+import EditProfile from '../views/auth/EditProfile'
+import TodoList from '../views/todos/TodoList'
 import LunchPicker from '../views/LunchPicker'
 import PostsList from '../views/posts/PostsList'
 import PostUpload from '../views/posts/PostUpload'
@@ -43,9 +44,14 @@ const routes = [
     component: Register,
   },
   {
+    path: '/user/profile/edit',
+    name: 'EditProfile',
+    component: EditProfile,
+  },
+  {
     path: '/todos',
-    name: 'Todos',
-    component: Todos,
+    name: 'TodoList',
+    component: TodoList,
   },
   {
     path: '/lunchpicker',
