@@ -6,15 +6,15 @@
       <div class="input-field-group">
         <div class="input-field">
           <label for="post-title">Title</label>
-          <input v-model="form.title" id="post-title" type="text" required />
+          <input v-model="post.title" id="post-title" type="text" required />
         </div>
         <div class="input-field">
           <label for="post-price">Price</label>
-          <input v-model="form.price" id="post-price" type="text" required />
+          <input v-model="post.price" id="post-price" type="text" required />
         </div>
         <div class="input-field">
           <label for="post-category">Categories</label>
-          <select v-model="form.category">
+          <select v-model="post.category">
             <option disabled value="">Please select one</option>
             <option>A</option>
             <option>B</option>
@@ -24,12 +24,13 @@
         <div class="input-field">
           <label for="post-desc">Description</label>
           <textarea
-            v-model="form.description"
+            v-model="post.description"
             id="post-desc"
             rows="4"
             required
           />
         </div>
+        <input type="file" @change="onFileSelected" />
       </div>
 
       <input type="submit" value="Add post" />
@@ -45,11 +46,12 @@ export default {
 
   data() {
     return {
-      form: {
+      post: {
         title: '',
         price: null,
         category: null,
         description: '',
+        selectedFile: null,
       },
     }
   },
@@ -57,14 +59,13 @@ export default {
   methods: {
     ...mapActions(['addPost']),
 
-    onSubmit(event) {
-      event.preventDefault()
+    onFileSelected(e) {
+      this.post.selectedFile = e.target.files[0]
+    },
 
-      this.addPost({
-        // fileInfo: this.fileInfo,
-        form: this.form,
-      })
-
+    onSubmit(e) {
+      e.preventDefault()
+      this.addPost({ post: this.post })
       this.$router.replace('/post')
     },
   },
