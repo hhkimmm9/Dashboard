@@ -28,17 +28,17 @@ router.get('/', async (req, res) => {
 
 router.get('/detail/:id', async (req, res) => {
   await Post.find({ _id: req.params.id })
-    .then((data) => res.send(data))
+    .then((data) => {
+      res.send(data)
+    })
     .catch((err) => res.status(400).send('Error ' + err))
 })
 
 // POST REQUEST
-// router.post('/upload', verify, upload.single('image'), (req, res) => {
-router.post('/upload', upload.single('image'), (req, res) => {
-  console.log(req.file)
-
-  // const token = req.header('auth-token')
-  // const userId = jwt.verify(token, process.env.TOKEN_SECRET)
+// router.post('/upload', upload.single('image'), (req, res) => {
+router.post('/upload', verify, upload.single('image'), (req, res) => {
+  const token = req.header('auth-token')
+  const userId = jwt.verify(token, process.env.TOKEN_SECRET)
 
   const newPost = new Post({
     image: req.file.path,
@@ -46,7 +46,7 @@ router.post('/upload', upload.single('image'), (req, res) => {
     price: req.body.price,
     category: req.body.category,
     description: req.body.description,
-    // userId: userId._id,
+    userId: userId._id,
     date: Date.now(),
   })
 

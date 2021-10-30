@@ -40,14 +40,7 @@ const actions = {
   },
 
   async addPost({ commit }, inPost) {
-    const config = {
-      headers: {
-        'auth-token': localStorage.getItem('auth-token'),
-      },
-    }
-
     const post = inPost.post
-
     const fd = new FormData()
     fd.append('image', post.selectedFile, post.selectedFile.name)
     fd.append('title', post.title)
@@ -55,18 +48,16 @@ const actions = {
     fd.append('category', post.category)
     fd.append('description', post.description)
 
-    // https://stackoverflow.com/questions/47630163/axios-post-request-to-send-form-data
-    await axios(
-      {
-        method: 'POST',
-        url: 'http://localhost:5000/api/post/upload',
-        data: fd,
-        headers: { 'Content-Type': 'multipart/form-data' },
+    const config = {
+      headers: {
+        'auth-token': localStorage.getItem('auth-token'),
+        'Content-Type': 'multipart/form-data',
       },
-      config
-    )
+    }
+
+    await axios
+      .post('http://localhost:5000/api/post/upload', fd, config)
       .then((res) => {
-        console.log(res)
         commit('setNewPost', res.data)
       })
       .catch((err) => console.log(err))
