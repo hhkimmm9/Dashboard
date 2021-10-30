@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3>Post Ad</h3>
+    <h1>Post Ad</h1>
 
     <form @submit="onSubmit">
       <div class="input-field-group">

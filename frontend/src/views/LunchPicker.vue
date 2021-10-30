@@ -120,11 +120,11 @@ p {
 textarea {
   border: none;
   display: block;
-  width: 100%;
-  height: 100px;
+  width: 90vw;
+  height: 10vh;
   font-family: inherit;
   padding: 10px;
-  margin: 0 0 20px;
+  margin: 10px auto;
   font-size: 16px;
 }
 

@@ -74,11 +74,19 @@ export default {
 </script>
 
 <style scoped>
-.input-group {
+form {
+  margin: 10px;
+}
+
+.input-field-group {
+  margin: 10px auto;
+  width: 50%;
+}
+
+.input-field {
+  margin: 10px;
   display: flex;
   flex-direction: column;
-  margin: 10px auto;
-  width: 70%;
 }
 
 .flag-section {

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <h3>Home</h3>
     <p>
       {{ getIsSignedIn ? `Hello Welcome back, ${getUserInfo.username}!` : '' }}
     </p>
