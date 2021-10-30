@@ -39,36 +39,28 @@ const actions = {
       .catch((err) => alert(err))
   },
 
-  async addPost({ commit }, postInfo) {
+  async addPost({ commit }, inPost) {
+    const post = inPost.post
+    const fd = new FormData()
+    fd.append('image', post.selectedFile, post.selectedFile.name)
+    fd.append('title', post.title)
+    fd.append('price', post.price)
+    fd.append('category', post.category)
+    fd.append('description', post.description)
+
     const config = {
       headers: {
         'auth-token': localStorage.getItem('auth-token'),
+        'Content-Type': 'multipart/form-data',
       },
     }
 
-    // const FormData = require('form-data')
-    // const form = new FormData()
-    // form.append('productImage', postInfo.fileInfo)
-    // form.append('title', postInfo.form.title)
-    // form.append('price', postInfo.form.price)
-    // form.append('category', postInfo.form.category)
-    // form.append('description', postInfo.form.description)
-
     await axios
-      .post(
-        'http://localhost:5000/api/post/upload',
-        {
-          title: postInfo.form.title,
-          price: postInfo.form.price,
-          category: postInfo.form.category,
-          description: postInfo.form.description,
-        },
-        config
-      )
+      .post('http://localhost:5000/api/post/upload', fd, config)
       .then((res) => {
         commit('setNewPost', res.data)
       })
-      .catch((err) => console.log('Error ' + err))
+      .catch((err) => console.log(err))
   },
 
   async deletePost({ commit }, id) {

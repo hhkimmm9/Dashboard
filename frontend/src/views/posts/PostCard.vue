@@ -1,9 +1,12 @@
 <template>
   <div @click="readPostDetail" class="post-card">
-    <img src="../../../public/_32357-top-nav-sale-OS.png" alt="temp img" />
+    <img
+      :src="`http://localhost:5000/${getPostDetail.image}`"
+      alt="product image"
+    />
 
     <div class="product-detail">
-      <h1>{{ postItem.title }}</h1>
+      <h2>{{ postItem.title }}</h2>
       <p>Price: ${{ postItem.price }}</p>
       <p>Category: {{ postItem.category }}</p>
       <p>Description: {{ postItem.description }}</p>
@@ -12,6 +15,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'PostCard',
 
@@ -24,6 +29,8 @@ export default {
       this.$router.replace(`/post/detail/${this.postItem._id}`)
     },
   },
+
+  computed: mapGetters(['getPostDetail']),
 }
 </script>
 
@@ -35,7 +42,7 @@ export default {
 }
 
 .post-card img {
-  width: 150px;
+  width: 25vw;
   border: 1px solid #ccc;
 }
 

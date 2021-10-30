@@ -32,6 +32,10 @@ app.use('/api/todos', todosRouter)
 app.use('/api/post', postsRouter)
 
 // API
+
+// make uploads directory publicly available.
+app.use('/uploads', express.static('./uploads'))
+
 const users = require('./routes/auth')
 app.use('/routes/users', users)
 

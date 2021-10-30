@@ -4,7 +4,10 @@
       {{ getPostDetail.title }}
     </h1>
 
-    <img src="../../../public/_32357-top-nav-sale-OS.png" alt="temp img" />
+    <img
+      :src="`http://localhost:5000/${getPostDetail.image}`"
+      alt="product image"
+    />
 
     <div id="post-detail">
       <p>Category: {{ getPostDetail.category }}</p>
@@ -29,12 +32,14 @@ export default {
     return {
       id: this.$route.params.id,
       poster: false,
+      image: null,
     }
   },
 
   async created() {
     await this.fetchPostDetail(this.$route.params.id)
 
+    // To determine if delete button has to appear on the screen.
     const signedInUserInfo = this.getUserInfo._id
     const posterUserId = this.getPostDetail.userId
 
