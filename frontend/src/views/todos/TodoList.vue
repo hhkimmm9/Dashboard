@@ -4,6 +4,7 @@
 
     <!-- TODO: make it available only if a user is signed in -->
     <Button
+      id="todo-add-button"
       @btn-click="toggleForm"
       :text="isSetToShow ? 'Hide Form' : 'Add Todo'"
       :color="isSetToShow ? 'orange' : 'green'"
@@ -14,7 +15,7 @@
 
     <hr />
 
-    <div id="todoList" v-for="item in allTodos" :key="item.id">
+    <div id="todo-list" v-for="item in allTodos" :key="item.id">
       <TodoCard
         @switchFlag="updateThenFetch"
         @deleteTodo="deleteTodo"
@@ -72,19 +73,18 @@ export default {
 
 <style scoped>
 .container {
-  width: 100%;
   padding: 10px;
 }
 
-form {
-  padding: 10px;
+#todo-add-button {
+  margin: 5px;
 }
 
-button {
+#todo-form {
+  margin: 20px;
+}
+
+#todo-list {
   margin: 10px;
-}
-
-#todoList {
-  margin: 30px auto;
 }
 </style>
