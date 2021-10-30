@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div v-if="!getIsSignedIn">
-      <h2>Sign In</h2>
+      <h1>Sign In</h1>
 
       <form @submit="onSubmit">
         <div id="input-field-group">

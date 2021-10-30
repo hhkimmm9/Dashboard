@@ -4,9 +4,9 @@
     @dblclick="$emit('switchFlag', todoItem)"
     :class="[todoItem.flag ? 'flag' : '', 'todo-card']"
   >
-    <h4>
+    <h2>
       {{ todoItem.title }}
-    </h4>
+    </h2>
     <!-- TODO: icon instead of button with 'x' -->
     <button id="delete-button" @click="$emit('deleteTodo', todoItem._id)">
       X
@@ -39,7 +39,7 @@ export default {
   border-left: 5px solid red;
 }
 
-.todo-card h4 {
+.todo-card h2 {
   text-align: left;
   width: 80%;
 }

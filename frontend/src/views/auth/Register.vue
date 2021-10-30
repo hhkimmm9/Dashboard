@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2>Register</h2>
+    <h1>Register</h1>
 
     <form @submit="onSubmit">
       <div id="input-field-group">

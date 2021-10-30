@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <h3>
+    <h1>
       {{ getPostDetail.title }}
-    </h3>
+    </h1>
 
     <img src="../../../public/_32357-top-nav-sale-OS.png" alt="temp img" />
 
