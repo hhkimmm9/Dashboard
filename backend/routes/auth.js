@@ -7,7 +7,20 @@ const User = require('../models/userModel')
 
 const { registerValidation, loginValidation } = require('../validation')
 
-router.post('/register', async (req, res) => {
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, './uploads/')
+  },
+  filename: (req, file, callback) => {
+    callback(null, file.originalname)
+  },
+})
+
+const upload = multer({ storage })
+
+router.post('/register', upload.single('profilePicture'), async (req, res) => {
   // Validating the data before letting a user register their account.
   const { error } = registerValidation(req.body)
   if (error) return res.status(400).send(error.details[0].message)
@@ -26,6 +39,7 @@ router.post('/register', async (req, res) => {
 
   // Create a new user.
   const user = new User({
+    profilePicture: req.file.path,
     username: req.body.username,
     email: req.body.email,
     password: hashedPassword,

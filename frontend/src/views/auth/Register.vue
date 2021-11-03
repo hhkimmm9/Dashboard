@@ -4,6 +4,7 @@
 
     <form @submit="onSubmit">
       <div id="input-field-group">
+        <input type="file" @change="onFileSelected" />
         <div class="input-field">
           <label for="register-email">E-mail</label>
           <input
@@ -66,6 +67,7 @@ export default {
         username: '',
         password: '',
         confirmPassword: '',
+        selectedFile: null,
       },
     }
   },
@@ -73,12 +75,17 @@ export default {
   methods: {
     ...mapActions(['register']),
 
+    onFileSelected(e) {
+      this.form.selectedFile = e.target.files[0]
+    },
+
     onSubmit(e) {
       e.preventDefault()
       // validation: if password === confirmPassword, when passed, vuex: dispatch the form data.
       // look for a library to validate the user input >> bootstrap-vue will do.
       if (this.form.password === this.form.confirmPassword) {
         this.register({
+          profilePicture: this.form.selectedFile,
           email: this.form.email,
           username: this.form.username,
           password: this.form.password,

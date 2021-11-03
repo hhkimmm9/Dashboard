@@ -12,12 +12,24 @@ const getters = {
 
 const actions = {
   async register({ commit }, userInfo) {
+    const fd = new FormData()
+    fd.append(
+      'profilePicture',
+      userInfo.profilePicture,
+      userInfo.profilePicture.name
+    )
+    fd.append('email', userInfo.email)
+    fd.append('username', userInfo.username)
+    fd.append('password', userInfo.password)
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+
     await axios
-      .post('http://localhost:5000/api/user/register', {
-        username: userInfo.username,
-        email: userInfo.email,
-        password: userInfo.password,
-      })
+      .post('http://localhost:5000/api/user/register', fd, config)
       .catch((err) => alert(err))
   },
 
