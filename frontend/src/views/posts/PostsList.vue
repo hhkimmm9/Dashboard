@@ -38,6 +38,7 @@ export default {
 
   methods: {
     ...mapActions(['fetchPosts']),
+
     clickHandler() {
       this.$router.replace('/post/upload')
     },
