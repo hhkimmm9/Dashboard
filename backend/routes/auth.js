@@ -39,6 +39,7 @@ router.post('/register', upload.single('profilePicture'), async (req, res) => {
 
   // Create a new user.
   const user = new User({
+    profilePicture: req.file.path,
     username: req.body.username,
     email: req.body.email,
     password: hashedPassword,
