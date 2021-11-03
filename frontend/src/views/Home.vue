@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" v-if="loading">
     <h3>Home</h3>
     <img
       :src="`http://localhost:5000/${getUserInfo.profilePicture}`"
@@ -16,6 +16,16 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Home',
+
+  data() {
+    return {
+      loading: false,
+    }
+  },
+
+  mounted() {
+    this.loading = true
+  },
 
   computed: mapGetters(['getIsSignedIn', 'getUserInfo']),
 }
