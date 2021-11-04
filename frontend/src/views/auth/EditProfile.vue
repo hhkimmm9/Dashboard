@@ -47,6 +47,7 @@
           />
         </div>
       </div>
+      <input type="submit" value="Edit Profile" />
     </form>
 
     <router-link to="/user/login">Go back</router-link>
@@ -54,7 +55,7 @@
 </template>
 
 <script>
-import { mapAction, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'ProfileEdit',
@@ -62,28 +63,35 @@ export default {
   data() {
     return {
       loading: false,
+
       profile: {
         email: '',
         username: '',
         password: '',
         confirmPassword: '',
-        selectedFile: null,
+        updatedProfilePicture: null,
       },
     }
   },
 
   methods: {
+    ...mapActions(['editProfile']),
+
     onFileSelected(e) {
       e.preventDefault()
 
       const profilePicture = document.querySelector('#imgOnProfileEdit')
-      this.profile.selectedFile = e.target.files[0]
+      this.profile.updatedProfilePicture = e.target.files[0]
 
-      profilePicture.src = URL.createObjectURL(this.profile.selectedFile)
+      profilePicture.src = URL.createObjectURL(
+        this.profile.updatedProfilePicture
+      )
     },
 
     onSubmit(e) {
       e.preventDefault()
+
+      this.editProfile(this.profile)
     },
   },
 

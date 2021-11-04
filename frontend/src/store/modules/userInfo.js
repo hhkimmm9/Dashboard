@@ -13,6 +13,7 @@ const getters = {
 const actions = {
   async register({ commit }, userInfo) {
     const fd = new FormData()
+
     fd.append(
       'profilePicture',
       userInfo.profilePicture,
@@ -54,12 +55,44 @@ const actions = {
   async logout({ commit }) {
     commit('logout')
   },
+
+  async editProfile({ commit }, updatedProfile) {
+    // console.log(updatedProfile)
+
+    const fd = new FormData()
+
+    fd.append(
+      'updatedProfilePicture',
+      updatedProfile.updatedProfilePicture,
+      updatedProfile.updatedProfilePicture.name
+    )
+    fd.append('email', updatedProfile.email)
+    fd.append('username', updatedProfile.username)
+    fd.append('password', updatedProfile.password)
+
+    const config = {
+      headers: {
+        'auth-token': localStorage.getItem('auth-token'),
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+
+    await axios
+      .put('http://localhost:5000/api/user/profile/edit', fd, config)
+      .then((res) => {
+        commit('updateProfile', res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
 }
 
 const mutations = {
   signedIn: (state, signStatus) => (state.signedIn = signStatus),
   setUserInfo: (state, userInfo) => (state.userInfo = userInfo),
   logout: (state) => ((state.signedIn = false), (state.userInfo = null)),
+  updateProfile: (state, updatedProfile) => (state.userInfo = updatedProfile),
 }
 
 export default {
