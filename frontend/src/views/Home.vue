@@ -1,13 +1,18 @@
 <template>
   <div class="home" v-if="loading">
     <h3>Home</h3>
-    <img
-      :src="`http://localhost:5000/${getUserInfo.profilePicture}`"
-      alt="user profile picture"
-    />
-    <p>
-      {{ getIsSignedIn ? `Hello Welcome back, ${getUserInfo.username}!` : '' }}
-    </p>
+    <div class="content" v-if="getIsSignedIn">
+      <img
+        :src="`http://localhost:5000/${getUserInfo.profilePicture}`"
+        alt="user profile picture"
+      />
+      <p>
+        {{ `Hello Welcome back, ${getUserInfo.username}!` }}
+      </p>
+    </div>
+    <div class="class" v-else>
+      <p>User not signed in.</p>
+    </div>
   </div>
 </template>
 

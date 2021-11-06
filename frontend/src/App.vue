@@ -1,14 +1,14 @@
 <template>
   <div class="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/user/login">My Account</router-link> |
+      <router-link to="/todos">Todos</router-link> |
+      <router-link to="/lunchpicker">Today's lunch</router-link> |
+      <router-link to="/post">Market (Post)</router-link> |
+      <router-link to="/portfolios">Portfolios</router-link>
+    </div>
     <div class="content">
-      <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/user/login">My Account</router-link> |
-        <router-link to="/todos">Todos</router-link> |
-        <router-link to="/lunchpicker">Today's lunch</router-link> |
-        <router-link to="/post">Market (Post)</router-link> |
-        <router-link to="/portfolios">Portfolios</router-link>
-      </div>
       <router-view />
     </div>
     <Footer class="footer" />
