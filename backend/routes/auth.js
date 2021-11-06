@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const verify = require('./verifyToken')
 
 const User = require('../models/userModel')
 
@@ -20,6 +21,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
+// ROUTES ---------------------------------------------------------------------
+//
 router.post('/register', upload.single('profilePicture'), async (req, res) => {
   // Validating the data before letting a user register their account.
   const { error } = registerValidation(req.body)
@@ -54,6 +57,7 @@ router.post('/register', upload.single('profilePicture'), async (req, res) => {
   }
 })
 
+//
 router.post('/login', async (req, res) => {
   const { error } = loginValidation(req.body)
   if (error) return res.status(400).send(error.details[0].message)
@@ -72,13 +76,76 @@ router.post('/login', async (req, res) => {
     expiresIn: '15d',
   })
 
-  res.header('auth-token', token)
+  try {
+    res.header('auth-token', token)
 
-  res.send({
-    isSignedIn: true,
-    authToken: token,
-    userInfo: user,
-  })
+    res.send({
+      isSignedIn: true,
+      authToken: token,
+      userInfo: user,
+    })
+  } catch (err) {
+    res.send('login failed.')
+  }
 })
+
+//
+router.put(
+  '/profile/edit',
+  verify,
+  // don't care if updatedProfilePicture is in the req.
+  upload.single('updatedProfilePicture'),
+  async (req, res) => {
+    const token = req.header('auth-token')
+    const userId = jwt.verify(token, process.env.TOKEN_SECRET)
+
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(
+      req.body.email + req.body.password,
+      salt
+    )
+
+    // If the user changed their profile picture.
+    // TODO: why boolean changed to string? maybe bodyparser?
+    if (req.body.withProfilePicture === 'true') {
+      const currUser = await User.findOneAndUpdate(
+        { _id: userId },
+        {
+          profilePicture: req.file.path,
+          email: req.body.email,
+          username: req.body.username,
+          password: hashedPassword,
+        }
+      )
+
+      try {
+        res.send({ userInfo: currUser })
+      } catch (err) {
+        res.send('Profile update with new profile picture failed.' + err)
+      }
+    }
+    // If the user didn't change their profile picture.
+    else {
+      const currUser = await User.findOneAndUpdate(
+        { _id: userId },
+        {
+          profilePicture: req.body.profilePicture,
+          email: req.body.email,
+          username: req.body.username,
+          password: hashedPassword,
+        }
+      )
+
+      console.log(currUser)
+      res.send({ userInfo: currUser })
+
+      try {
+        res.send({ userInfo: currUser })
+      } catch (err) {
+        res.send('Profile update with new profile picture failed.' + err)
+      }
+    }
+  }
+)
 
 module.exports = router

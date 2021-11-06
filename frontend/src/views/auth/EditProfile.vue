@@ -11,7 +11,7 @@
 
     <form @submit="onSubmit">
       <div class="input-field-group">
-        <input type="file" @change="onFileSelected" />
+        <input id="file-input" type="file" @change="onFileSelected" />
         <div class="input-field">
           <label for="edit-profile-email">E-mail</label>
           <input
@@ -30,12 +30,14 @@
             type="text"
           />
         </div>
+        <!-- TODO: prompt: please provide password to proceed. -->
         <div class="input-field">
           <label for="edit-profile-password">Password</label>
           <input
             v-model="profile.password"
             id="edit-profile-password"
             type="password"
+            required
           />
         </div>
         <div class="input-field">
@@ -44,6 +46,7 @@
             v-model="profile.confirmPassword"
             id="edit-profile-confirm-password"
             type="password"
+            required
           />
         </div>
       </div>
@@ -91,7 +94,36 @@ export default {
     onSubmit(e) {
       e.preventDefault()
 
-      this.editProfile(this.profile)
+      // TODO: password validation, is it enough?
+      // When a user intends to change their password.
+      if (
+        this.profile.password !== '' &&
+        this.profile.confirmPassword !== '' &&
+        this.profile.password === this.profile.confirmPassword
+      ) {
+        if (this.profile.email === '') {
+          this.profile.email = this.getUserInfo.email
+        }
+
+        if (this.profile.username === '') {
+          this.profile.username = this.getUserInfo.username
+        }
+
+        this.editProfile({ profile: this.profile })
+
+        this.$router.push('/')
+      }
+      // One of the input fields or both are empty.
+      else if (
+        this.profile.password === '' ||
+        this.profile.confirmPassword === ''
+      ) {
+        alert('Please enter your password to proceed.')
+      }
+      // A user intended to change their password but failed confirmation.
+      else if (this.profile.password !== this.profile.confirmPassword) {
+        alert('Password does not match. Please try again.')
+      }
     },
   },
 
@@ -103,10 +135,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 img {
   width: 30vh;
   margin: 15px auto;
+}
+
+form {
+  margin: 25px;
+}
+
+#file-input {
 }
 
 .input-field {
