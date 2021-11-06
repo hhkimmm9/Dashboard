@@ -6,7 +6,7 @@
       <div id="input-field-group">
         <input type="file" @change="onFileSelected" />
         <div class="input-field">
-          <label for="register-email">E-mail</label>
+          <!-- <label for="register-email">E-mail</label> -->
           <input
             v-model="form.email"
             id="register-email"
@@ -16,7 +16,7 @@
           />
         </div>
         <div class="input-field">
-          <label for="register-username">Username</label>
+          <!-- <label for="register-username">Username</label> -->
           <input
             v-model="form.username"
             id="register-username"
@@ -26,7 +26,7 @@
           />
         </div>
         <div class="input-field">
-          <label for="register-password">Password</label>
+          <!-- <label for="register-password">Password</label> -->
           <input
             v-model="form.password"
             id="register-password"
@@ -37,7 +37,7 @@
           />
         </div>
         <div class="input-field">
-          <label for="register-confirm-password">Confirm Your Password</label>
+          <!-- <label for="register-confirm-password">Confirm Your Password</label> -->
           <input
             v-model="form.confirmPassword"
             id="register-confirm-password"
@@ -88,6 +88,7 @@ export default {
           profilePicture: this.form.selectedFile,
           email: this.form.email,
           username: this.form.username,
+          // TODO: can I send password like this?
           password: this.form.password,
         })
         // redirect to homepage
@@ -104,21 +105,29 @@ export default {
 
 <style scoped>
 form {
-  padding: 15px;
+  padding: 10px;
 }
 
 #input-field-group {
-  margin: 10px auto;
+  margin: auto;
+  padding: 10px;
   width: 50%;
 }
 
 .input-field {
-  margin: 10px;
+  margin: 10px auto;
   display: flex;
   flex-direction: column;
 }
 
+.input-field > input {
+  margin: 10px;
+  height: 25px;
+  font-size: 17px;
+}
+
 form > input {
-  margin: 20px;
+  margin: 5px;
+  height: 2rem;
 }
 </style>
