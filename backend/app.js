@@ -36,7 +36,7 @@ app.use('/api/post', postsRouter)
 // make uploads directory publicly available.
 app.use('/uploads', express.static('./uploads'))
 
-const users = require('./routes/auth')
+const users = require('./routes/auth/auth')
 app.use('/routes/users', users)
 
 app.use(express.static(path.join(__dirname, '../build')))
