@@ -4,9 +4,9 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const verify = require('./verifyToken')
 
-const User = require('../models/userModel')
+const User = require('../../models/userModel')
 
-const { registerValidation, loginValidation } = require('../validation')
+const { registerValidation, loginValidation } = require('./validation')
 
 const multer = require('multer')
 

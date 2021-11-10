@@ -23,7 +23,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Route
-const authRouter = require('./routes/auth')
+const authRouter = require('./routes/auth/auth')
 const todosRouter = require('./routes/todos')
 const postsRouter = require('./routes/posts')
 
