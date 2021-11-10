@@ -23,7 +23,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Route
-const authRouter = require('./routes/auth')
+const authRouter = require('./routes/auth/auth')
 const todosRouter = require('./routes/todos')
 const postsRouter = require('./routes/posts')
 
@@ -32,6 +32,10 @@ app.use('/api/todos', todosRouter)
 app.use('/api/post', postsRouter)
 
 // API
+
+// make uploads directory publicly available.
+app.use('/uploads', express.static('./uploads'))
+
 const users = require('./routes/auth')
 app.use('/routes/users', users)
 

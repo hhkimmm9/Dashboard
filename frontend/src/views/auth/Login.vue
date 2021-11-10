@@ -1,49 +1,47 @@
 <template>
-  <div class="container">
-    <div v-if="!getIsSignedIn">
-      <h1>Sign In</h1>
-      <div class="form">
-        <b-form @submit="onSubmit">
-          <b-form-group id="input-group-1" label-for="input-1">
-            <b-form-input
-              id="input-1"
-              v-model="form.email"
-              type="email"
-              placeholder="Enter email"
-              required
-            ></b-form-input>
-          </b-form-group>
-
-          <b-form-group id="input-group-2" label-for="input-2">
-            <b-form-input
-              id="input-2"
-              v-model="form.password"
-              type="password"
-              placeholder="Enter password"
-              required
-            ></b-form-input>
-          </b-form-group>
-
-          <b-button type="submit" variant="outline-primary" class="button"
-            >Login</b-button
-          >
-
-          <div class="link-to-register">
-            New to here?
-            <router-link to="/user/register" class="button">
-              Register
-            </router-link>
-          </div>
-        </b-form>
-      </div>
+  <div class="container" v-if="getIsSignedIn">
+    <h1>My Account</h1>
+    <div class="button-group">
+      <router-link to="/user/profile/edit">Edit Profile</router-link>
+      <button @click="logoutHandler">Log Out</button>
     </div>
-    <div v-if="getIsSignedIn">
-      <h1>My Account</h1>
-      <div class="button-group">
-        <!-- TODO: this has to be a link to a profile edit page. -->
-        <b-button>Edit Profile</b-button>
-        <b-button @click="logoutHandler">Log Out</b-button>
+  </div>
+
+  <div class="container" v-else>
+    <h1>Sign In</h1>
+
+    <form @submit="onSubmit">
+      <div id="input-field-group">
+        <div class="input-field">
+          <!-- <label for="login-email">E-mail</label> -->
+          <input
+            v-model="form.email"
+            id="login-email"
+            placeholder="Enter your e-mail..."
+            type="email"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <!-- <label for="login-password">Password</label> -->
+          <input
+            v-model="form.password"
+            id="login-password"
+            placeholder="Enter your password..."
+            type="password"
+            required
+          />
+        </div>
       </div>
+
+      <input type="submit" value="Sign in" />
+    </form>
+
+    <div id="link-to-register">
+      New to here?
+      <router-link to="/user/register" class="button">
+        Register
+      </router-link>
     </div>
   </div>
 </template>
@@ -80,9 +78,6 @@ export default {
     logoutHandler() {
       this.logout()
       localStorage.removeItem('auth-token')
-      // this.clearTodos()
-      location.reload()
-      // clear state or refresh the page? which one would be a better practice?
     },
   },
 
@@ -91,21 +86,41 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  width: 30%;
+form {
+  margin: 10px 0;
+  padding: 10px;
 }
 
-.form {
-  margin-top: 25px;
+#input-field-group {
+  padding: 10px;
+  margin: auto;
+  width: 50%;
 }
 
-.button {
-  margin: 10px 5px;
+form > input {
+  height: 2rem;
+  margin: 5px;
+}
+
+.input-field {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-field > input {
+  height: 27px;
+  font-size: 17px;
+}
+
+#link-to-register {
+  margin: 10px 0;
 }
 
 .button-group {
   display: flex;
-  justify-content: space-between;
-  margin: 70px;
+  justify-content: space-around;
+  margin: 50px auto;
+  width: 50%;
 }
 </style>

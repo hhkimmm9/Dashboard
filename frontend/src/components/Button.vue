@@ -1,7 +1,7 @@
 <template>
-  <b-button @click="$emit('btn-click')" :style="{ background: color }">
+  <button @click="$emit('btn-click')" :style="{ background: color }">
     {{ text }}
-  </b-button>
+  </button>
 </template>
 
 <script>

@@ -1,26 +1,20 @@
 <template>
-  <div id="container">
-    <!-- image of ths product -->
+  <div class="container">
+    <h1>
+      {{ getPostDetail.title }}
+    </h1>
 
-    <!-- detail of the product -->
-    <div id="postDetail">
-      <img src="../../../public/1554925025552.png" alt="temp image" />
-      <h1>
-        {{ getPostDetail.title }}
-      </h1>
-      <p>
-        {{ getPostDetail.category }}
-      </p>
-      <p>$ {{ getPostDetail.price }}</p>
-      <p>
-        {{ getPostDetail.description }}
-      </p>
+    <img :src="`api/${getPostDetail.image}`" alt="product image" />
+
+    <div id="post-detail">
+      <p>Category: {{ getPostDetail.category }}</p>
+      <p>Price: ${{ getPostDetail.price }}</p>
+      <p id="desc-p">Description: {{ getPostDetail.description }}</p>
     </div>
 
-    <!-- go-back button -->
     <div class="button-group">
-      <b-button to="/post">Go back</b-button>
-      <b-button @click="deletePostReq" v-if="poster">Delete Post</b-button>
+      <router-link to="/post">Go back</router-link>
+      <button @click="deletePostReq" v-if="poster">Delete Post</button>
     </div>
   </div>
 </template>
@@ -35,6 +29,19 @@ export default {
     return {
       id: this.$route.params.id,
       poster: false,
+      image: null,
+    }
+  },
+
+  async created() {
+    await this.fetchPostDetail(this.$route.params.id)
+
+    // To determine if delete button has to appear on the screen.
+    const signedInUserInfo = this.getUserInfo._id
+    const posterUserId = this.getPostDetail.userId
+
+    if (signedInUserInfo === posterUserId) {
+      this.poster = true
     }
   },
 
@@ -49,33 +56,26 @@ export default {
   },
 
   computed: mapGetters(['getPostDetail', 'getUserInfo']),
-
-  async created() {
-    await this.fetchPostDetail(this.$route.params.id)
-
-    const signedInUserInfo = this.getUserInfo._id
-    const posterUserId = this.getPostDetail.userId
-
-    if (signedInUserInfo === posterUserId) {
-      this.poster = true
-    }
-  },
 }
 </script>
 
 <style scoped>
-#container {
-  width: 40%;
-  margin: auto;
+.container > img {
+  width: 45%;
+  border: 1px solid #ccc;
+  margin: 15px;
 }
 
-#postDetail {
-  margin: 50px;
+#post-detail {
+  width: 80%;
+  margin: 10px auto;
 }
 
 .button-group {
+  margin: 40px auto;
+  width: 70%;
   display: flex;
   justify-content: space-around;
-  margin: 120px;
+  align-items: center;
 }
 </style>

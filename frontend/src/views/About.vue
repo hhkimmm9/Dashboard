@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h4>Project Name</h4>
-    <p>Learning Tracker</p>
+    <p>Dashboard</p>
 
     <h4>Frontend</h4>
     <p>Vue</p>

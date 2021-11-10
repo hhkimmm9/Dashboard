@@ -1,22 +1,22 @@
 <template>
   <div id="container">
-    <h1>Market</h1>
+    <h1>Post List</h1>
 
     <!-- Only if logged in -->
-    <b-button @click="clickHandler" v-if="signedIn">Post</b-button>
+    <button v-if="signedIn" @click="clickHandler">Post</button>
 
-    <div v-for="post in getPosts" :key="post.id">
-      <Post :postItem="post" />
+    <div id="post-card" v-for="post in getPosts" :key="post.id">
+      <PostCard :postItem="post" />
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import Post from './Post'
+import PostCard from './PostCard'
 
 export default {
-  name: 'Market',
+  name: 'PostList',
 
   data() {
     return {
@@ -25,15 +25,7 @@ export default {
   },
 
   components: {
-    Post,
-  },
-
-  methods: {
-    ...mapActions(['fetchPosts']),
-
-    clickHandler() {
-      this.$router.replace('/post/upload')
-    },
+    PostCard,
   },
 
   mounted() {
@@ -44,13 +36,24 @@ export default {
     }
   },
 
+  methods: {
+    ...mapActions(['fetchPosts']),
+
+    clickHandler() {
+      this.$router.replace('/post/upload')
+    },
+  },
+
   computed: mapGetters(['getPosts']),
 }
 </script>
 
 <style scoped>
 #container {
-  width: 80%;
-  margin: auto;
+  padding: 20px;
+}
+
+#post-card {
+  margin: 20px;
 }
 </style>
