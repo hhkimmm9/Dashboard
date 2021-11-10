@@ -1,6 +1,6 @@
 <template>
   <div @click="readPostDetail" class="post-card">
-    <img :src="`api/${postItem.image}`" alt="product image" />
+    <img :src="`/api/${postItem.image}`" alt="product image" />
 
     <div class="product-detail">
       <h2>{{ postItem.title }}</h2>

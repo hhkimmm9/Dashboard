@@ -4,7 +4,7 @@
       {{ getPostDetail.title }}
     </h1>
 
-    <img :src="`api/${getPostDetail.image}`" alt="product image" />
+    <img :src="`/api/${getPostDetail.image}`" alt="product image" />
 
     <div id="post-detail">
       <p>Category: {{ getPostDetail.category }}</p>
