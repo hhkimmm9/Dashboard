@@ -17,7 +17,7 @@ const actions = {
     }
 
     await axios
-      .get('http://localhost:5000/api/todos', config)
+      .get('api/todos', config)
       .then((res) => commit('fetchTodos', res.data))
       .catch((err) => console.log('Login required'))
   },
@@ -31,7 +31,7 @@ const actions = {
 
     await axios
       .post(
-        'http://localhost:5000/api/todos/add',
+        'api/todos/add',
         {
           title: newTodo.title,
           description: newTodo.description,
@@ -51,7 +51,7 @@ const actions = {
     }
 
     await axios
-      .delete(`http://localhost:5000/api/todos/delete/${id}`, config)
+      .delete(`api/todos/delete/${id}`, config)
       .then((res) => commit('deleteTodo', id))
       .catch((err) => alert(err))
   },
@@ -65,7 +65,7 @@ const actions = {
 
     await axios
       .patch(
-        `http://localhost:5000/api/todos/patch/${target._id}`,
+        `api/todos/patch/${target._id}`,
         {
           flag: !target.flag,
         },

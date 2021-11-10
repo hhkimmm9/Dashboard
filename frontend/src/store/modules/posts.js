@@ -19,7 +19,7 @@ const actions = {
     }
 
     await axios
-      .get('http://localhost:5000/api/post/', config)
+      .get('api/post/', config)
       .then((res) => commit('setPosts', res.data))
       .catch((err) => alert(err))
   },
@@ -32,7 +32,7 @@ const actions = {
     }
 
     await axios
-      .get(`http://localhost:5000/api/post/detail/${id}`, config)
+      .get(`api/post/detail/${id}`, config)
       .then((res) => {
         commit('setPostDetail', res.data[0])
       })
@@ -56,7 +56,7 @@ const actions = {
     }
 
     await axios
-      .post('http://localhost:5000/api/post/upload', fd, config)
+      .post('api/post/upload', fd, config)
       .then((res) => {
         commit('setNewPost', res.data)
       })
@@ -71,7 +71,7 @@ const actions = {
     }
 
     await axios
-      .delete(`http://localhost:5000/api/post/delete/${id}`, config)
+      .delete(`api/post/delete/${id}`, config)
       .then((res) => commit('setDeletedPosts', id))
       .catch((err) => alert(err))
   },

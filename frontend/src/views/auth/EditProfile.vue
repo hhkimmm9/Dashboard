@@ -4,7 +4,7 @@
     <h3>Profile Edit</h3>
 
     <img
-      :src="`http://localhost:5000/${getUserInfo.profilePicture}`"
+      :src="`api/${getUserInfo.profilePicture}`"
       alt="current profile picture"
       id="imgOnProfileEdit"
     />

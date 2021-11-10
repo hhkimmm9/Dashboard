@@ -3,7 +3,7 @@
     <h3>Home</h3>
     <div class="content" v-if="getIsSignedIn">
       <img
-        :src="`http://localhost:5000/${getUserInfo.profilePicture}`"
+        :src="`api/${getUserInfo.profilePicture}`"
         alt="user profile picture"
       />
       <p>
