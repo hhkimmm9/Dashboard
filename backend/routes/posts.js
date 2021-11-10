@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
-const verify = require('./verifyToken')
+const verify = require('./auth/verifyToken')
 
 const Post = require('../models/postModel')
 const app = require('../app')

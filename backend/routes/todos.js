@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Todo = require('../models/todoModel')
-const verify = require('./verifyToken')
+const verify = require('./auth/verifyToken')
 
 const jwt = require('jsonwebtoken')
 
