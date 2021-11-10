@@ -33,7 +33,7 @@ const actions = {
     }
 
     await axios
-      .post('api/user/register', fd, config)
+      .post('/api/user/register', fd, config)
       .then((res) => alert(res.data))
       .catch((err) => alert(err))
   },
@@ -41,7 +41,7 @@ const actions = {
   //
   async login({ commit }, userInfo) {
     await axios
-      .post('api/user/login', {
+      .post('/api/user/login', {
         email: userInfo.email,
         password: userInfo.password,
       })
@@ -91,7 +91,7 @@ const actions = {
     }
 
     await axios
-      .put('api/user/profile/edit', fd, config)
+      .put('/api/user/profile/edit', fd, config)
       .then((res) => {
         console.log(res.data)
         commit('setUserInfo', res.data.userInfo)
