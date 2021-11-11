@@ -43,7 +43,6 @@ router.post('/register', upload.single('profilePicture'), async (req, res) => {
     salt
   )
 
-  console.log(req.file)
   // Create a new user.
   const user = new User({
     profilePicture: req.file.filename,
