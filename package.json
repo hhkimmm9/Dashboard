@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "prestart": "npm i && node server/index &",
+    "start": "cd client && npm i && npm run serve",
     "dev": "nodemon server/index"
   },
   "dependencies": {

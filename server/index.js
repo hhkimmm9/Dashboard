@@ -1,5 +1,5 @@
 const express = require('express')
-const logger = require('morgan')
+const morgan = require('morgan')
 const cors = require('cors')
 
 const path = require('path')
@@ -18,9 +18,9 @@ app.use(express.static('./uploads'))
 app.use(express.json())
 // cors
 app.use(cors())
-// logger?
-app.use(logger('dev'))
-// url encoding parser
+// log only 4xx and 5xx responses to console
+app.use(morgan('dev'))
+// parses incoming requests with urlencoded payloads.
 app.use(express.urlencoded({ extended: false }))
 
 // Route
