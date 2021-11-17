@@ -10,8 +10,11 @@ require('./database')
 
 const app = express()
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'jade')
+
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static('./uploads'))
 
 // Middleware
 // express default json bodyparser
@@ -31,10 +34,14 @@ app.use('/api/post', require('./routes/posts'))
 // Handle production
 if (process.env.NODE_ENV === 'production') {
   // Static folder
-  app.use(express.static(__dirname + '/public/'))
+  // app.use(express.static(__dirname + '/public/'))
+  // app.use(express.static(path.join(__dirname, 'public')))
 
   // Handle SPA
-  app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'))
+  app.get(/.*/, (req, res) =>
+    // app.get('*', (req, res) =>
+    res.sendFile(__dirname + '/public/dist/index.html')
+  )
 }
 
 // Run the server.
@@ -58,18 +65,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500)
   res.render('error')
 })
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'jade')
-
-//
-app.use(express.static(path.join(__dirname, '../build')))
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build'))
-})
-
-// what is this for?
-// app.use('/routes/users', require('./routes/auth/auth'))
 
 module.exports = app
