@@ -34,7 +34,6 @@ app.use('/api/post', require('./routes/posts'))
 // Handle production
 if (process.env.NODE_ENV === 'production') {
   // Static folder
-  // app.use(express.static(__dirname + '/public/'))
   // app.use(express.static(path.join(__dirname, 'public')))
 
   // Handle SPA
