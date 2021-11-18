@@ -44,7 +44,7 @@ router.post('/register', upload.single('profilePicture'), async (req, res) => {
   )
 
   // Create a new user.
-  const user = new User({
+  const newUser = new User({
     profilePicture: req.file.filename,
     username: req.body.username,
     email: req.body.email,
@@ -53,8 +53,8 @@ router.post('/register', upload.single('profilePicture'), async (req, res) => {
 
   // Store the created user into the DB.
   try {
-    const savedUser = await user.save()
-    res.send('User successfully created.')
+    const savedUser = await newUser.save()
+    res.send({ userInfo: savedUser })
   } catch (err) {
     res.status(400).send('Error ' + err)
   }
@@ -96,7 +96,7 @@ router.post('/login', async (req, res) => {
 router.put(
   '/profile/edit',
   verify,
-  // don't care if updatedProfilePicture is in the req.
+  // no error even if updatedProfilePicture is not in the req.
   upload.single('updatedProfilePicture'),
   async (req, res) => {
     const token = req.header('auth-token')
@@ -108,45 +108,23 @@ router.put(
       salt
     )
 
-    // If the user changed their profile picture.
-    // TODO: why boolean changed to string? maybe bodyparser?
-    if (req.body.withProfilePicture === 'true') {
-      const currUser = await User.findOneAndUpdate(
-        { _id: userId },
-        {
-          profilePicture: req.file.path,
-          email: req.body.email,
-          username: req.body.username,
-          password: hashedPassword,
-        }
-      )
-
-      try {
-        res.send({ userInfo: currUser })
-      } catch (err) {
-        res.send('Profile update with new profile picture failed.' + err)
-      }
+    const updProfile = {
+      profilePicture:
+        req.body.withProfilePicture === 'true'
+          ? req.file.filename
+          : req.body.profilePicture,
+      email: req.body.email,
+      username: req.body.username,
+      password: hashedPassword,
     }
-    // If the user didn't change their profile picture.
-    else {
-      const currUser = await User.findOneAndUpdate(
-        { _id: userId },
-        {
-          profilePicture: req.body.profilePicture,
-          email: req.body.email,
-          username: req.body.username,
-          password: hashedPassword,
-        }
-      )
 
-      console.log(currUser)
-      res.send({ userInfo: currUser })
+    try {
+      // TODO: two operations in one try block?
+      const updUser = await User.findOneAndUpdate({ _id: userId }, updProfile)
 
-      try {
-        res.send({ userInfo: currUser })
-      } catch (err) {
-        res.send('Profile update with new profile picture failed.' + err)
-      }
+      res.send({ userInfo: updProfile })
+    } catch (err) {
+      res.send('Profile update failed.' + err)
     }
   }
 )
