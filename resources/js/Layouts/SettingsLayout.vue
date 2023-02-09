@@ -20,23 +20,7 @@ const toggleWidth = () => {
 onMounted(() => {
     
 
-    const form = useRemember({
-        first_name: "Harrison",
-        last_name: "Kim",
-    })
-
-
-    console.log(router);
-    router.remember({
-        firstName: "Sol",
-        lastName: "Chang",
-    }, 'wife-name');
-    console.log(router)
-    console.log(router.restore('wife-name'))
-
-    console.log(history);
-    form.first_name = "Haesoo";
-    console.log(history);
+    console.log(route())
 });
 
 </script>

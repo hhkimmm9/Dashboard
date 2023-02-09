@@ -24,7 +24,7 @@ export default {
 
     <!-- <AuthenticatedLayout> -->
         <div class="relative">
-            <div class="flex flex-row h-screen">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-screen flex flex-row">
                 <!-- transition -->
                 <SettingsLayout @toggleWidth="toggleWidth" :expanded="expanded" :class="[expanded ? 'w-60' : 'w-20']"/>
 
