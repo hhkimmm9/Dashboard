@@ -18,17 +18,45 @@ const showingNavigationDropdown = ref(false);
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-end h-16">
                         <div class="hidden sm:flex sm:items-center sm:ml-6 sm:space-x-7">
-                            <Link :href="route('dashboard')" :class="[route().current('dashboard') ? '' : '']">
-                                Home
+
+                            <!-- Home -->
+                            <Link :href="route('dashboard')"
+                                :class="[route().current('dashboard') ? '' : '',
+                                    'flex flex-row space-x-1 items-center'
+                                ]"
+                            >
+                                <span class="material-icons">home</span>
+                                <span>Home</span>
                             </Link>
-                            <Link :href="route('profile.edit')" :class="[route().current('dashboard') ? '' : '']">
-                                Profile
+
+                            <!-- Profile -->
+                            <Link :href="route('profile.edit')"
+                                :class="[route().current('dashboard') ? '' : '',
+                                    'flex flex-row space-x-1 items-center'
+                                ]"
+                            >
+                                <span class="material-icons">person</span>
+                                <span>Profile</span>
                             </Link>
-                            <Link :href="route('settings.index')" :class="[route().current('dashboard') ? '' : '']">
-                                Settings
+                            
+                            <!-- Settings -->
+                            <Link :href="route('settings.index')"
+                                :class="[route().current('dashboard') ? '' : '',
+                                    'flex flex-row space-x-1 items-center'
+                                ]"
+                            >
+                                <span class="material-icons">settings</span>
+                                <span>Settings</span>
                             </Link>
-                            <Link :href="route('logout')" method="post" as="button" :class="[route().current('dashboard') ? '' : '']">
-                                Log Out
+
+                            <!-- Logout -->
+                            <Link :href="route('logout')" method="post" as="button"
+                                :class="[route().current('dashboard') ? '' : '',
+                                    'flex flex-row space-x-1 items-center'
+                                ]"
+                            >
+                                <span class="material-icons">logout</span>
+                                <span>Log Out</span>
                             </Link>
                         </div>
 
