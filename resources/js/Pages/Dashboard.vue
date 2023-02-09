@@ -1,16 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import TextInput from '@/Components/TextInput.vue';
-import BlockSix from '@/Pages/BlockSix/BlockSix.vue';
-import Calendar from '@/Pages/Calendar/Calendar.vue';
-import Tetris from '@/Pages/Tetris/Tetris.vue';
-import SettingsSideBar from '@/Components/Custom/SettingsSidebar.vue';
+import Dock from '../Components/Custom/Dock.vue';
 import { Head } from '@inertiajs/vue3';
-
-let showDock = true;
-let showSidebar = true;
-let selectedModule = 'blocksix';
-
 
 </script>
 
@@ -18,29 +10,24 @@ let selectedModule = 'blocksix';
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <!-- <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
-        </template> -->
-
-        <div class="py-12 relative">
+        <div class="py-12 relative h-screen">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="text-3xl font-bold uppercase">
+                    dashboard
+                </div>
 
-                <BlockSix v-if="selectedModule == 'blocksix'" />
-                <Calendar v-else-if="selectedModule == 'calendar'" />
-                <Tetris v-else-if="selectedModule == 'tetris'" />
-
-                <div v-if="showDock"
-                    class="rounded-xl shadow-lg bg-blue-100 p-4 flex flex-row justify-around mt-10"
-                >
-                    <span v-for="(item,index) in 5" :key="index"
-                        class="border shadow px-2 hover:shadow-lg cursor-pointer"
-                    >{{ item }}</span>
+                <div class="mt-10 grid grid-cols-2 gap-3">
+                    <div v-for="item in 4" :key="item"
+                        class="border-2 border-black rounded p-2 h-64"
+                    >
+                        {{ item }}
+                    </div>
                 </div>
             </div>
-
-            <SettingsSideBar v-if="showSidebar" />
+            
+            <div class="absolute bottom-28 mx-auto left-0 right-0 px-20">
+                <Dock />
+            </div>
         </div>
-
-
     </AuthenticatedLayout>
 </template>
