@@ -6,6 +6,9 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import { useLayoutStore } from '../Stores/LayoutStore';
+
+const layoutStore = useLayoutStore();
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -134,6 +137,15 @@ const showingNavigationDropdown = ref(false);
             <main>
                 <slot />
             </main>
+
+            <!-- show dock toggle -->
+            <div class="w-full flex justify-center relative">
+                <button @click="layoutStore.showDock = !layoutStore.showDock"
+                    :class="[layoutStore.showDock ? '' : 'hidden',
+                        'material-icons opacity-90 cursor-pointer absolute bottom-4'
+                    ]"
+                > keyboard_double_arrow_up </button>
+            </div>
         </div>
     </div>
 </template>
