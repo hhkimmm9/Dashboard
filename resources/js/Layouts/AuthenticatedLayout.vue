@@ -15,7 +15,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-100 relative">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -139,10 +139,10 @@ const showingNavigationDropdown = ref(false);
             </main>
 
             <!-- show dock toggle -->
-            <div class="w-full flex justify-center relative">
+            <div class="w-full flex justify-center absolute bottom-28">
                 <button @click="layoutStore.showDock = !layoutStore.showDock"
                     :class="[layoutStore.showDock ? '' : 'hidden',
-                        'material-icons opacity-90 cursor-pointer absolute bottom-4'
+                        'material-icons opacity-90 cursor-pointer'
                     ]"
                 > keyboard_double_arrow_up </button>
             </div>

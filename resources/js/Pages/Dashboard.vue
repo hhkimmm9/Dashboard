@@ -10,7 +10,7 @@ import { Head } from '@inertiajs/vue3';
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <div class="py-12 relative h-screen">
+        <div class="pt-10 relative h-screen">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="text-3xl font-bold uppercase">
                     dashboard
