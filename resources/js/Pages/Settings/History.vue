@@ -1,5 +1,5 @@
 <script setup>
-import Dock from '../../Components/Custom/Dock.vue'
+import Dock from '../../Components/Shared/Dock.vue'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import SettingsLayout from '@/Layouts/SettingsLayout.vue';
 import { Head } from '@inertiajs/vue3';
