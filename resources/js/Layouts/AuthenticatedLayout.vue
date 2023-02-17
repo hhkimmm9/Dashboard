@@ -6,14 +6,17 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import { useLayoutStore } from '../Stores/LayoutStore';
+
+const layoutStore = useLayoutStore();
 
 const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+        <div class="min-h-screen relative">
+            <nav class="absolute top-0 z-10 w-full">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-end h-16">
@@ -131,9 +134,18 @@ const showingNavigationDropdown = ref(false);
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="relative">
                 <slot />
             </main>
+
+            <!-- show dock toggle -->
+            <div class="w-full flex justify-center absolute bottom-28">
+                <button @click="layoutStore.showDock = !layoutStore.showDock"
+                    :class="[layoutStore.showDock ? '' : 'hidden',
+                        'material-icons opacity-90 cursor-pointer'
+                    ]"
+                > keyboard_double_arrow_up </button>
+            </div>
         </div>
     </div>
 </template>

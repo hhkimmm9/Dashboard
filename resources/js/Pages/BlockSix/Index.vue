@@ -1,85 +1,31 @@
 <template>
-    <div class="text-center flex justify-center">
-        <div class="border shadow w-2/3 p-10 flex flex-col space-y-6">
-            <div class="flex flex-row">
-                <TextInput
-                    id="block1"
-                    type="text"
-                    class="block w-full"
-                    v-model="block1"
-                />
-                <span class="border-2 border-black p-2 ml-3">icon placeholder</span>
+    <Head title="Block Six" />
+
+    <AuthenticatedLayout>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-32 h-screen bg-violet-200 pt-20 space-y-14">
+            <div class="flex justify-center">
+                <p class="text-3xl font-extrabold border p-3 bg-violet-300 rounded-lg shadow-lg uppercase text-white"> Block Six </p>
             </div>
-            <div class="flex flex-row">
-                <TextInput
-                    id="block2"
-                    type="text"
-                    class="block w-full"
-                    v-model="block2"
-                />
-                <span class="border-2 border-black p-2 ml-3">icon placeholder</span>
+
+            <div class="flex justify-center text-center">
+                <div class="bg-white border shadow w-2/3 p-10 flex flex-col space-y-4 rounded-lg">
+                    <InputFields />
+                </div>
             </div>
-            <div class="flex flex-row">
-                <TextInput
-                    id="block3"
-                    type="text"
-                    class="block w-full"
-                    v-model="block3"
-                />
-                <span class="border-2 border-black p-2 ml-3">icon placeholder</span>
-            </div>
-            <div class="flex flex-row">
-                <TextInput
-                    id="block4"
-                    type="text"
-                    class="block w-full"
-                    v-model="block4"
-                />
-                <span class="border-2 border-black p-2 ml-3">icon placeholder</span>
-            </div>
-            <div class="flex flex-row">
-                <TextInput
-                    id="block5"
-                    type="text"
-                    class="block w-full"
-                    v-model="block5"
-                />
-                <span class="border-2 border-black p-2 ml-3">icon placeholder</span>
-            </div>
-            <div class="flex flex-row">
-                <TextInput
-                    id="block6"
-                    type="text"
-                    class="block w-full"
-                    v-model="block6"
-                />
-                <span class="border-2 border-black p-2 ml-3">icon placeholder</span>
+
+            <div class="flex justify-center">
+                <button class="bg-yellow-300 hover:bg-yellow-400 p-3 rounded-lg text-violet-700 font-bold shadow-md text-xl">Submit</button>
             </div>
         </div>
-    </div>
+        
+        <div class="absolute bottom-28 mx-auto left-0 right-0 px-20">
+            <Dock />
+        </div>
+    </AuthenticatedLayout>
 </template>
 
-<script>
-import TextInput from '@/Components/TextInput.vue'
-export default {
-    name: 'Index',
-    components: {
-        TextInput,
-    },
-    data() {
-        return {
-            block1: "",
-            block2: "",
-            block3: "",
-            block4: "",
-            block5: "",
-            block6: "",
-        }
-    },
+<script setup>
+import InputFields from '@/Components/BlockSix/InputFields.vue'
+import { ref } from '@vue/reactivity'
 
-}
 </script>
-
-<style>
-
-</style>
