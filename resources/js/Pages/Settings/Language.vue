@@ -1,6 +1,6 @@
 <script setup>
-import Dock from '../../Components/Custom/Dock.vue'
-import Toggle from '../../Components/Custom/Toggle.vue'
+import Dock from '../../Components/Shared/Dock.vue'
+import Toggle from '../../Components/Shared/Toggle.vue'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import SettingsLayout from '@/Layouts/SettingsLayout.vue';
 import { Head } from '@inertiajs/vue3';
