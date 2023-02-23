@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TetrisController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Foundation\Application;
@@ -35,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/modules/tetris', [TetrisController::class, 'index'])->name('tetris.index');
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/settings/history', [SettingsController::class, 'history'])->name('settings.history');
     Route::get('/settings/language', [SettingsController::class, 'language'])->name('settings.language');
