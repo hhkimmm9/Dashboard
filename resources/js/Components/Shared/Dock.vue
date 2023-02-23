@@ -21,7 +21,7 @@ var modules = [
         id: 3,
         name: "Calendar",
         icon: "calendar_month",
-        url: "modules.calendar",
+        url: "schedule.index",
     },
     {
         id: 4,
