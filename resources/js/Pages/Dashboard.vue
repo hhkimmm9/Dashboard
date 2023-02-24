@@ -8,11 +8,7 @@
             </div>
 
             <div class="mt-10 grid grid-cols-2 gap-3">
-                <div v-for="item in 4" :key="item"
-                    class="border-2 border-black rounded p-2 h-64"
-                >
-                    {{ item }}
-                </div>
+                <TodaysTasks :todays_tasks="todays_tasks" />
             </div>
         </div>
         
@@ -25,5 +21,6 @@
 <script setup>
 import TextInput from '@/Components/TextInput.vue';
 import { Head } from '@inertiajs/vue3';
+import TodaysTasks from '@/Components/Dashboard/TodaysTask.vue'
 
 </script>
