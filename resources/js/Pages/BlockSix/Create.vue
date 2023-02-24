@@ -1,7 +1,7 @@
 <template>
     <Head title="Block Six" />
 
-    <AuthenticatedLayout>
+    <AuthenticatedLayout class="relative">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-32 h-full bg-violet-100 py-20 space-y-14">
             <div class="flex justify-center">
                 <div class="flex flex-col font-bold text-3xl text-purple-800 cursor-default text-center font-noto-sans-korean-900">
@@ -36,6 +36,17 @@
                     > Set </button>
                 </div>
             </form>
+        </div>
+
+        <!-- TODO: transition -->
+        <div class="
+            absolute right-4 bottom-4 w-52 cursor-pointer invisible
+            hover:w-60
+            lg:visible
+        ">
+            <a href="http://www.yes24.com/Product/Goods/104868817" target="_blank">
+                <img src="https://image.yes24.com/goods/104868817/XL" alt="">
+            </a>
         </div>
     </AuthenticatedLayout>
 </template>
