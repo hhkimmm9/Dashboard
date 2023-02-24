@@ -13,6 +13,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                'noto-sans-korean-900': ['"Noto Sans Korean"'],
             },
         },
     },

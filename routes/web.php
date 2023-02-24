@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\TetrisController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ModulesController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SettingsController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -28,18 +28,17 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/modules/blocksix', [ModulesController::class, 'blocksix'])->name('modules.blocksix');
-    Route::get('/modules/tetris', [ModulesController::class, 'tetris'])->name('modules.tetris');
-    
+    Route::get('/modules/blocksix', [TaskController::class, 'index'])->name('blocksix.index');
+    Route::get('/modules/blocksix/create', [TaskController::class, 'create'])->name('blocksix.create');
+    Route::post('/modules/blocksix', [TaskController::class, 'store'])->name('blocksix.store');
+
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/settings/history', [SettingsController::class, 'history'])->name('settings.history');
     Route::get('/settings/language', [SettingsController::class, 'language'])->name('settings.language');

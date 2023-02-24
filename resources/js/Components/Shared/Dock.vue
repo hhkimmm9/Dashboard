@@ -1,8 +1,11 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import { useLayoutStore } from '../../Stores/LayoutStore';
+import { useGeneralStore } from '../../Stores/GeneralStore';
+import { onMounted } from 'vue';
 
-const layoutStore = useLayoutStore()
+const layoutStore = useLayoutStore();
+const generalStore = useGeneralStore();
 
 var modules = [
     {
@@ -15,13 +18,7 @@ var modules = [
         id: 2,
         name: "BlockSix",
         icon: "grid_view",
-        url: "modules.blocksix",
-    },
-    {
-        id: 4,
-        name: "Tetris",
-        icon: "sports_esports",
-        url: "modules.tetris",
+        url: generalStore.is_todays_tasks_created ? 'blocksix.index' : 'blocksix.create',
     },
 ]
 </script>
