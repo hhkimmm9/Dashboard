@@ -15,10 +15,6 @@ var apps = [
         id: 3,
         name: "Calendar",
     },
-    {
-        id: 4,
-        name: "Tetris",
-    },
 ]
 </script>
 
