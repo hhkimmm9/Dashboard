@@ -37,8 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/modules/calendar', [ModulesController::class, 'calendar'])->name('modules.calendar');
     Route::get('/modules/blocksix', [ModulesController::class, 'blocksix'])->name('modules.blocksix');
+    Route::get('/modules/tetris', [ModulesController::class, 'tetris'])->name('modules.tetris');
+    
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/settings/history', [SettingsController::class, 'history'])->name('settings.history');
     Route::get('/settings/language', [SettingsController::class, 'language'])->name('settings.language');

@@ -18,12 +18,6 @@ var modules = [
         url: "modules.blocksix",
     },
     {
-        id: 3,
-        name: "Calendar",
-        icon: "calendar_month",
-        url: "modules.calendar",
-    },
-    {
         id: 4,
         name: "Tetris",
         icon: "sports_esports",
