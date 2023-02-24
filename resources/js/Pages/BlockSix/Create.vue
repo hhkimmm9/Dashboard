@@ -4,7 +4,10 @@
     <AuthenticatedLayout>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-32 h-full bg-violet-100 py-20 space-y-14">
             <div class="flex justify-center">
-                <p class="text-3xl font-extrabold border p-3 bg-violet-300 rounded-lg shadow-lg uppercase text-white cursor-default"> Block Six </p>
+                <div class="flex flex-col font-bold text-3xl text-purple-800 cursor-default text-center font-noto-sans-korean-900">
+                    <span>시간을 선택하는 기술</span>
+                    <span>블럭식스</span>
+                </div>
             </div>
 
             <form @submit.prevent="tasks.post('/modules/blocksix', tasks);">
