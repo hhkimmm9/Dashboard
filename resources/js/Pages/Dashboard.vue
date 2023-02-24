@@ -22,5 +22,17 @@
 import TextInput from '@/Components/TextInput.vue';
 import { Head } from '@inertiajs/vue3';
 import TodaysTasks from '@/Components/Dashboard/TodaysTask.vue'
+import { useGeneralStore } from '@/Stores/GeneralStore';
+import { onMounted } from 'vue';
+
+
+const props = defineProps(['todays_tasks']);
+
+const generalStore = useGeneralStore();
+
+onMounted(() => {
+    if (props.todays_tasks.length > 0) generalStore.is_todays_tasks_created = true;
+    else generalStore.is_todays_tasks_created = false;
+})
 
 </script>
