@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -12,11 +12,18 @@ import Dock from '@/Components/Shared/Dock.vue'
 const layoutStore = useLayoutStore();
 
 const showingNavigationDropdown = ref(false);
+
+const isOnBlockSix = computed(() => {
+    console.log('dd')
+    if (location.pathname.includes('blocksix'))
+        return true;
+    else return false;
+});
 </script>
 
 <template>
     <div>
-        <div class="min-h-screen flex flex-col">
+        <div :class="['min-h-screen flex flex-col', isOnBlockSix ? 'bg-violet-100' : '']">
             <nav class="absolute top-0 z-10 w-full">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
