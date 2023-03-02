@@ -18,6 +18,7 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
-        "pinia": "^2.0.30"
+        "pinia": "^2.0.30",
+        "vue-tippy": "^6.0.0"
     }
 }
