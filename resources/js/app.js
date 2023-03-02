@@ -7,7 +7,9 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { createPinia } from 'pinia'
 
+// tippy
 import VueTippy from 'vue-tippy';
+import 'tippy.js/dist/tippy.css'
 
 // Layout
 import AuthenticatedLayout from './Layouts/AuthenticatedLayout.vue';
