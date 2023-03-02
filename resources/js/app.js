@@ -6,6 +6,10 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { createPinia } from 'pinia'
+
+import VueTippy from 'vue-tippy';
+
+// Layout
 import AuthenticatedLayout from './Layouts/AuthenticatedLayout.vue';
 import Dock from './Components/Shared/Dock.vue';
 
@@ -19,6 +23,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(createPinia())
+            .use(VueTippy)
             .component('AuthenticatedLayout', AuthenticatedLayout)
             .component('Dock', Dock)
             .mount(el);
