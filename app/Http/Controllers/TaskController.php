@@ -26,9 +26,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return Inertia::render('BlockSix/Index', [
-
-        ]);
+        return Inertia::render('BlockSix/Create');
     }
 
     /**

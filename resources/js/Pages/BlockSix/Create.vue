@@ -2,7 +2,7 @@
     <Head title="Block Six" />
 
     <AuthenticatedLayout class="relative">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-32 h-full bg-violet-100 py-20">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-32 h-full bg-violet-100 py-10">
             <div class="flex justify-center">
                 <div class="flex flex-col font-bold text-3xl text-purple-800 cursor-default text-center font-noto-sans-korean-900">
                     <span>시간을 선택하는 기술</span>
