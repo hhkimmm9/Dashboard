@@ -37,8 +37,6 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $tasks = $request->all();
-
         $validated_slots = $request->validate([
             'slot1' => 'required|string|min:1',
             'slot2' => 'required|string|min:1',
