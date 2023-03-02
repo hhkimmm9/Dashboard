@@ -42,5 +42,11 @@ var modules = [
         icon: "grid_view",
         url: generalStore.is_todays_tasks_created ? 'blocksix.index' : 'blocksix.create',
     },
+    {
+        id: 2,
+        name: "Note",
+        icon: "grid_view",
+        url: 'note.index',
+    },
 ]
 </script>
