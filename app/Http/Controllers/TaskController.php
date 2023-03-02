@@ -52,7 +52,8 @@ class TaskController extends Controller
         foreach($validated_slots as $validated_slot) {
             Task::create([
                 'user_id' => auth()->user()->id,
-                'description' => $validated_slot
+                'keyword' => explode('::', $validated_slot)[0],
+                'description' => explode('::', $validated_slot)[1]
             ]);
         }
 

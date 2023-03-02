@@ -13,19 +13,19 @@
             <div class="mt-8">
                 <form @submit.prevent="tasks.post('/modules/blocksix', tasks);">
                     <div class="flex justify-center text-center">
-                        <div class="bg-white border shadow w-2/3 p-10 flex flex-col space-y-4 rounded-lg">
+                        <div class="bg-white border shadow w-2/3 p-6 flex flex-col space-y-4 rounded-lg">
                             <div class="border-2 p-3 rounded-lg shadow">
-                                <div class="text-xl font-bold cursor-default my-2">Morning 🕘</div>
-                                <InputField v-model="tasks.slot1" />
+                                <div class="text-xl font-bold cursor-default my-2 text-violet-800">Morning 🕘</div>
+                                <InputField @update:modelValue="(keyword_and_description) => buildInput('slot1', keyword_and_description)" />
                                 <InputField v-model="tasks.slot2" />
                             </div>
                             <div class="border-2 p-3 rounded-lg shadow">
-                                <div class="text-xl font-bold cursor-default my-2">Aternoon 🕛</div>
+                                <div class="text-xl font-bold cursor-default my-2 text-violet-800">Aternoon 🕛</div>
                                 <InputField v-model="tasks.slot3" />
                                 <InputField v-model="tasks.slot4" />
                             </div>
                             <div class="border-2 p-3 rounded-lg shadow">
-                                <div class="text-xl font-bold cursor-default my-2">Evening 🕕</div>
+                                <div class="text-xl font-bold cursor-default my-2 text-violet-800">Evening 🕕</div>
                                 <InputField v-model="tasks.slot5" />
                                 <InputField v-model="tasks.slot6" />
                             </div>
@@ -41,7 +41,7 @@
         </div>
 
         <!-- TODO: transition -->
-        <div class="
+        <div ref="purchase_book" class="
             absolute right-4 bottom-4 w-52 cursor-pointer invisible
             hover:w-60
             lg:visible
@@ -56,6 +56,8 @@
 <script setup>
 import InputField from '@/Components/BlockSix/InputField.vue'
 import { useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import { useTippy }from 'vue-tippy'
 
 const tasks = useForm({
     slot1: null,
@@ -65,5 +67,26 @@ const tasks = useForm({
     slot5: null,
     slot6: null,
 });
+
+const buildInput = (whichSlot, keyword_and_description) => {
+    // TODO
+    if (whichSlot == 'slot1') tasks.slot1 = keyword_and_description;
+    else if (whichSlot == 'slot2') tasks.slot2 = keyword_and_description;
+    else if (whichSlot == 'slot3') tasks.slot3 = keyword_and_description;
+    else if (whichSlot == 'slot4') tasks.slot4 = keyword_and_description;
+    else if (whichSlot == 'slot5') tasks.slot5 = keyword_and_description;
+    else if (whichSlot == 'slot6') tasks.slot6 = keyword_and_description;
+}
+
+// Tippy
+const purchase_book = ref();
+useTippy(purchase_book, {
+    content: "Click to buy the book!",
+    placement: 'top',
+    animation: 'shift-away',
+    theme: 'light',
+    interactive: true,
+    duration: 0,
+})
 
 </script>
