@@ -23,7 +23,15 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(createPinia())
-            .use(VueTippy)
+            .use(VueTippy, {
+                directive: 'tippy', // => v-tippy
+                component: 'tippy', // => <tippy/>
+                componentSingleton: 'tippy-singleton', // => <tippy-singleton/>,
+                defaultProps: {
+                    placement: 'auto-end',
+                    allowHTML: true,
+                }, // => Global default options * see all props
+            })
             .component('AuthenticatedLayout', AuthenticatedLayout)
             .component('Dock', Dock)
             .mount(el);
