@@ -1,3 +1,25 @@
+<template>
+    <div :class="['max-w-7xl flex flex-col mx-auto', layoutStore.showDock ? 'hidden' : '']">
+        <!-- modules -->
+        <div class="w-full rounded-xl shadow-lg bg-slate-50 p-4 flex flex-row justify-around">
+            <span v-for="item in modules" :key="item.id"
+                class="px-2 hover:shadow-2xl hover:bg-slate-200 cursor-pointer py-1 space-y-1"
+            >
+                <Link :href="route(item.url)" :class="[route().current('dashboard') ? '' : '', 'flex flex-col w-20']">
+                    <span class="material-icons mx-auto text-3xl">{{ item.icon }}</span>
+                    <div class="text-center"> {{ item.name }} </div>
+                </Link >
+            </span>
+        </div>
+
+        <div class="w-full flex justify-center mt-2">
+            <button @click="layoutStore.showDock = !layoutStore.showDock"
+                class="material-icons opacity-90 cursor-pointer"
+            > keyboard_double_arrow_down </button>
+        </div>
+    </div>
+</template>
+
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import { useLayoutStore } from '../../Stores/LayoutStore';
@@ -26,25 +48,3 @@ var modules = [
     },
 ]
 </script>
-
-<template>
-    <div class="relative" :class="[layoutStore.showDock ? 'hidden' : '', 'max-w-7xl flex mx-auto']">
-        <!-- modules -->
-        <div class="w-full rounded-xl shadow-lg bg-slate-50 p-4 flex flex-row justify-around">
-            <span v-for="item in modules" :key="item.id"
-                class="px-2 hover:shadow-2xl hover:bg-slate-200 cursor-pointer py-1 space-y-1"
-            >
-                <Link :href="route(item.url)" :class="[route().current('dashboard') ? '' : '', 'flex flex-col']">
-                    <span class="material-icons mx-auto text-3xl">{{ item.icon }}</span>
-                    <div class="text-center"> {{ item.name }} </div>
-                </Link >
-            </span>
-        </div>
-
-        <div class="absolute bottom-1 w-full flex justify-center">
-            <button @click="layoutStore.showDock = !layoutStore.showDock"
-                class="material-icons opacity-90 cursor-pointer"
-            > keyboard_double_arrow_down </button>
-        </div>
-    </div>
-</template>
