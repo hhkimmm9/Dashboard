@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 export const useGeneralStore = defineStore('generalStore', {
     state: () => {
         return {
-            is_todays_tasks_created: false,
+            is_todays_tasks_created: Boolean,
 
         }
     },

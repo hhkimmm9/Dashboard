@@ -16,7 +16,15 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = auth()->user()->id;
+
+        // TODO: with comments
+        // https://laravel.com/docs/10.x/pagination#paginating-query-builder-results
+        $tasks = Task::where('user_id', $user_id)->paginate(6*7);
+
+        return Inertia::render('BlockSix/Index', [
+            'tasks' => $tasks
+        ]);
     }
 
     /**
@@ -69,7 +77,11 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        $tasks = Task::where('id', $id)->first();
+
+        return Inertia::render('BlockSix/Show', [
+
+        ]);
     }
 
     /**
