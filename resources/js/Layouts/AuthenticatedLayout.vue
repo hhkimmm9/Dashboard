@@ -12,6 +12,12 @@ import Dock from '@/Components/Shared/Dock.vue'
 const layoutStore = useLayoutStore();
 
 const showingNavigationDropdown = ref(false);
+
+const isOnBlockSix = computed(() => {
+    if (location.pathname.includes('blocksix'))
+        return true;
+    else return false;
+});
 </script>
 
 <template>
