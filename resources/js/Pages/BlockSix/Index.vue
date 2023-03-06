@@ -2,124 +2,125 @@
     <Head title="BlockSix (index)" />
 
     <AuthenticatedLayout class="relative">
-        <div id="default-carousel" class="relative" data-carousel="static">
-            <!-- Carousel wrapper -->
-            <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                <div v-for="(item, index) in 3" :key="index"
-                    :id="`carousel-item-${index+1}`" class="hidden duration-700 ease-in-out" data-carousel-item="active"
-                >
-                    <!-- TODO: -->
-                    <!-- <img src="https://dimg.donga.com/wps/NEWS/IMAGE/2021/07/06/107821577.2.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."> -->
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-32 h-full bg-violet-100 py-10 flex justify-center">
-                        <div class="bg-white border shadow w-2/3 p-10 flex flex-col space-y-4 rounded-lg">
-                            <div>
-                                <span class="text-2xl font-bold">Today</span>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-32 h-full py-10 flex flex-row">
+
+            <div class="relative bg-white border border-gray-200 shadow w-2/3 mx-auto p-6 flex flex-col space-y-4 rounded-lg">
+                <div class="font-bold text-2xl"> {{ date }} </div>
+                <div>
+                    <div class="space-y-2">
+                        <div class="text-xl">Morning</div>
+                        <div class="space-y-2">
+                            <div class="flex flex-row items-center space-x-2">
+                                <Link :href="`blocksix/${tasks.data[0].id}`" method="PATCH" :data="{ is_completed: !tasks.data[0].is_completed }">
+                                    <input type="checkbox" :checked="tasks.data[0].is_completed">
+                                </Link>
+                                <div class="w-full flex flex-row justify-between items-center">
+                                    <div class="flex flex-row space-x-1">
+                                        <div class="bg-yellow-200 text-violet-500 px-1"> {{ tasks.data[0].keyword }} </div>
+                                        <div :class="tasks.data[0].is_completed ? 'line-through' : ''">{{ tasks.data[0].description }}</div>
+                                    </div>
+                                    <div class="flex flex-row space-x-2 opacity-80 cursor-pointer">
+                                        <span class="material-symbols-outlined text-xl">edit</span>
+                                        <span class="material-symbols-outlined text-xl">add_comment</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <!-- morning -->
-                                <div class="space-y-2">
-
-                                    <!-- title container -->
-                                    <div>
-                                        <span class="text-lg">Morning</span>
-                                    </div>
-
-                                    <!-- checkbox container -->
-                                    <div>
-                                        <!-- v-for -->
-                                        <div class="flex flex-row space-x-2 items-center">
-                                            <input type="checkbox" :checked="true">
-                                            <p class="line-through">우동 먹고 싶다</p>
-                                        </div>
-                                        <div class="flex flex-row space-x-2 items-center">
-                                            <input type="checkbox" :checked="true">
-                                            <p class="line-through">우동 먹고 싶다</p>
-                                        </div>
-                                    </div>
+                            <div class="flex flex-row items-center space-x-2">
+                                <Link :href="`blocksix/${tasks.data[1].id}`" method="PATCH" :data="{ is_completed: !tasks.data[1].is_completed }">
+                                    <input type="checkbox" :checked="tasks.data[1].is_completed">
+                                </Link>
+                                <div class="flex flex-row space-x-1">
+                                    <div class="bg-yellow-200 text-violet-500 px-1"> {{ tasks.data[1].keyword }} </div>
+                                    <div :class="tasks.data[1].is_completed ? 'line-through' : ''">{{ tasks.data[1].description }}</div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
 
-                                <hr class="my-4">
-
-                                <!-- afternoon -->
-                                <div>
-                                    <!-- title container -->
-                                    <div>
-                                        <span class="text-lg">Aternoon</span>
-                                    </div>
-
-                                    <!-- checkbox container -->
-                                    <div>
-                                        <div class="flex flex-row space-x-2 items-center">
-                                            <input type="checkbox" :checked="true">
-                                            <p class="line-through">우동 먹고 싶다</p>
-                                        </div>
-                                        <div class="flex flex-row space-x-2 items-center">
-                                            <input type="checkbox" :checked="true">
-                                            <p class="line-through">우동 먹고 싶다</p>
-                                        </div>
-                                    </div>
+                    <div class="space-y-2">
+                        <div class="text-xl">Afternoon</div>
+                        <div class="space-y-2">
+                            <div class="flex flex-row items-center space-x-2">
+                                <Link :href="`blocksix/${tasks.data[2].id}`" method="PATCH" :data="{ is_completed: !tasks.data[2].is_completed }">
+                                    <input type="checkbox" :checked="tasks.data[2].is_completed">
+                                </Link>
+                                <div class="flex flex-row space-x-1">
+                                    <div class="bg-yellow-200 text-violet-500 px-1"> {{ tasks.data[2].keyword }} </div>
+                                    <div :class="tasks.data[2].is_completed ? 'line-through' : ''">{{ tasks.data[2].description }}</div>
                                 </div>
+                            </div>
+                            <div class="flex flex-row items-center space-x-2">
+                                <Link :href="`blocksix/${tasks.data[3].id}`" method="PATCH" :data="{ is_completed: !tasks.data[3].is_completed }">
+                                    <input type="checkbox" :checked="tasks.data[3].is_completed">
+                                </Link>
+                                <div class="flex flex-row space-x-1">
+                                    <div class="bg-yellow-200 text-violet-500 px-1"> {{ tasks.data[3].keyword }} </div>
+                                    <div :class="tasks.data[3].is_completed ? 'line-through' : ''">{{ tasks.data[3].description }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                <hr class="my-4">
+                    <hr class="my-4">
 
-                                <!-- evening -->
-                                <div>
-                                    <!-- title container -->
-                                    <div>
-                                        <span class="text-lg">Evening</span>
-                                    </div>
-
-                                    <!-- checkbox container -->
-                                    <div>
-                                        <div class="flex flex-row space-x-2 items-center">
-                                            <input type="checkbox" :checked="true">
-                                            <p class="line-through">우동 먹고 싶다</p>
-                                        </div>
-                                        <div class="flex flex-row space-x-2 items-center">
-                                            <input type="checkbox" :checked="true">
-                                            <p class="line-through">우동 먹고 싶다</p>
-                                        </div>
-                                    </div>
+                    <div class="space-y-2">
+                        <div class="text-xl">Evening</div>
+                        <div class="space-y-2">
+                            <div class="flex flex-row items-center space-x-2">
+                                <Link :href="`blocksix/${tasks.data[4].id}`" method="PATCH" :data="{ is_completed: !tasks.data[4].is_completed }">
+                                    <input type="checkbox" :checked="tasks.data[4].is_completed">
+                                </Link>
+                                <div class="flex flex-row space-x-1">
+                                    <div class="bg-yellow-200 text-violet-500 px-1"> {{ tasks.data[4].keyword }} </div>
+                                    <div :class="tasks.data[4].is_completed ? 'line-through' : ''">{{ tasks.data[4].description }}</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-row items-center space-x-2">
+                                <Link :href="`blocksix/${tasks.data[5].id}`" method="PATCH" :data="{ is_completed: !tasks.data[5].is_completed }">
+                                    <input type="checkbox" :checked="tasks.data[5].is_completed">
+                                </Link>
+                                <div class="flex flex-row space-x-1">
+                                    <div class="bg-yellow-200 text-violet-500 px-1"> {{ tasks.data[5].keyword }} </div>
+                                    <div :class="tasks.data[5].is_completed ? 'line-through' : ''">{{ tasks.data[5].description }}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <Link :href="tasks.next_page_url" :class="['absolute -left-10 top-48', tasks.next_page_url ? 'visible' : 'hidden']">
+                    <button class="">
+                        <span class="material-symbols-outlined">keyboard_double_arrow_left</span>
+                    </button>
+                </Link>
+
+                <Link :href="tasks.prev_page_url" :class="['absolute -right-10 top-48', tasks.prev_page_url ? 'visible' : 'hidden']">
+                    <button class="">
+                        <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+                    </button>
+                </Link>
             </div>
 
-            <!-- Slider indicators -->
-            <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-                <button v-for="(item, index) in 3" :key="index"
-                    :id="`carousel-indicator-${index+1}`" type="button" class="w-3 h-3 rounded-full" aria-current="true" :aria-label="`Slide ${index+1}`" :data-carousel-slide-to="index+1"
-                ></button>
-            </div>
-            <!-- Slider controls -->
-            <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    <span class="sr-only">Previous</span>
-                </span>
-            </button>
-            <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    <span class="sr-only">Next</span>
-                </span>
-            </button>
         </div>
     </AuthenticatedLayout>
 </template>
 
 <script setup>
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { Carousel, initCarousels, } from 'flowbite';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 
 const props = defineProps(['tasks']);
 
+const date = computed(() => {
+    const date = new Date(props.tasks.data[0].created_at);
+    return date.toUTCString();
+});
+
 onMounted(() => {
     initCarousels();
-    console.log(props.tasks);
 })
 </script>
 

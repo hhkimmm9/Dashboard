@@ -20,7 +20,7 @@ class TaskController extends Controller
 
         // TODO: with comments
         // https://laravel.com/docs/10.x/pagination#paginating-query-builder-results
-        $tasks = Task::where('user_id', $user_id)->paginate(6*7);
+        $tasks = Task::where('user_id', $user_id)->latest()->paginate(6);
 
         return Inertia::render('BlockSix/Index', [
             'tasks' => $tasks
@@ -104,7 +104,9 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $new_value = $request['is_completed'];
+
+        $target_task = Task::find($id)->update(['is_completed' => $new_value]);
     }
 
     /**
