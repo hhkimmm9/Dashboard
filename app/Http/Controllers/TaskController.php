@@ -104,9 +104,24 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $new_value = $request['is_completed'];
+        // update is_completed only
+        if ($request['is_completed']) {
+            $new_value = $request['is_completed'];
+    
+            $target_task = Task::find($id)->update(['is_completed' => $new_value]);
+        }
+        // update the whole task
+        else {
+            $validated = $request->validate([
+                'keyword' => 'alpha_num|min:1',
+                'description' => 'alpha_num|min:1'
+            ]);
 
-        $target_task = Task::find($id)->update(['is_completed' => $new_value]);
+            Task::where('id', $id)->update([
+                'keyword' => $validated['keyword'],
+                'description' => $validated['description']
+            ]);
+        }
     }
 
     /**
