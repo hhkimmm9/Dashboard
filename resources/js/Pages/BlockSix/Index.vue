@@ -33,8 +33,8 @@
 
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import { Carousel, initCarousels, } from 'flowbite';
-import { computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
+import { useTippy } from 'vue-tippy';
 import TaskContainer from '@/Components/BlockSix/TaskContainer.vue';
 
 const props = defineProps(['tasks']);
@@ -44,8 +44,17 @@ const date = computed(() => {
     return date.toUTCString();
 });
 
-onMounted(() => {
-    initCarousels();
+// Tippy
+const edit = ref();
+useTippy(edit, {
+    content: "Edit the task",
+    duration: 0
+});
+
+const add_comment = ref();
+useTippy(add_comment, {
+    content: "Leave a comment",
+    duration: 0
 })
 </script>
 
