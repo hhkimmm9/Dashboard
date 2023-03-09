@@ -6,7 +6,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
-import { useLayoutStore } from '../Stores/LayoutStore';
+import { useLayoutStore, } from '@/Stores/index'
 import Dock from '@/Components/Shared/Dock.vue'
 
 const layoutStore = useLayoutStore();

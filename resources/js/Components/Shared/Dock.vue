@@ -22,8 +22,7 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3';
-import { useLayoutStore } from '../../Stores/LayoutStore';
-import { useGeneralStore } from '../../Stores/GeneralStore';
+import { useGeneralStore, useLayoutStore, } from '@/Stores/index'
 import { computed, onMounted } from 'vue';
 
 const layoutStore = useLayoutStore();
