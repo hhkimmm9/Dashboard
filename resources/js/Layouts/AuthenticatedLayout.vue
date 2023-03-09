@@ -8,6 +8,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 import { useLayoutStore, } from '@/Stores/index'
 import Dock from '@/Components/Shared/Dock.vue'
+import Notification from '@/Components/Shared/Notification.vue'
 
 const layoutStore = useLayoutStore();
 
@@ -154,6 +155,10 @@ const isOnBlockSix = computed(() => {
                 > keyboard_double_arrow_up </button>
 
                 <Dock />
+            </div>
+
+            <div v-if="layoutStore.show_notification" class="fixed right-10 bottom-10">
+                <Notification />
             </div>
         </div>
     </div>
