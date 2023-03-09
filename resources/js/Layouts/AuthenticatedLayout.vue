@@ -14,7 +14,6 @@ const layoutStore = useLayoutStore();
 const showingNavigationDropdown = ref(false);
 
 const isOnBlockSix = computed(() => {
-    console.log('dd')
     if (location.pathname.includes('blocksix'))
         return true;
     else return false;
