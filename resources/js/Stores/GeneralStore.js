@@ -1,10 +1,14 @@
 import { defineStore } from 'pinia';
 
-export const useGeneralStore = defineStore('generalStore', {
+const useGeneralStore = defineStore('generalStore', {
     state: () => {
         return {
-            is_todays_tasks_created: false,
-
+            is_todays_tasks_created: Boolean,
+            modal_target_container: Object,
+            notification: {
+                icon_type: 'pass',
+                message: null,
+            },
         }
     },
 
@@ -16,3 +20,5 @@ export const useGeneralStore = defineStore('generalStore', {
 
     }
 });
+
+export default useGeneralStore;
