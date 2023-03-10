@@ -69,7 +69,11 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        // 
+        $target_task = Task::where('id', $id)->first();
+
+        return Inertia::render('BlockSix/Show', [
+            'target_task' => $target_task
+        ]);
     }
 
     /**
