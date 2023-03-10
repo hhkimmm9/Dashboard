@@ -22,7 +22,9 @@
                                     <span v-if="1" class="material-symbols-outlined text-lg cursor-pointer">alarm_off</span>
                                     <span v-else class="material-symbols-outlined text-lg cursor-pointer">alarm_on</span>
                                 </Link>
-                                <span class="material-symbols-outlined text-lg cursor-pointer">edit</span>
+                                <Link :href="`${target_task.id}/edit`" as="span" class="material-symbols-outlined text-lg cursor-pointer">
+                                    edit
+                                </Link>
                             </div>
                         </div>
                         <div class="border border-gray-200 rounded p-4 h-60">
