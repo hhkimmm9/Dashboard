@@ -1,15 +1,20 @@
 import { defineStore } from 'pinia';
 
-export const useLayoutStore = defineStore('layoutStore', {
+const useLayoutStore = defineStore('layoutStore', {
     state: () => ({
         showDock: true,
+        show_notification: true,
+        open_comment_modal: false,
+        open_quick_edit_modal: false,
     }),
 
     getters: {
-        
+        // 
     },
 
     actions: {
-
+        // 
     }
 });
+
+export default useLayoutStore;

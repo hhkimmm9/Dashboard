@@ -1,12 +1,14 @@
 <?php
 
+use Inertia\Inertia;
+use Illuminate\Console\Application;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/modules/blocksix', [TaskController::class, 'index'])->name('blocksix.index');
     Route::get('/modules/blocksix/create', [TaskController::class, 'create'])->name('blocksix.create');
     Route::post('/modules/blocksix', [TaskController::class, 'store'])->name('blocksix.store');
+    Route::post('/modules/blocksix/{id}', [TaskController::class, 'show'])->name('blocksix.show');
+    Route::patch('/modules/blocksix/{id}', [TaskController::class, 'update'])->name('blocksix.update');
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/settings/history', [SettingsController::class, 'history'])->name('settings.history');

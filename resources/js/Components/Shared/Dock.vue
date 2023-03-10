@@ -22,12 +22,15 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3';
-import { useLayoutStore } from '../../Stores/LayoutStore';
-import { useGeneralStore } from '../../Stores/GeneralStore';
-import { onMounted } from 'vue';
+import { useGeneralStore, useLayoutStore, } from '@/Stores/index'
+import { computed, onMounted } from 'vue';
 
 const layoutStore = useLayoutStore();
 const generalStore = useGeneralStore();
+
+const isTodaysTasksCreated = computed(() => {
+    return generalStore.is_todays_tasks_created ? 'blocksix.index' : 'blocksix.create';
+});
 
 var modules = [
     {
@@ -40,7 +43,7 @@ var modules = [
         id: 2,
         name: "BlockSix",
         icon: "grid_view",
-        url: generalStore.is_todays_tasks_created ? 'blocksix.index' : 'blocksix.create',
+        url: isTodaysTasksCreated.value,
     },
 ]
 </script>

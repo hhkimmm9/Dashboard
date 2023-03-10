@@ -16,7 +16,15 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = auth()->user()->id;
+
+        // TODO: with comments
+        // https://laravel.com/docs/10.x/pagination#paginating-query-builder-results
+        $tasks = Task::where('user_id', $user_id)->latest()->paginate(6);
+
+        return Inertia::render('BlockSix/Index', [
+            'tasks' => $tasks
+        ]);
     }
 
     /**
@@ -26,9 +34,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return Inertia::render('BlockSix/Index', [
-
-        ]);
+        return Inertia::render('BlockSix/Create');
     }
 
     /**
@@ -54,7 +60,8 @@ class TaskController extends Controller
         foreach($validated_slots as $validated_slot) {
             Task::create([
                 'user_id' => auth()->user()->id,
-                'description' => $validated_slot
+                'keyword' => explode('::', $validated_slot)[0],
+                'description' => explode('::', $validated_slot)[1]
             ]);
         }
 
@@ -70,7 +77,11 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        $tasks = Task::where('id', $id)->first();
+
+        return Inertia::render('BlockSix/Show', [
+
+        ]);
     }
 
     /**
@@ -93,7 +104,24 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // update is_completed only
+        if ($request['is_completed']) {
+            $new_value = $request['is_completed'];
+    
+            $target_task = Task::find($id)->update(['is_completed' => $new_value]);
+        }
+        // update the whole task
+        else {
+            $validated = $request->validate([
+                'keyword' => 'alpha_num|min:1',
+                'description' => 'alpha_num|min:1'
+            ]);
+
+            Task::where('id', $id)->update([
+                'keyword' => $validated['keyword'],
+                'description' => $validated['description']
+            ]);
+        }
     }
 
     /**
