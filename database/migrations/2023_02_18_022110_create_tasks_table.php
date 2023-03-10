@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('type')->default('general');
             $table->boolean('is_completed')->default(false);
+            $table->unsignedInteger('parent_id');
             $table->timestamps();
         });
     }
