@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Inertia\Inertia;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -16,7 +17,15 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = auth()->user()->id;
+
+        // TODO: with comments
+        // https://laravel.com/docs/10.x/pagination#paginating-query-builder-results
+        $tasks = Task::where('user_id', $user_id)->latest()->paginate(6);
+
+        return Inertia::render('BlockSix/Index', [
+            'tasks' => $tasks
+        ]);
     }
 
     /**
@@ -67,7 +76,10 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        return Inertia::render('BlockSix/Show', [
+            'target_task' => Task::where('id', $id)->first(),
+            'comments' => Comment::where('task_id', $id)->get()
+        ]);
     }
 
     /**
@@ -90,7 +102,24 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // update is_completed only
+        if ($request['is_completed']) {
+            $new_value = $request['is_completed'];
+    
+            $target_task = Task::find($id)->update(['is_completed' => $new_value]);
+        }
+        // update the whole task
+        else {
+            $validated = $request->validate([
+                'keyword' => 'alpha_num|min:1',
+                'description' => 'alpha_num|min:1'
+            ]);
+
+            Task::where('id', $id)->update([
+                'keyword' => $validated['keyword'],
+                'description' => $validated['description']
+            ]);
+        }
     }
 
     /**
