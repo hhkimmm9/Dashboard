@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Inertia\Inertia;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -77,10 +78,9 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        $target_task = Task::where('id', $id)->first();
-
         return Inertia::render('BlockSix/Show', [
-            'target_task' => $target_task
+            'target_task' => Task::where('id', $id)->first(),
+            'comments' => Comment::where('task_id', $id)->get()
         ]);
     }
 
