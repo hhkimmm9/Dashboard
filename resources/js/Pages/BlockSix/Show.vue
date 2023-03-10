@@ -16,7 +16,14 @@
                                 <span class="bg-yellow-200 px-2">{{ target_task.keyword }}</span>
                                 <span :class="target_task.is_completed ? 'line-through' : ''">{{ target_task.description }}</span>
                             </div>
-                            <span class="material-symbols-outlined text-lg">edit</span>
+                            <div class="space-x-2">
+                                <!-- TODO: tooltip & update notification list -->
+                                <Link href="#" as="span">
+                                    <span v-if="1" class="material-symbols-outlined text-lg cursor-pointer">alarm_off</span>
+                                    <span v-else class="material-symbols-outlined text-lg cursor-pointer">alarm_on</span>
+                                </Link>
+                                <span class="material-symbols-outlined text-lg cursor-pointer">edit</span>
+                            </div>
                         </div>
                         <div class="border border-gray-200 rounded p-4 h-60">
                             subtask tree
