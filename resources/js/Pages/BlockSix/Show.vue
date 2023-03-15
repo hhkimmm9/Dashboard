@@ -5,10 +5,19 @@
         <AuthenticatedLayout class="relative">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-32 h-full py-10 flex flex-row">
                 <div class="relative bg-white border border-gray-200 shadow w-2/3 mx-auto p-6 space-y-4 rounded-lg">
-                    <div class="flex flex-row items-center space-x-2 border rounded-full px-2 py-1 w-min">
-                        <span class="material-symbols-outlined">keyboard_backspace</span>
-                        <Link href="/blocksix" as="span" class="text-sm whitespace-nowrap cursor-pointer"> Go Back </Link>
+
+                    <!-- go back -->
+                    <div>
+                        <Link href="/blocksix" as="button"
+                            class="text-sm whitespace-nowrap cursor-pointer items-center flex gap-2 border rounded-full px-2 py-1 w-min shadow-sm
+                                hover:shadow-lg hover:bg-gray-50
+                            "
+                        >
+                            <span class="material-symbols-outlined">keyboard_backspace</span>
+                            <span class="">Go Back</span>
+                        </Link>
                     </div>
+
                     <div class="space-y-5">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
