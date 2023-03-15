@@ -20,10 +20,13 @@
 
                     <div class="space-y-5">
                         <div class="flex items-center justify-between">
+                            <!-- task -->
                             <div class="flex items-center space-x-2">
-                                <input type="checkbox" :checked="target_task.is_completed">
-                                <span class="bg-yellow-200 px-2">{{ target_task.keyword }}</span>
-                                <span :class="target_task.is_completed ? 'line-through' : ''">{{ target_task.description }}</span>
+                                <Checkbox :value="target_task.id" @update:checked="(val) => updateTaskStatus(val)"
+                                    :checked="target_task.is_completed == 1 ? true : false"
+                                />
+                                <span class="bg-yellow-200 px-2"> {{ target_task.keyword }} </span>
+                                <span :class="target_task.is_completed ? 'line-through' : ''"> {{ target_task.description }} </span>
                             </div>
                             <div class="space-x-2">
                                 <!-- TODO: tooltip & update notification list -->
