@@ -107,11 +107,19 @@ class TaskController extends Controller
     {
         // update is_completed only
         if (isset($request['is_completed'])) {
-            $updated = Task::where('id', $id)->update(
+            $target = Task::where('id', $id);
+            $parent_id = $target->first()['parent_id'];
+
+            $target->update(
                 $request->validate(['is_completed' => 'boolean'])
             );
 
-            return redirect("blocksix/{$id}");
+            if (isset($parent_id)) {
+                return redirect("blocksix/{$parent_id}");
+            }
+            else {
+                return redirect("blocksix/{$id}");
+            }
         }
         // update the whole task
         else if (isset($request['keyword']) && isset($request['description'])) {
@@ -139,8 +147,6 @@ class TaskController extends Controller
 
             return redirect("blocksix/{$updated_task}");
         }
-
-        
     }
 
     /**

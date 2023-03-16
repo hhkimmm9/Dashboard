@@ -1,9 +1,11 @@
 <template>
     <div class="flex justify-between items-center">
         <div class="flex items-center gap-2 w-full mr-3">
-            <Checkbox :value="item" @update:checked="(val) => updateSubaskStatus(val)" />
+            <Checkbox :value="subtask.id" @update:checked="(val) => updateSubaskStatus(val)"
+                :checked="subtask.is_completed == 1 ? true : false"    
+            />
             
-            <p v-if="!showEditor">{{ subtask.description }}</p>
+            <p v-if="!showEditor" :class="[subtask.is_completed ? 'line-through' : '', '']">{{ subtask.description }}</p>
             <form v-else @submit.prevent="updateSubtask" class="flex w-full gap-2 items-center h-full">
                 <TextInput
                     :value="subtask.description" @update:modelValue="form.updatedDescription = $event"
@@ -46,8 +48,13 @@ const form = useForm({
     updatedDescription: null,
 })
 
-const updateSubaskStatus = () => {
-    console.log('updateSubaskStatus');
+const isCompleted = useForm({
+    is_completed: null,
+})
+
+const updateSubaskStatus = (val) => {
+    isCompleted.is_completed = val;
+    isCompleted.patch(`${props.subtask.id}`);
 };
 
 const updateSubtask = () => {
