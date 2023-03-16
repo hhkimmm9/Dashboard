@@ -21,7 +21,7 @@
                     <ul>
                         <!-- TODO: modal -->
                         <li @click="showEditor = true" class="hover:bg-gray-100 p-1 rounded text-sm">Edit</li>
-                        <li class="hover:bg-gray-100 p-1 rounded text-sm">Delete</li>
+                        <li @click="deleteSubtask" class="hover:bg-gray-100 p-1 rounded text-sm">Delete</li>
                     </ul>
                 </div>
             </template>
@@ -32,7 +32,7 @@
 <script setup>
 import { ref } from "vue";
 import TextInput from '@/Components/TextInput.vue'
-import { useForm } from '@inertiajs/vue3';
+import { router, useForm } from '@inertiajs/vue3';
 import Checkbox from '@/Components/Checkbox.vue'
 import Dropdown from '@/Components/Dropdown.vue'
 
@@ -52,6 +52,12 @@ const updateSubaskStatus = () => {
 
 const updateSubtask = () => {
     form.patch(`${props.subtask.id}`);
+};
+
+const deleteSubtask = () => {
+    router.visit(`${props.subtask.id}`, {
+        method: 'delete',
+    })
 };
 
 </script>

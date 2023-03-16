@@ -151,6 +151,13 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // TODO: validation?
+        $target = Task::where('id', $id)->first();
+
+        $parent_id = $target['parent_id'];
+        
+        $target->delete();
+
+        return redirect("blocksix/{$parent_id}");
     }
 }
