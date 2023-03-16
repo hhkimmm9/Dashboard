@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('keyword');
+            $table->string('keyword')->nullable();
             $table->text('description');
             $table->string('type')->default('general');
             $table->boolean('is_completed')->default(false);
-            $table->unsignedInteger('parent_id');
+            $table->unsignedInteger('parent_id')->nullable();
             $table->timestamps();
         });
     }
