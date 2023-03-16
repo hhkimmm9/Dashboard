@@ -41,8 +41,33 @@
                                 </Link>
                             </div>
                         </div>
-                        <div class="border border-gray-200 rounded p-4 h-60">
-                            subtask tree
+
+                        <!-- subtasks -->
+                        <div class="border border-gray-200 rounded p-4 h-60 flex flex-col gap-2 overflow-y-auto">
+                            <div v-for="item in subtasks" :key="item" class="flex justify-between items-center">
+                                <div class="flex items-center gap-2">
+                                    <Checkbox :value="item" @update:checked="(val) => updateTaskStatus(val)" />
+                                    <p>{{ item.description }}</p>
+                                </div>
+                                <Dropdown>
+                                    <template v-slot:trigger>
+                                        <span class="material-symbols-outlined opacity-80 cursor-pointer text-xl"> more_horiz </span>
+                                    </template>
+                                    <template v-slot:content>
+                                        <div class="flex flex-col px-3 py-1">
+                                            <ul>
+                                                <!-- TODO: modal -->
+                                                <li class="hover:bg-gray-100 p-1 rounded text-sm">Edit</li>
+                                                <li class="hover:bg-gray-100 p-1 rounded text-sm">Delete</li>
+                                            </ul>
+                                        </div>
+                                    </template>
+                                </Dropdown>
+                            </div>
+                            <div class="border text-center py-1 rounded my-4">
+                                <!-- TODO: modal -->
+                                <span class="material-symbols-outlined pt-1 text-gray-400 hover:scale-125 hover:text-gray-600"> add_circle </span>
+                            </div>
                         </div>
                         <div class="border border-gray-200 rounded p-4">
                             <h3 class="font-bold text-xl mb-3">Comments</h3>
