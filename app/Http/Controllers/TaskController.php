@@ -46,26 +46,42 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $validated_slots = $request->validate([
-            'slot1' => 'required|string|min:1',
-            'slot2' => 'required|string|min:1',
-            'slot3' => 'required|string|min:1',
-            'slot4' => 'required|string|min:1',
-            'slot5' => 'required|string|min:1',
-            'slot6' => 'required|string|min:1',
-        ]);
+        if ($request['type'] == 'task') {
+            $validated_slots = $request->validate([
+                'slot1' => 'required|string|min:1',
+                'slot2' => 'required|string|min:1',
+                'slot3' => 'required|string|min:1',
+                'slot4' => 'required|string|min:1',
+                'slot5' => 'required|string|min:1',
+                'slot6' => 'required|string|min:1',
+            ]);
+    
+            // after validation passes put a task into the database.
+            foreach($validated_slots as $validated_slot) {
+                Task::create([
+                    'user_id' => auth()->user()->id,
+                    'keyword' => explode('::', $validated_slot)[0],
+                    'description' => explode('::', $validated_slot)[1]
+                ]);
+            }
+    
+            // redirect to the index page.
+            return Redirect::route('dashboard');
+        }
+        else if ($request['type'] == 'subtask') {
+            $validated = $request->validate([
+                'description' => 'required|alpha_num|min:1',
+                'parent_id' => 'required|numeric',
+            ]);
 
-        // after validation passes put a task into the database.
-        foreach($validated_slots as $validated_slot) {
             Task::create([
                 'user_id' => auth()->user()->id,
-                'keyword' => explode('::', $validated_slot)[0],
-                'description' => explode('::', $validated_slot)[1]
+                'description' => $validated['description'],
+                'parent_id' => $validated['parent_id'],
             ]);
-        }
 
-        // redirect to the index page.
-        return Redirect::route('dashboard');
+            return redirect("blocksix/{$validated['parent_id']}");
+        }
     }
 
     /**

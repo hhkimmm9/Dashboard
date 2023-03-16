@@ -49,7 +49,12 @@
                             <!-- Add a new subtask section -->
                             <div class="border text-center py-1 rounded my-4">
                                 <!-- TODO: modal -->
-                                <span class="material-symbols-outlined pt-1 text-gray-400 hover:scale-125 hover:text-gray-600"> add_circle </span>
+                                <span v-if="!addNewSubtask" @click="addNewSubtask = true" class="material-symbols-outlined pt-1 text-gray-400 hover:scale-125 hover:text-gray-600"> add_circle </span>
+                                <form v-else @submit.prevent="createNewSubtask" class="flex gap-2 p-3 w-full">
+
+                                    <TextInput v-model="newSubtask.description" class="p-2 w-full" />
+                                    <button class="border p-1 rounded">Submit</button>
+                                </form>
                             </div>
                         </div>
                         <div class="border border-gray-200 rounded p-4">
@@ -80,7 +85,8 @@
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import Checkbox from '@/Components/Checkbox.vue'
 import SubtaskContainer from '@/Components/BlockSix/SubtaskContainer.vue';
-
+import { ref } from 'vue';
+import TextInput from '@/Components/TextInput.vue'
 
 const props = defineProps([
     'target_task',
@@ -88,9 +94,25 @@ const props = defineProps([
     'comments',
 ])
 
+const addNewSubtask = ref(false);
+
 const form = useForm({
     is_completed: null,
 });
+
+const newSubtask = useForm({
+    description: null,
+    type: 'subtask',
+    parent_id: props.target_task.id,
+})
+
+const createNewSubtask = () => {
+    newSubtask.post('/blocksix', {
+        onSuccess: () => newSubtask.reset('description'),
+    });
+
+    // addNewSubtask.value = false;
+};
 
 const updateTaskStatus = (val) => {
     form.is_completed = val;
