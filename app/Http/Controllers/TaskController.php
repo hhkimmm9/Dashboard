@@ -78,6 +78,7 @@ class TaskController extends Controller
     {
         return Inertia::render('BlockSix/Show', [
             'target_task' => Task::where('id', $id)->first(),
+            'subtasks' => Task::where('parent_id', $id)->get(),
             'comments' => Comment::where('task_id', $id)->get()
         ]);
     }
