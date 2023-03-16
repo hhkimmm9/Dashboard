@@ -17,7 +17,9 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => 1,
+            'task_id' => 1,
+            'content' => fake()->sentence,
         ];
     }
 }
