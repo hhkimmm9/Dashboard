@@ -106,13 +106,15 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         // update is_completed only
-        if ($request['is_completed']) {
-            $new_value = $request['is_completed'];
-    
-            $target_task = Task::find($id)->update(['is_completed' => $new_value]);
+        if (isset($request['is_completed'])) {
+            $updated = Task::where('id', $id)->update(
+                $request->validate(['is_completed' => 'boolean'])
+            );
+
+            return redirect("blocksix/{$id}");
         }
         // update the whole task
-        else {
+        else if (isset($request['keyword']) && isset($request['description'])) {
             $validated = $request->validate([
                 'keyword' => 'alpha_num|min:1',
                 'description' => 'alpha_num|min:1'
@@ -122,7 +124,23 @@ class TaskController extends Controller
                 'keyword' => $validated['keyword'],
                 'description' => $validated['description']
             ]);
+
+            return redirect("blocksix/{$id}");
         }
+        // update a subtask
+        else if (isset($request['updatedDescription'])) {
+            $validated = $request->validate([
+                'updatedDescription' => 'alpha_num|min:1'
+            ]);
+
+            $updated_task = Task::where('id', $id)->update([
+                'description' => $validated['updatedDescription']
+            ]);
+
+            return redirect("blocksix/{$updated_task}");
+        }
+
+        
     }
 
     /**
