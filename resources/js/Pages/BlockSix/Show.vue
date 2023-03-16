@@ -77,7 +77,8 @@
 </template>
 
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import Checkbox from '@/Components/Checkbox.vue'
 import SubtaskContainer from '@/Components/BlockSix/SubtaskContainer.vue';
 
 
@@ -86,6 +87,16 @@ const props = defineProps([
     'subtasks',
     'comments',
 ])
+
+const form = useForm({
+    is_completed: null,
+});
+
+const updateTaskStatus = (val) => {
+    form.is_completed = val;
+    // form.is_completed = props.target_task.is_completed
+    form.patch(`${props.target_task.id}`)
+};
 
 </script>
 
