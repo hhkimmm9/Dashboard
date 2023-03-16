@@ -19,22 +19,24 @@
                     </div>
 
                     <div class="space-y-5">
-                        <div class="flex items-center justify-between">
-                            <!-- task -->
-                            <div class="flex items-center space-x-2">
+                        <!-- task -->
+                        <div class="flex flex-row items-center justify-between">
+                            <div class="basis-11/12 flex flex-row items-center gap-2 truncate">
                                 <Checkbox :value="target_task.id" @update:checked="(val) => updateTaskStatus(val)"
                                     :checked="target_task.is_completed == 1 ? true : false"
                                 />
                                 <span class="bg-yellow-200 px-2"> {{ target_task.keyword }} </span>
-                                <span :class="target_task.is_completed ? 'line-through' : ''"> {{ target_task.description }} </span>
+                                <p :class="[target_task.is_completed ? 'line-through' : '', 'truncate']"> {{ target_task.description }} </p>
                             </div>
-                            <div class="space-x-2">
+
+                            <!-- icons -->
+                            <div class="basis-1/12 flex gap-2 whitespace-nowrap justify-end">
                                 <!-- TODO: tooltip & update notification list -->
-                                <Link href="#" as="span">
+                                <Link href="#" as="div">
                                     <span v-if="1" class="material-symbols-outlined text-lg cursor-pointer">alarm_off</span>
                                     <span v-else class="material-symbols-outlined text-lg cursor-pointer">alarm_on</span>
                                 </Link>
-                                <Link :href="`${target_task.id}/edit`" as="span" class="material-symbols-outlined text-lg cursor-pointer">
+                                <Link :href="`${target_task.id}/edit`" as="div" class="material-symbols-outlined text-lg cursor-pointer">
                                     edit
                                 </Link>
                             </div>
