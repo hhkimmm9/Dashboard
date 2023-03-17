@@ -18,16 +18,6 @@ class CommentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,29 +25,20 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'task_id' => 'numeric',
+            'content' => 'required|alpha_num|min:1',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Comment $comment)
-    {
-        //
-    }
+        $user_id = auth()->user()->id;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
-    {
-        //
+        Comment::create([
+            'user_id' => $user_id,
+            'task_id' => $validated['task_id'],
+            'content' => $validated['content'],
+        ]);
+
+        return redirect("blocksix/{$validated['task_id']}");
     }
 
     /**

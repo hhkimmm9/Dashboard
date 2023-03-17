@@ -58,8 +58,20 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="border border-gray-200 rounded p-4">
-                            <h3 class="font-bold text-xl mb-3">Comments</h3>
+
+                        <!-- comments -->
+                        <div class="border border-gray-200 rounded p-4 space-y-4">
+                            <div class="flex justify-between">
+                                <h3 class="font-bold text-xl">Comments</h3>
+                                <span v-if="!showAddComment" @click="showAddComment = true" class="material-symbols-outlined mr-1 cursor-pointer"> add_circle </span>
+                                <span v-else @click="showAddComment = false; newComment.reset();" class="material-symbols-outlined mr-1 cursor-pointer"> cancel </span>
+                            </div>
+                            <!-- showAddComment -->
+                            <form @submit.prevent="addComment" v-if="showAddComment" class="border p-3 w-full flex gap-2">
+                                <TextInput v-model="newComment.content" class="w-full pl-2" />
+                                <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+                                <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
+                            </form>
                             <div class="space-y-4 h-60 overflow-y-auto">
                                 <div v-for="(item, index) in comments" :key="index" class="border p-3 rounded">
                                     {{ item.content }}
@@ -96,6 +108,7 @@ const props = defineProps([
 ])
 
 const addNewSubtask = ref(false);
+const showAddComment = ref(false);
 
 const form = useForm({
     is_completed: null,
@@ -106,6 +119,11 @@ const newSubtask = useForm({
     type: 'subtask',
     parent_id: props.target_task.id,
 })
+
+const newComment = useForm({
+    task_id: props.target_task.id,
+    content: "",
+});
 
 const createNewSubtask = () => {
     newSubtask.post('/blocksix', {
@@ -119,6 +137,12 @@ const updateTaskStatus = (val) => {
     form.is_completed = val;
     // form.is_completed = props.target_task.is_completed
     form.patch(`${props.target_task.id}`)
+};
+
+const addComment = () => {
+    newComment.post('/comment', {
+        onSuccess: () => newComment.reset('content'),
+    });
 };
 
 </script>
