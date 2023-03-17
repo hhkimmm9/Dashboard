@@ -27,7 +27,7 @@ class CommentController extends Controller
     {
         $validated = $request->validate([
             'task_id' => 'numeric',
-            'content' => 'required|alpha_num|min:1',
+            'content' => 'required|string|min:1',
         ]);
 
         $user_id = auth()->user()->id;
@@ -51,7 +51,7 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         $validated = $request->validate([
-            'updatedContent' => 'required|alpha_num|min:1',
+            'updatedContent' => 'required|string|min:1',
         ]);
 
         $comment->update([

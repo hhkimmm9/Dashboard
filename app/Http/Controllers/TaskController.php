@@ -70,7 +70,7 @@ class TaskController extends Controller
         }
         else if ($request['type'] == 'subtask') {
             $validated = $request->validate([
-                'description' => 'required|alpha_num|min:1',
+                'description' => 'required|string|min:1',
                 'parent_id' => 'required|numeric',
             ]);
 
@@ -140,8 +140,8 @@ class TaskController extends Controller
         // update the whole task
         else if (isset($request['keyword']) && isset($request['description'])) {
             $validated = $request->validate([
-                'keyword' => 'alpha_num|min:1',
-                'description' => 'alpha_num|min:1'
+                'keyword' => 'string|min:1',
+                'description' => 'string|min:1'
             ]);
 
             Task::where('id', $id)->update([
@@ -154,7 +154,7 @@ class TaskController extends Controller
         // update a subtask
         else if (isset($request['updatedDescription'])) {
             $validated = $request->validate([
-                'updatedDescription' => 'alpha_num|min:1'
+                'updatedDescription' => 'string|min:1'
             ]);
 
             $updated_task = Task::where('id', $id)->update([
