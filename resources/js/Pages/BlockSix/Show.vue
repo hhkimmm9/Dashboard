@@ -18,6 +18,7 @@
                         </Link>
                     </div>
 
+                    <!-- task, subtasks, comments -->
                     <div class="space-y-5">
                         <!-- task -->
                         <div class="flex flex-row items-center justify-between">
@@ -32,10 +33,10 @@
                             <!-- icons -->
                             <div class="basis-1/12 flex gap-2 whitespace-nowrap justify-end">
                                 <!-- TODO: tooltip & update notification list -->
-                                <Link href="#" as="div">
+                                <!-- <Link href="#" as="div">
                                     <span v-if="1" class="material-symbols-outlined text-lg cursor-pointer">alarm_off</span>
                                     <span v-else class="material-symbols-outlined text-lg cursor-pointer">alarm_on</span>
-                                </Link>
+                                </Link> -->
                                 <Link :href="`${target_task.id}/edit`" as="div" class="material-symbols-outlined text-lg cursor-pointer">
                                     edit
                                 </Link>
@@ -44,19 +45,17 @@
 
                         <!-- subtasks -->
                         <div class="border border-gray-200 rounded p-4 h-60 flex flex-col gap-2 overflow-y-auto">
-                            <p class="font-bold text-xl">Subtask</p>
-                            <SubtaskContainer v-for="item in subtasks" :key="item" :subtask="item" />
-
-                            <!-- Add a new subtask section -->
-                            <div class="border text-center py-1 rounded my-4">
-                                <!-- TODO: modal -->
-                                <span v-if="!addNewSubtask" @click="addNewSubtask = true" class="material-symbols-outlined pt-1 text-gray-400 hover:scale-125 hover:text-gray-600"> add_circle </span>
-                                <form v-else @submit.prevent="createNewSubtask" class="flex gap-2 p-3 w-full">
-
-                                    <TextInput v-model="newSubtask.description" class="p-2 w-full" />
-                                    <button class="border p-1 rounded">Submit</button>
-                                </form>
+                            <div class="flex justify-between">
+                                <h3 class="font-bold text-xl"> Subtask </h3>
+                                <span v-if="!showAddSubtask" @click="showAddSubtask = true" class="material-symbols-outlined mr-1 cursor-pointer"> add_circle </span>
+                                <span v-else @click="showAddSubtask = false; newSubtask.reset();" class="material-symbols-outlined mr-1 cursor-pointer"> cancel </span>
                             </div>
+                            <form @submit.prevent="addSubtask" v-if="showAddSubtask" class="border p-3 w-full flex gap-2">
+                                <TextInput v-model="newSubtask.description" class="w-full pl-2" />
+                                <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
+                            </form>
+
+                            <SubtaskContainer v-for="item in subtasks" :key="item" :subtask="item" />
                         </div>
 
                         <!-- comments -->
@@ -97,7 +96,7 @@ const props = defineProps([
     'comments',
 ])
 
-const addNewSubtask = ref(false);
+const showAddSubtask = ref(false);
 const showAddComment = ref(false);
 
 const form = useForm({
@@ -115,12 +114,10 @@ const newComment = useForm({
     content: "",
 });
 
-const createNewSubtask = () => {
+const addSubtask = () => {
     newSubtask.post('/blocksix', {
         onSuccess: () => newSubtask.reset('description'),
     });
-
-    // addNewSubtask.value = false;
 };
 
 const updateTaskStatus = (val) => {
