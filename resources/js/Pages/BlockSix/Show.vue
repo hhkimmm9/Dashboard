@@ -44,6 +44,7 @@
 
                         <!-- subtasks -->
                         <div class="border border-gray-200 rounded p-4 h-60 flex flex-col gap-2 overflow-y-auto">
+                            <p class="font-bold text-xl">Subtask</p>
                             <SubtaskContainer v-for="item in subtasks" :key="item" :subtask="item" />
 
                             <!-- Add a new subtask section -->
