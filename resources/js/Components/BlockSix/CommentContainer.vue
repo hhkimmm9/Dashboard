@@ -8,7 +8,7 @@
         </form>
         <hr class="my-2">
         <div class="flex justify-between items-center">
-            <div class="text-xs text-gray-500"> {{ comment.created_at }} </div>
+            <div class="text-xs text-gray-500"> {{ createdAt }} </div>
             <div class="space-x-2">
                 <!-- TODO: tooltip -->
                 <span @click="showEditComment = true" class="material-symbols-outlined text-lg cursor-pointer"> edit </span>
@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import TextInput from '@/Components/TextInput.vue'
 import { router, useForm } from "@inertiajs/vue3";
 
@@ -42,6 +42,11 @@ const updateComment = () => {
 const deleteComment = () => {
     router.delete(`/comment/${props.comment.id}`);
 };
+
+const createdAt = computed(() => {
+    let createdAt = new Date(props.comment.created_at);
+    return createdAt.toUTCString();
+});
 
 const showEditComment = ref(false);
 </script>
