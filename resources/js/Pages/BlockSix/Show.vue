@@ -21,12 +21,14 @@
                     <!-- task, subtasks, comments -->
                     <div class="space-y-5">
                         <!-- task -->
-                        <div class="flex flex-row items-center justify-between">
+                        <div v-if="!showTaskEditor" class="flex flex-row items-center justify-between">
+
                             <div class="basis-11/12 flex flex-row items-center gap-2 truncate">
                                 <Checkbox :value="target_task.id" @update:checked="(val) => updateTaskStatus(val)"
                                     :checked="target_task.is_completed == 1 ? true : false"
                                 />
-                                <span class="bg-yellow-200 px-2"> {{ target_task.keyword }} </span>
+
+                                <p class="bg-yellow-200 px-2"> {{ target_task.keyword }} </p>
                                 <p :class="[target_task.is_completed ? 'line-through' : '', 'truncate']"> {{ target_task.description }} </p>
                             </div>
 
@@ -37,11 +39,23 @@
                                     <span v-if="1" class="material-symbols-outlined text-lg cursor-pointer">alarm_off</span>
                                     <span v-else class="material-symbols-outlined text-lg cursor-pointer">alarm_on</span>
                                 </Link> -->
-                                <Link :href="`${target_task.id}/edit`" as="div" class="material-symbols-outlined text-lg cursor-pointer">
-                                    edit
-                                </Link>
+                                <span @click="showTaskEditor = true" class="material-symbols-outlined text-lg cursor-pointer"> edit </span>
                             </div>
                         </div>
+
+                        <form v-else @submit.prevent="updateTask" class="space-y-1">
+                            <div class="flex flex-col w-full gap-2 items-center h-full">
+                                <InputLabel value="Keyword" />
+                                <TextInput v-model="taskForm.keyword" class="w-full p-1" />
+                                <InputLabel value="Description" />
+                                <TextInput v-model="taskForm.description" class="w-full p-1" />
+                            </div>
+                            <div class="flex w-full">
+                                <button @click="showTaskEditor = false" class="text-sm border p-1.5 hover:bg-gray-50 basis-1/2"> Cancel </button>
+                                <button type="submit" class="text-sm border p-1.5 hover:bg-gray-50 basis-1/2"> Submit </button>
+                            </div>
+                        </form>
+
 
                         <!-- subtasks -->
                         <div class="border border-gray-200 rounded p-4 h-60 flex flex-col gap-2 overflow-y-auto">
@@ -57,7 +71,6 @@
                                 </div>
                                 <p v-if="errors" class="text-sm text-red-500 mt-2 ml-2"> {{ errors.description }} </p>
                             </form>
-
                             <SubtaskContainer v-for="item in subtasks" :key="item" :subtask="item" />
                         </div>
 
@@ -94,6 +107,7 @@ import SubtaskContainer from '@/Components/BlockSix/SubtaskContainer.vue';
 import { ref } from 'vue';
 import TextInput from '@/Components/TextInput.vue'
 import Comment from '@/Components/BlockSix/CommentContainer.vue'
+import InputLabel from '@/Components/InputLabel.vue'
 
 const props = defineProps([
     'target_task',
@@ -102,12 +116,18 @@ const props = defineProps([
     'errors',
 ])
 
+const showTaskEditor = ref(false);
 const showAddSubtask = ref(false);
 const showAddComment = ref(false);
 
 const form = useForm({
     is_completed: null,
 });
+
+const taskForm = useForm({
+    keyword: props.target_task.keyword,
+    description: props.target_task.description,
+})
 
 const newSubtask = useForm({
     description: null,
@@ -119,6 +139,14 @@ const newComment = useForm({
     task_id: props.target_task.id,
     content: "",
 });
+
+function updateTask() {
+    taskForm.patch(`${props.target_task.id}`, {
+        onSuccess: () => {
+            showTaskEditor.value = false;
+        },
+    });
+};
 
 const addSubtask = () => {
     newSubtask.post('/blocksix', {
