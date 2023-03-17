@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Console\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
@@ -38,6 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('blocksix', TaskController::class);
+
+    Route::resource('comment', CommentController::class);
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/settings/history', [SettingsController::class, 'history'])->name('settings.history');
