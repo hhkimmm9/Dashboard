@@ -73,18 +73,7 @@
                                 <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
                             </form>
                             <div class="space-y-4 h-60 overflow-y-auto">
-                                <div v-for="(item, index) in comments" :key="index" class="border p-3 rounded">
-                                    {{ item.content }}
-                                    <hr class="my-2">
-                                    <div class="flex justify-between items-center">
-                                        <div class="text-xs text-gray-500"> {{ item.created_at }} </div>
-                                        <div class="space-x-2">
-                                            <!-- TODO: tooltip -->
-                                            <span class="material-symbols-outlined text-lg cursor-pointer">edit</span>
-                                            <span class="material-symbols-outlined text-lg cursor-pointer">delete</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <Comment v-for="(item, index) in comments" :key="index" class="border p-3 rounded" :comment="item" />
                             </div>
                         </div>
                     </div>
@@ -100,6 +89,7 @@ import Checkbox from '@/Components/Checkbox.vue'
 import SubtaskContainer from '@/Components/BlockSix/SubtaskContainer.vue';
 import { ref } from 'vue';
 import TextInput from '@/Components/TextInput.vue'
+import Comment from '@/Components/BlockSix/CommentContainer.vue'
 
 const props = defineProps([
     'target_task',

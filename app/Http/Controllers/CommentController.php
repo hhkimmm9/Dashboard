@@ -50,7 +50,15 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $validated = $request->validate([
+            'updatedContent' => 'required|alpha_num|min:1',
+        ]);
+
+        $comment->update([
+            'content' => $validated['updatedContent'],
+        ]);
+
+        return redirect("blocksix/{$comment['task_id']}");
     }
 
     /**
@@ -61,6 +69,9 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $task_id = $comment['task_id'];
+        $comment->delete();
+
+        return redirect("blocksix/{$task_id}");
     }
 }
