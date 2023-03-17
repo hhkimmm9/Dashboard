@@ -50,9 +50,12 @@
                                 <span v-if="!showAddSubtask" @click="showAddSubtask = true" class="material-symbols-outlined mr-1 cursor-pointer"> add_circle </span>
                                 <span v-else @click="showAddSubtask = false; newSubtask.reset();" class="material-symbols-outlined mr-1 cursor-pointer"> cancel </span>
                             </div>
-                            <form @submit.prevent="addSubtask" v-if="showAddSubtask" class="border p-3 w-full flex gap-2">
-                                <TextInput v-model="newSubtask.description" class="w-full pl-2" />
-                                <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
+                            <form @submit.prevent="addSubtask" v-if="showAddSubtask" class="border p-3 w-full rounded">
+                                <div class="flex gap-2 mt-2">
+                                    <TextInput v-model="newSubtask.description" class="w-full pl-2" />
+                                    <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
+                                </div>
+                                <p v-if="errors" class="text-sm text-red-500 mt-2 ml-2"> {{ errors.description }} </p>
                             </form>
 
                             <SubtaskContainer v-for="item in subtasks" :key="item" :subtask="item" />
@@ -66,10 +69,12 @@
                                 <span v-else @click="showAddComment = false; newComment.reset();" class="material-symbols-outlined mr-1 cursor-pointer"> cancel </span>
                             </div>
                             <!-- showAddComment -->
-                            <form @submit.prevent="addComment" v-if="showAddComment" class="border p-3 w-full flex gap-2">
-                                <TextInput v-model="newComment.content" class="w-full pl-2" />
-                                <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
-                                <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
+                            <form @submit.prevent="addComment" v-if="showAddComment" class="border p-3 w-full rounded">
+                                <div class="flex gap-2 mt-2">
+                                    <TextInput v-model="newComment.content" class="w-full pl-2" />
+                                    <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
+                                </div>
+                                <p v-if="errors" class="text-sm text-red-500 mt-2 ml-2"> {{ errors.content }} </p>
                             </form>
                             <div class="space-y-4 h-60 overflow-y-auto">
                                 <Comment v-for="(item, index) in comments" :key="index" class="border p-3 rounded" :comment="item" />
@@ -94,6 +99,7 @@ const props = defineProps([
     'target_task',
     'subtasks',
     'comments',
+    'errors',
 ])
 
 const showAddSubtask = ref(false);
