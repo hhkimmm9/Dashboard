@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p v-if="!showEditComment" class="w-full"> {{ comment.content }} </p>
+        <p v-if="!showEditComment" class="w-full break-words"> {{ comment.content }} </p>
         <form v-else @submit.prevent="updateComment" class="flex gap-2 my-2 items-center">
             <TextInput v-model="updatedCommentForm.updatedContent" class="w-full py-1 px-2" />
             <button @click="showEditComment = false" class="border p-1 rounded"> cancel </button>

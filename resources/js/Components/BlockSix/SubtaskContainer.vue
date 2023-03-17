@@ -5,7 +5,7 @@
                 :checked="subtask.is_completed == 1 ? true : false"    
             />
             
-            <p v-if="!showEditor" :class="[subtask.is_completed ? 'line-through' : '', '']">{{ subtask.description }}</p>
+            <p v-if="!showEditor" :class="[subtask.is_completed ? 'line-through' : '', 'break-words w-full']">{{ subtask.description }}</p>
             <form v-else @submit.prevent="updateSubtask" class="flex w-full gap-2 items-center h-full">
                 <TextInput
                     :value="subtask.description" @update:modelValue="form.updatedDescription = $event"
