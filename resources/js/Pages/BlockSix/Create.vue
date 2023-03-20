@@ -49,7 +49,7 @@
             lg:visible
         ">
             <a href="http://www.yes24.com/Product/Goods/104868817" target="_blank">
-                <img src="https://image.yes24.com/goods/104868817/XL" alt="">
+                <img src="/storage/img/blocksix_bookcover.jpeg" alt="">
             </a>
         </div>
     </AuthenticatedLayout>
