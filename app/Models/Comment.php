@@ -7,21 +7,21 @@ use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Task extends Model
+class Comment extends Model
 {
     use HasFactory;
 
-    protected $table = 'tasks';
+    protected $table = 'comments';
 
     protected $guarded = [];
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function comments()
+    public function task()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Task::class);
     }
 }
