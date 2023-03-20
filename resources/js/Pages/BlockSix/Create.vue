@@ -13,7 +13,7 @@
             </div>
 
             <div class="mt-8">
-                <form @submit.prevent="tasks.post('/modules/blocksix', tasks);">
+                <form @submit.prevent="createTasks">
                     <div class="flex justify-center text-center">
                         <div class="bg-white border shadow w-2/3 p-6 flex flex-col space-y-4 rounded-lg">
                             <div class="border-2 p-3 rounded-lg shadow">
@@ -79,6 +79,14 @@ const buildInput = (whichSlot, keyword_and_description) => {
     else if (whichSlot == 'slot5') tasks.slot5 = keyword_and_description;
     else if (whichSlot == 'slot6') tasks.slot6 = keyword_and_description;
 }
+
+function createTasks() {
+    tasks.post('/blocksix', {
+        onSuccess: () => {
+            tasks.reset();
+        },
+    });
+};
 
 // Tippy
 const purchase_book = ref();
