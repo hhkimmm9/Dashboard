@@ -21,7 +21,10 @@ class TaskController extends Controller
 
         // TODO: with comments
         // https://laravel.com/docs/10.x/pagination#paginating-query-builder-results
-        $tasks = Task::where('user_id', $user_id)->latest()->paginate(6);
+        $tasks = Task::query()
+            ->where('user_id', $user_id)
+            ->whereNull('parent_id')
+            ->latest()->paginate(6);
 
         return Inertia::render('BlockSix/Index', [
             'tasks' => $tasks
