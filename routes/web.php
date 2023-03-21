@@ -1,6 +1,7 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\Task;
 use Illuminate\Console\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
@@ -31,7 +32,16 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    $todays_tasks = Task::query()
+        ->where('user_id', auth()->user()->id)
+        ->whereNull('parent_id')
+        ->latest()->paginate(6);
+
+    return Inertia::render('Dashboard', [
+        'todays_tasks' => $todays_tasks,
+    ]);
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
