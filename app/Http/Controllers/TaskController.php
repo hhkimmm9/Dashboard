@@ -19,8 +19,6 @@ class TaskController extends Controller
     {
         $user_id = auth()->user()->id;
 
-        // TODO: with comments
-        // https://laravel.com/docs/10.x/pagination#paginating-query-builder-results
         $tasks = Task::query()
             ->where('user_id', $user_id)
             ->whereNull('parent_id')
