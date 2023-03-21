@@ -24,7 +24,7 @@
                     as="input" type="checkbox" :checked="second_task.is_completed"
                 />
                 <div class="w-full flex flex-row justify-between items-center">
-                    <Link :href="`blocksix/${first_task.id}`" method="GET" as="div" class="flex flex-row space-x-1 cursor-pointer">
+                    <Link :href="`blocksix/${second_task.id}`" method="GET" as="div" class="flex flex-row space-x-1 cursor-pointer">
                         <div class="bg-yellow-200 text-violet-500 px-1"> {{ second_task.keyword }} </div>
                         <div :class="second_task.is_completed ? 'line-through' : ''">{{ second_task.description }}</div>
                     </Link>
