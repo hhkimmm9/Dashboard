@@ -47,7 +47,7 @@ const props = defineProps(['tasks']);
 
 const date = computed(() => {
     const date = new Date(props.tasks.data[0].created_at);
-    return date.toUTCString();
+    return date.toDateString();
 });
 
 // Tippy
