@@ -8,14 +8,14 @@
 
                     <!-- go back -->
                     <div>
-                        <Link href="/blocksix" as="button"
+                        <button @click="goBack" type="button"
                             class="text-sm whitespace-nowrap cursor-pointer items-center flex gap-2 border rounded-full px-2 py-1 w-min shadow-sm
                                 hover:shadow-lg hover:bg-gray-50
                             "
                         >
                             <span class="material-symbols-outlined">keyboard_backspace</span>
                             <span class="">Go Back</span>
-                        </Link>
+                        </button>
                     </div>
 
                     <!-- task, subtasks, comments -->
@@ -164,6 +164,10 @@ const addComment = () => {
     newComment.post('/comment', {
         onSuccess: () => newComment.reset('content'),
     });
+};
+
+function goBack() {
+    history.back();
 };
 
 </script>
