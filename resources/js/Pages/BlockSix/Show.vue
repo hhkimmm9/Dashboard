@@ -8,14 +8,14 @@
 
                     <!-- go back -->
                     <div>
-                        <button @click="goBack" type="button"
+                        <Link v-if="checkPrevPage" href="/blocksix"
                             class="text-sm whitespace-nowrap cursor-pointer items-center flex gap-2 border rounded-full px-3 w-min
                                 hover:bg-gray-50
                             "
                         >
                             <span class="material-symbols-outlined text-lg">keyboard_backspace</span>
                             <span class="">Go Back</span>
-                        </button>
+                        </Link>
                     </div>
 
                     <!-- task, subtasks, comments -->
@@ -176,9 +176,10 @@ const addComment = () => {
     });
 };
 
-function goBack() {
-    history.back();
-};
+function checkPrevPage() {
+    // The go back button only appears if the previous page was blocksix.index
+    // or, if we can do SPA behaviour with history.back() somehow then we can just go back to the previous page.
+}
 
 </script>
 
