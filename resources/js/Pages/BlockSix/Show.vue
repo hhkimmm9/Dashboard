@@ -9,11 +9,11 @@
                     <!-- go back -->
                     <div>
                         <button @click="goBack" type="button"
-                            class="text-sm whitespace-nowrap cursor-pointer items-center flex gap-2 border rounded-full px-2 py-1 w-min shadow-sm
-                                hover:shadow-lg hover:bg-gray-50
+                            class="text-sm whitespace-nowrap cursor-pointer items-center flex gap-2 border rounded-full px-3 w-min
+                                hover:bg-gray-50
                             "
                         >
-                            <span class="material-symbols-outlined">keyboard_backspace</span>
+                            <span class="material-symbols-outlined text-lg">keyboard_backspace</span>
                             <span class="">Go Back</span>
                         </button>
                     </div>
