@@ -43,16 +43,26 @@
                             </div>
                         </div>
 
-                        <form v-else @submit.prevent="updateTask" class="space-y-1">
-                            <div class="flex flex-col w-full gap-2 items-center h-full">
-                                <InputLabel value="Keyword" />
-                                <TextInput v-model="taskForm.keyword" class="w-full p-1" />
+                        <form v-else @submit.prevent="updateTask" class="space-y-3">
+                            <div class="flex flex-col w-full gap-2 h-full">
+                                <InputLabel value="Keyword" class="bg-yellow-200 w-min px-1"/>
+                                <TextInput v-model="taskForm.keyword" class="w-full p-1 border" />
                                 <InputLabel value="Description" />
-                                <TextInput v-model="taskForm.description" class="w-full p-1" />
+                                <TextInput v-model="taskForm.description" class="w-full p-1 border" />
                             </div>
-                            <div class="flex w-full">
-                                <button @click="showTaskEditor = false" class="text-sm border p-1.5 hover:bg-gray-50 basis-1/2"> Cancel </button>
-                                <button type="submit" class="text-sm border p-1.5 hover:bg-gray-50 basis-1/2"> Submit </button>
+                            <div class="flex w-full gap-2">
+                                <button @click="showTaskEditor = false"
+                                    class="
+                                        text-sm border p-1.5 basis-1/2 rounded-lg
+                                        hover:bg-red-300 hover:text-white hover:font-bold
+                                    "
+                                > Cancel </button>
+                                <button type="submit"
+                                    class="
+                                        text-sm border p-1.5  basis-1/2 rounded-lg
+                                        hover:bg-green-300 hover:text-white hover:font-bold
+                                    "
+                                > Submit </button>
                             </div>
                         </form>
 
