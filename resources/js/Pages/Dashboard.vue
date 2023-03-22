@@ -23,7 +23,7 @@ const props = defineProps(['todays_tasks']);
 const generalStore = useGeneralStore();
 
 onMounted(() => {
-    if (props.todays_tasks.length > 0) generalStore.is_todays_tasks_created = true;
+    if (props.todays_tasks.data.length > 0) generalStore.is_todays_tasks_created = true;
     else generalStore.is_todays_tasks_created = false;
 })
 

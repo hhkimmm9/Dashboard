@@ -1,7 +1,8 @@
 <?php
 
-use Inertia\Inertia;
 use App\Models\Task;
+use Inertia\Inertia;
+use Illuminate\Support\Carbon;
 use Illuminate\Console\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -33,8 +34,13 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+
+    $today = now()->subDay()->format('Y-m-d');
+    // $today = now()->format('Y-m-d');
+
     $todays_tasks = Task::query()
         ->where('user_id', auth()->user()->id)
+        ->whereDate('created_at', $today)
         ->whereNull('parent_id')
         ->latest()->paginate(6);
 
