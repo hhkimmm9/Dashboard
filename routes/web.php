@@ -4,7 +4,7 @@ use Inertia\Inertia;
 use App\Models\Task;
 use Illuminate\Console\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CommentController;
+use Illuminate\Foundation\Application;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
