@@ -1,17 +1,21 @@
 <template>
     <div :class="['max-w-7xl flex flex-col mx-auto', layoutStore.showDock ? 'hidden' : '']">
         <!-- modules -->
-        <div class="w-full rounded-xl shadow-lg bg-slate-50 p-4 flex flex-row justify-around">
-            <span v-for="item in modules" :key="item.id"
-                class="px-2 hover:shadow-2xl hover:bg-slate-200 cursor-pointer py-1 space-y-1"
+        <div class="w-full rounded-xl shadow-lg bg-gray-50 p-4 flex flex-row justify-around">
+            <span v-for="(item, index) in modules" :key="index"
+                class="
+                    px-2 cursor-pointer py-1 space-y-1 h-16 rounded
+                    hover:border hover:shadow-sm hover:bg-gray-100
+                "
             >
-                <Link :href="route(item.url)" :class="[route().current('dashboard') ? '' : '', 'flex flex-col w-20']">
+                <Link :href="route(item.url)" class="flex flex-col w-20">
                     <span class="material-icons mx-auto text-3xl">{{ item.icon }}</span>
                     <div class="text-center"> {{ item.name }} </div>
                 </Link >
             </span>
         </div>
 
+        <!-- down arrow -->
         <div class="w-full flex justify-center mt-2">
             <button @click="layoutStore.showDock = !layoutStore.showDock"
                 class="material-icons opacity-90 cursor-pointer"
@@ -22,31 +26,36 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3';
-import { useLayoutStore } from '../../Stores/LayoutStore';
-import { useGeneralStore } from '../../Stores/GeneralStore';
-import { onMounted } from 'vue';
+import { useGeneralStore, useLayoutStore, } from '@/Stores/index'
+import { computed, onMounted } from 'vue';
 
 const layoutStore = useLayoutStore();
 const generalStore = useGeneralStore();
 
+const isTodaysTasksCreated = computed(() => {
+    return generalStore.is_todays_tasks_created ? 'blocksix.index' : 'blocksix.create';
+});
+
 var modules = [
     {
-        id: 1,
-        name: "Dashboard",
-        icon: "dashboard",
-        url: "dashboard",
+        name: 'Dashboard',
+        icon: 'dashboard',
+        url: 'dashboard',
     },
     {
-        id: 2,
-        name: "BlockSix",
-        icon: "grid_view",
-        url: generalStore.is_todays_tasks_created ? 'blocksix.index' : 'blocksix.create',
+        name: 'Block Six',
+        icon: 'grid_view',
+        url: isTodaysTasksCreated.value,
     },
-    {
-        id: 2,
-        name: "Note",
-        icon: "grid_view",
-        url: 'note.index',
-    },
+    // {
+    //     name: 'Notes',
+    //     icon: 'note_alt',
+    //     url: 'notes',
+    // },
 ]
+
+onMounted(() => {
+    // console.log(route().current('dashboard'))
+})
+
 </script>
