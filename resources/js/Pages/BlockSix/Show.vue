@@ -76,7 +76,7 @@
                             </div>
                             <form @submit.prevent="addSubtask" v-if="showAddSubtask" class="border p-3 w-full rounded">
                                 <div class="flex gap-2 mt-2">
-                                    <TextInput v-model="newSubtask.description" class="w-full pl-2" />
+                                    <TextInput v-model="newSubtask.description" class="w-full pl-2 border" />
                                     <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
                                 </div>
                                 <p v-if="errors" class="text-sm text-red-500 mt-2 ml-2"> {{ errors.description }} </p>
@@ -94,7 +94,7 @@
                             <!-- showAddComment -->
                             <form @submit.prevent="addComment" v-if="showAddComment" class="border p-3 w-full rounded">
                                 <div class="flex gap-2 mt-2">
-                                    <TextInput v-model="newComment.content" class="w-full pl-2" />
+                                    <TextInput v-model="newComment.content" class="w-full pl-2 border" />
                                     <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
                                 </div>
                                 <p v-if="errors" class="text-sm text-red-500 mt-2 ml-2"> {{ errors.content }} </p>
