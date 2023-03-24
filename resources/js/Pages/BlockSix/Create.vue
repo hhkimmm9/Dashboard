@@ -41,12 +41,14 @@
                         </div>
                     </div>
                     <div class="flex justify-center mt-10">
-                        <button type="submit" :disabled="isDisabled"
-                            :class="[
-                                'px-4 py-2 rounded-lg text-violet-700 font-bold shadow-md text-xl',
-                                isDisabled ? 'bg-gray-200' : 'hover:text-2xl hover:bg-yellow-300 bg-yellow-200'
-                            ]"
-                        > Submit </button>
+                        <span ref="tippySubmitButton">
+                            <button type="submit" :disabled="isDisabled"
+                                :class="[
+                                    'px-4 py-2 rounded-lg text-violet-700 font-bold shadow-md text-xl',
+                                    isDisabled ? 'bg-gray-200' : 'hover:text-2xl hover:bg-yellow-300 bg-yellow-200'
+                                ]"
+                            > Submit </button>
+                        </span>
                     </div>
                 </form>
             </div>
@@ -107,7 +109,12 @@ watchEffect(() => {
 });
 
 // Tippy
-const tippyPurchaseBook = ref();
+const tippySubmitButton = ref()
+useTippy(tippySubmitButton, {
+    content: "Please fill the form above first 🙂",
+})
+
+const tippyPurchaseBook = ref()
 useTippy(tippyPurchaseBook, {
     content: "Click to buy the book!",
     placement: 'top',
