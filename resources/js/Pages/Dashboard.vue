@@ -11,12 +11,10 @@
 </template>
 
 <script setup>
-import TextInput from '@/Components/TextInput.vue';
 import { Head } from '@inertiajs/vue3';
 import TodaysTasks from '@/Components/Dashboard/TodaysTask.vue'
 import { useGeneralStore } from '@/Stores/index';
 import { onMounted } from 'vue';
-
 
 const props = defineProps(['todays_tasks']);
 
