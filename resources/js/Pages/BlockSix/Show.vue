@@ -66,7 +66,6 @@
                             </div>
                         </form>
 
-
                         <!-- subtasks -->
                         <div class="border border-gray-200 rounded p-4 h-60 flex flex-col gap-2 overflow-y-auto">
                             <div class="flex justify-between">
@@ -74,9 +73,9 @@
                                 <span v-if="!showAddSubtask" @click="showAddSubtask = true" class="material-symbols-outlined mr-1 cursor-pointer"> add_circle </span>
                                 <span v-else @click="showAddSubtask = false; newSubtask.reset();" class="material-symbols-outlined mr-1 cursor-pointer"> cancel </span>
                             </div>
-                            <form @submit.prevent="addSubtask" v-if="showAddSubtask" class="border p-3 w-full rounded">
+                            <form @submit.prevent="addSubtask" v-if="showAddSubtask" class="border px-2 py-1 w-full rounded">
                                 <div class="flex gap-2 mt-2">
-                                    <TextInput v-model="newSubtask.description" class="w-full pl-2 border" />
+                                    <TextInput v-model="newSubtask.description" class="w-full pl-2 border rounded-sm" />
                                     <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
                                 </div>
                                 <p v-if="errors" class="text-sm text-red-500 mt-2 ml-2"> {{ errors.description }} </p>
@@ -92,9 +91,9 @@
                                 <span v-else @click="showAddComment = false; newComment.reset();" class="material-symbols-outlined mr-1 cursor-pointer"> cancel </span>
                             </div>
                             <!-- showAddComment -->
-                            <form @submit.prevent="addComment" v-if="showAddComment" class="border p-3 w-full rounded">
+                            <form @submit.prevent="addComment" v-if="showAddComment" class="border px-2 py-1 w-full rounded">
                                 <div class="flex gap-2 mt-2">
-                                    <TextInput v-model="newComment.content" class="w-full pl-2 border" />
+                                    <TextInput v-model="newComment.content" class="w-full pl-2 border rounded-sm" />
                                     <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
                                 </div>
                                 <p v-if="errors" class="text-sm text-red-500 mt-2 ml-2"> {{ errors.content }} </p>
