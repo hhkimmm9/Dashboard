@@ -14,7 +14,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Note/Index');
+        //
     }
 
     /**
@@ -46,7 +46,11 @@ class NoteController extends Controller
      */
     public function show($id)
     {
-        //
+        // if id == 0 (initializing)
+
+        return Inertia::render('Note/Show', [
+
+        ]);
     }
 
     /**
