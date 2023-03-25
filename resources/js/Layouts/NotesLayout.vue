@@ -1,13 +1,30 @@
 <template>
     <div class="max-w-7xl mx-auto h-full flex flex-row">
         <div class="grid grid-cols-12 w-full">
-            <div v-if="layoutStore.showSidePanels" class="col-span-3 h-screen bg-gray-100">
+            <div v-if="layoutStore.showSidePanels"
+                class="
+                    bg-gray-100
+                    md:col-span-5
+                    lg:col-span-3 lg:h-screen
+                "
+            >
                 <FoldersList />
             </div>
-            <div v-if="layoutStore.showSidePanels" class="col-span-4 h-screen bg-gray-200">
+            <div v-if="layoutStore.showSidePanels"
+                class="
+                    bg-gray-200
+                    md:col-span-7
+                    lg:col-span-4 lg:h-screen
+                "
+            >
                 <NotesList />
             </div>
-            <div :class="['h-screen bg-gray-100', layoutStore.showSidePanels ? 'col-span-5' : 'col-span-12']">
+            <div :class="[
+                'h-screen bg-gray-100 md:col-span-12',
+                layoutStore.showSidePanels
+                ? 'lg:col-span-5'
+                : 'lg:col-span-12'
+            ]">
                 <slot />
             </div>
         </div>
