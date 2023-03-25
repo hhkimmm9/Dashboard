@@ -3,11 +3,21 @@
         <Head title="Note (index)" />
         <AuthenticatedLayout class="relative">
             <NotesLayout>
-                <div class="bg-gray-300 p-2 text-center flex gap-2 items-center">
+                <!-- hide the side panels -->
+                <div v-if="layoutStore.showSidePanels == true" @click="layoutStore.showSidePanels = false"
+                    class="bg-gray-300 p-2 flex gap-2 items-center cursor-pointer"
+                >
                     <span class="material-symbols-outlined text-2xl"> keyboard_arrow_left </span>
-                    <p v-if="1" class="text-lg"> Expand </p>
-                    <p></p>
+                    <p class="text-lg"> Hide </p>
                 </div>
+                <!-- expand -->
+                <div v-else @click="layoutStore.showSidePanels = true"
+                    class="bg-gray-300 p-2 flex gap-2 items-center cursor-pointer"
+                >
+                    <span class="material-symbols-outlined text-2xl"> keyboard_arrow_right </span>
+                    <p class="text-lg"> Expand </p>
+                </div>
+
                 <div class="h-full p-3 flex flex-col gap-6">
                     <div class="container">
                         <p> title </p>
