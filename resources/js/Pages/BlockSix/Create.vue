@@ -41,12 +41,14 @@
                         </div>
                     </div>
                     <div class="flex justify-center mt-10">
-                        <button type="submit" :disabled="isDisabled"
-                            :class="[
-                                'px-4 py-2 rounded-lg text-violet-700 font-bold shadow-md text-xl',
-                                isDisabled ? 'bg-gray-200' : 'hover:text-2xl hover:bg-yellow-300 bg-yellow-200'
-                            ]"
-                        > Submit </button>
+                        <span :ref="isDisabled ? tippySubmitButton : ''">
+                            <button type="submit" :disabled="isDisabled"
+                                :class="[
+                                    'px-4 py-2 rounded-lg text-violet-700 font-bold shadow-md text-xl',
+                                    isDisabled ? 'bg-gray-200' : 'hover:text-2xl hover:bg-yellow-300 bg-yellow-200'
+                                ]"
+                            > Submit </button>
+                        </span>
                     </div>
                 </form>
             </div>
@@ -70,8 +72,12 @@
 <script setup>
 import InputField from '@/Components/BlockSix/InputField.vue'
 import { useForm } from '@inertiajs/vue3';
-import { computed, ref, watchEffect } from 'vue';
+import { onBeforeMount, ref, watchEffect } from 'vue';
 import { useTippy }from 'vue-tippy'
+
+const props = defineProps([
+    'existTodaysTasks'
+])
 
 const isDisabled = ref(true);
 
@@ -84,6 +90,11 @@ const tasks = useForm({
     slot6: null,
     type: 'task'
 });
+
+onBeforeMount(() => {
+    // TODO: loading to prevent having the create page flashed
+    if (props.existTodaysTasks) location.href = "/blocksix"
+})
 
 function createTasks() {
     tasks.post('/blocksix', {
@@ -107,7 +118,12 @@ watchEffect(() => {
 });
 
 // Tippy
-const tippyPurchaseBook = ref();
+const tippySubmitButton = ref()
+useTippy(tippySubmitButton, {
+    content: "Please fill the form above first 🙂",
+})
+
+const tippyPurchaseBook = ref()
 useTippy(tippyPurchaseBook, {
     content: "Click to buy the book!",
     placement: 'top',

@@ -23,9 +23,26 @@ class TaskController extends Controller
             ->where('user_id', $user_id)
             ->whereNull('parent_id')
             ->latest()->paginate(6);
+            
+        $subtasks = [];
+        foreach($subtasks as $key=>$subtask) {
+            if (isset($task->subtasks)) {
+                $subtasks[$key] = $task->subtasks;
+            }
+        }
 
+        $comments = [];
+        foreach($tasks as $key=>$task) {
+            if (isset($task->comments)) {
+                $comments[$key] = $task->comments;
+            }
+        }
+
+        // TODO: OPT
         return Inertia::render('BlockSix/Index', [
-            'tasks' => $tasks
+            'tasks' => $tasks,
+            'subtasks' => $subtasks,
+            'comments' => $comments,
         ]);
     }
 
@@ -36,7 +53,16 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return Inertia::render('BlockSix/Create');
+        $today = now()->format('Y-m-d');
+        $existTodaysTasks = Task::query()
+            ->where('user_id', auth()->user()->id)
+            ->whereDate('created_at', $today)
+            ->whereNull('parent_id')
+            ->get();
+
+        return Inertia::render('BlockSix/Create', [
+            'existTodaysTasks' => isset($existTodaysTasks)
+        ]);
     }
 
     /**
@@ -101,17 +127,6 @@ class TaskController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        // 
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -133,7 +148,7 @@ class TaskController extends Controller
                 return redirect("blocksix/{$parent_id}");
             }
             else {
-                return redirect("blocksix/{$id}");
+                return redirect("blocksix");
             }
         }
         // update the whole task

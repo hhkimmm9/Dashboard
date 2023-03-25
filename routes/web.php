@@ -35,8 +35,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
 
-    $today = now()->subDay()->format('Y-m-d');
-    // $today = now()->format('Y-m-d');
+    $today = now()->format('Y-m-d');
 
     $todays_tasks = Task::query()
         ->where('user_id', auth()->user()->id)
