@@ -3,7 +3,7 @@
         <div class="grid grid-cols-12 w-full">
             <div v-if="layoutStore.showSidePanels"
                 class="
-                    bg-gray-100
+                    bg-gray-100 col-span-12
                     md:col-span-5
                     lg:col-span-3 lg:h-screen
                 "
@@ -12,7 +12,7 @@
             </div>
             <div v-if="layoutStore.showSidePanels"
                 class="
-                    bg-gray-200
+                    bg-gray-200 col-span-12
                     md:col-span-7
                     lg:col-span-4 lg:h-screen
                 "
@@ -20,7 +20,7 @@
                 <NotesList />
             </div>
             <div :class="[
-                'h-screen bg-gray-100 md:col-span-12',
+                'h-screen bg-gray-100 col-span-12',
                 layoutStore.showSidePanels
                 ? 'lg:col-span-5'
                 : 'lg:col-span-12'

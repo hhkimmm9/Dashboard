@@ -3,7 +3,7 @@
         <div class="bg-gray-300 p-2 text-center">
             <p class="font-bold text-2xl"> Folders </p>
         </div>
-        <div class="md:h-60 overflow-y-auto">
+        <div class="h-48 md:h-60 overflow-y-auto">
             <ul>
                 <li v-for="(item, index) in folders" :key="index" class="flex justify-between items-center hover:bg-gray-200 p-2">
                     <span class="cursor-pointer"> {{ item.name }} </span>
