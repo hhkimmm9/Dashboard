@@ -9,7 +9,7 @@
             <form v-else @submit.prevent="updateSubtask" class="flex w-full gap-2 items-center h-full">
                 <TextInput
                     :value="subtask.description" @update:modelValue="form.updatedDescription = $event"
-                    class="w-full p-1"
+                    class="w-full p-1 border"
                 />
                 <button @click="showEditor = false" class="text-sm border p-1.5 rounded hover:bg-gray-50"> Cancel </button>
                 <button type="submit" class="text-sm border p-1.5 rounded hover:bg-gray-50"> Submit </button>

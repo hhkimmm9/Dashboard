@@ -1,11 +1,13 @@
 <?php
 
+use App\Models\Task;
 use Inertia\Inertia;
-use Illuminate\Console\Application;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CommentController;
+use Illuminate\Foundation\Application;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SettingsController;
@@ -31,7 +33,20 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+
+    $today = now()->format('Y-m-d');
+
+    $todays_tasks = Task::query()
+        ->where('user_id', auth()->user()->id)
+        ->whereDate('created_at', $today)
+        ->whereNull('parent_id')
+        ->latest()->paginate(6);
+
+    return Inertia::render('Dashboard', [
+        'todays_tasks' => $todays_tasks,
+    ]);
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -8,12 +8,12 @@
 
                     <!-- go back -->
                     <div>
-                        <Link href="/blocksix" as="button"
-                            class="text-sm whitespace-nowrap cursor-pointer items-center flex gap-2 border rounded-full px-2 py-1 w-min shadow-sm
-                                hover:shadow-lg hover:bg-gray-50
+                        <Link v-if="checkPrevPage" href="/blocksix"
+                            class="text-sm whitespace-nowrap cursor-pointer items-center flex gap-2 border rounded-full px-3 w-min
+                                hover:bg-gray-50
                             "
                         >
-                            <span class="material-symbols-outlined">keyboard_backspace</span>
+                            <span class="material-symbols-outlined text-lg">keyboard_backspace</span>
                             <span class="">Go Back</span>
                         </Link>
                     </div>
@@ -43,19 +43,28 @@
                             </div>
                         </div>
 
-                        <form v-else @submit.prevent="updateTask" class="space-y-1">
-                            <div class="flex flex-col w-full gap-2 items-center h-full">
-                                <InputLabel value="Keyword" />
-                                <TextInput v-model="taskForm.keyword" class="w-full p-1" />
+                        <form v-else @submit.prevent="updateTask" class="space-y-3">
+                            <div class="flex flex-col w-full gap-2 h-full">
+                                <InputLabel value="Keyword" class="bg-yellow-200 w-min px-1"/>
+                                <TextInput v-model="taskForm.keyword" class="w-full p-1 border" />
                                 <InputLabel value="Description" />
-                                <TextInput v-model="taskForm.description" class="w-full p-1" />
+                                <TextInput v-model="taskForm.description" class="w-full p-1 border" />
                             </div>
-                            <div class="flex w-full">
-                                <button @click="showTaskEditor = false" class="text-sm border p-1.5 hover:bg-gray-50 basis-1/2"> Cancel </button>
-                                <button type="submit" class="text-sm border p-1.5 hover:bg-gray-50 basis-1/2"> Submit </button>
+                            <div class="flex w-full gap-2">
+                                <button @click="showTaskEditor = false"
+                                    class="
+                                        text-sm border p-1.5 basis-1/2 rounded-lg
+                                        hover:bg-red-300 hover:text-white hover:font-bold
+                                    "
+                                > Cancel </button>
+                                <button type="submit"
+                                    class="
+                                        text-sm border p-1.5  basis-1/2 rounded-lg
+                                        hover:bg-green-300 hover:text-white hover:font-bold
+                                    "
+                                > Submit </button>
                             </div>
                         </form>
-
 
                         <!-- subtasks -->
                         <div class="border border-gray-200 rounded p-4 h-60 flex flex-col gap-2 overflow-y-auto">
@@ -64,9 +73,9 @@
                                 <span v-if="!showAddSubtask" @click="showAddSubtask = true" class="material-symbols-outlined mr-1 cursor-pointer"> add_circle </span>
                                 <span v-else @click="showAddSubtask = false; newSubtask.reset();" class="material-symbols-outlined mr-1 cursor-pointer"> cancel </span>
                             </div>
-                            <form @submit.prevent="addSubtask" v-if="showAddSubtask" class="border p-3 w-full rounded">
+                            <form @submit.prevent="addSubtask" v-if="showAddSubtask" class="border px-2 py-1 w-full rounded">
                                 <div class="flex gap-2 mt-2">
-                                    <TextInput v-model="newSubtask.description" class="w-full pl-2" />
+                                    <TextInput v-model="newSubtask.description" class="w-full pl-2 border rounded-sm" />
                                     <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
                                 </div>
                                 <p v-if="errors" class="text-sm text-red-500 mt-2 ml-2"> {{ errors.description }} </p>
@@ -82,9 +91,9 @@
                                 <span v-else @click="showAddComment = false; newComment.reset();" class="material-symbols-outlined mr-1 cursor-pointer"> cancel </span>
                             </div>
                             <!-- showAddComment -->
-                            <form @submit.prevent="addComment" v-if="showAddComment" class="border p-3 w-full rounded">
+                            <form @submit.prevent="addComment" v-if="showAddComment" class="border px-2 py-1 w-full rounded">
                                 <div class="flex gap-2 mt-2">
-                                    <TextInput v-model="newComment.content" class="w-full pl-2" />
+                                    <TextInput v-model="newComment.content" class="w-full pl-2 border rounded-sm" />
                                     <button type="submit" class="border p-1 rounded hover:bg-gray-50 hover:shadow-sm"> Submit </button>
                                 </div>
                                 <p v-if="errors" class="text-sm text-red-500 mt-2 ml-2"> {{ errors.content }} </p>
@@ -165,6 +174,11 @@ const addComment = () => {
         onSuccess: () => newComment.reset('content'),
     });
 };
+
+function checkPrevPage() {
+    // The go back button only appears if the previous page was blocksix.index
+    // or, if we can do SPA behaviour with history.back() somehow then we can just go back to the previous page.
+}
 
 </script>
 

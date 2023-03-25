@@ -146,8 +146,8 @@ const isOnBlockSix = computed(() => {
                 <slot />
             </main>
 
-            <!-- show dock toggle - only if url==dashboard -->
-            <div class="absolute bottom-10 w-full flex justify-center">
+            <!-- Dock -->
+            <div class="fixed bottom-10 w-full flex justify-center">
                 <button @click="layoutStore.showDock = !layoutStore.showDock"
                     :class="[layoutStore.showDock ? '' : 'hidden',
                         'material-icons opacity-90 cursor-pointer'
