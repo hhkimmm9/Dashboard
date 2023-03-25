@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center mt-10">
-                        <span ref="tippySubmitButton">
+                        <span :ref="isDisabled ? tippySubmitButton : ''">
                             <button type="submit" :disabled="isDisabled"
                                 :class="[
                                     'px-4 py-2 rounded-lg text-violet-700 font-bold shadow-md text-xl',
