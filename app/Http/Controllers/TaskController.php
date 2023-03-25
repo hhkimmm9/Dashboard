@@ -23,9 +23,26 @@ class TaskController extends Controller
             ->where('user_id', $user_id)
             ->whereNull('parent_id')
             ->latest()->paginate(6);
+            
+        $subtasks = [];
+        foreach($subtasks as $key=>$subtask) {
+            if (isset($task->subtasks)) {
+                $subtasks[$key] = $task->subtasks;
+            }
+        }
 
+        $comments = [];
+        foreach($tasks as $key=>$task) {
+            if (isset($task->comments)) {
+                $comments[$key] = $task->comments;
+            }
+        }
+
+        // TODO: OPT
         return Inertia::render('BlockSix/Index', [
-            'tasks' => $tasks
+            'tasks' => $tasks,
+            'subtasks' => $subtasks,
+            'comments' => $comments,
         ]);
     }
 

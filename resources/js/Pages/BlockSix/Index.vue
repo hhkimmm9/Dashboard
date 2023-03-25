@@ -8,11 +8,20 @@
                 <div class="relative bg-white border border-gray-200 shadow w-2/3 mx-auto p-6 flex flex-col space-y-4 rounded-lg">
                     <div class="font-bold text-2xl"> {{ date }} </div>
                     <div>
-                        <TaskContainer label="Morning" :first_task="tasks.data[0]" :second_task="tasks.data[1]" />
+                        <TaskContainer label="Morning"
+                            :first_task="tasks.data[0]" :first_task_comments="comments[0]" :first_task_subtasks="subtasks[0]"
+                            :second_task="tasks.data[1]" :second_task_comments="comments[1]" :second_task_subtasks="subtasks[1]"
+                        />
                         <hr class="my-4">
-                        <TaskContainer label="Afternoon" :first_task="tasks.data[2]" :second_task="tasks.data[3]" />
+                        <TaskContainer label="Afternoon"
+                            :first_task="tasks.data[2]" :first_task_comments="comments[2]" :first_task_subtasks="subtasks[2]"
+                            :second_task="tasks.data[3]" :second_task_comments="comments[3]" :second_task_subtasks="subtasks[3]"
+                        />
                         <hr class="my-4">
-                        <TaskContainer label="Evening" :first_task="tasks.data[4]" :second_task="tasks.data[5]" />
+                        <TaskContainer label="Evening"
+                            :first_task="tasks.data[4]" :first_task_comments="comments[4]" :first_task_subtasks="subtasks[1]"
+                            :second_task="tasks.data[5]" :second_task_comments="comments[5]" :second_task_subtasks="subtasks[5]"
+                        />
                     </div>
 
                     <Link :href="tasks.next_page_url" :class="['absolute -left-10 top-48', tasks.next_page_url ? 'visible' : 'hidden']">
@@ -43,7 +52,7 @@ import TaskContainer from '@/Components/BlockSix/TaskContainer.vue';
 import TaskComment from '@/Components/BlockSix/TaskCommentModal.vue'
 import TaskQuickEdit from '@/Components/BlockSix/TaskQuickEditModal.vue'
 
-const props = defineProps(['tasks']);
+const props = defineProps(['tasks', 'comments', 'subtasks']);
 
 const date = computed(() => {
     const date = new Date(props.tasks.data[0].created_at);
