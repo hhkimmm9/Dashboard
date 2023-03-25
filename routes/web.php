@@ -1,11 +1,17 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ModulesController;
-use App\Http\Controllers\SettingsController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
+use App\Models\Task;
 use Inertia\Inertia;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +34,18 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+
+    $today = now()->format('Y-m-d');
+
+    $todays_tasks = Task::query()
+        ->where('user_id', auth()->user()->id)
+        ->whereDate('created_at', $today)
+        ->whereNull('parent_id')
+        ->latest()->paginate(6);
+
+    return Inertia::render('Dashboard', [
+        'todays_tasks' => $todays_tasks,
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -36,9 +53,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/modules/blocksix', [ModulesController::class, 'blocksix'])->name('modules.blocksix');
-    Route::get('/modules/calendar', [ModulesController::class, 'calendar'])->name('modules.calendar');
-    Route::get('/modules/tetris', [ModulesController::class, 'tetris'])->name('modules.tetris');
+    Route::resource('blocksix', TaskController::class);
+
+    Route::resource('comment', CommentController::class);
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/settings/history', [SettingsController::class, 'history'])->name('settings.history');

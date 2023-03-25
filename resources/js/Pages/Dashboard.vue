@@ -3,27 +3,26 @@
 
     <AuthenticatedLayout>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="text-3xl font-bold uppercase">
-                dashboard
+            <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-3">
+                <TodaysTasks :todays_tasks="todays_tasks.data" />
             </div>
-
-            <div class="mt-10 grid grid-cols-2 gap-3">
-                <div v-for="item in 4" :key="item"
-                    class="border-2 border-black rounded p-2 h-64"
-                >
-                    {{ item }}
-                </div>
-            </div>
-        </div>
-        
-        <div class="absolute bottom-28 mx-auto left-0 right-0 px-20">
-            <Dock />
         </div>
     </AuthenticatedLayout>
 </template>
 
 <script setup>
-import TextInput from '@/Components/TextInput.vue';
 import { Head } from '@inertiajs/vue3';
+import TodaysTasks from '@/Components/Dashboard/TodaysTask.vue'
+import { useGeneralStore } from '@/Stores/index';
+import { onMounted } from 'vue';
+
+const props = defineProps(['todays_tasks']);
+
+const generalStore = useGeneralStore();
+
+onMounted(() => {
+    if (props.todays_tasks.data.length > 0) generalStore.is_todays_tasks_created = true;
+    else generalStore.is_todays_tasks_created = false;
+})
 
 </script>

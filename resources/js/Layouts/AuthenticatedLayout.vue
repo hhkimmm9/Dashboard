@@ -1,27 +1,35 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
-import { useLayoutStore } from '../Stores/LayoutStore';
+import { useLayoutStore, } from '@/Stores/index'
+import Dock from '@/Components/Shared/Dock.vue'
+import Notification from '@/Components/Shared/Notification.vue'
 
 const layoutStore = useLayoutStore();
 
 const showingNavigationDropdown = ref(false);
+
+const isOnBlockSix = computed(() => {
+    if (location.pathname.includes('blocksix'))
+        return true;
+    else return false;
+});
 </script>
 
 <template>
     <div>
-        <div class="min-h-screen relative">
+        <div :class="['min-h-screen flex flex-col', isOnBlockSix ? 'bg-violet-100' : '']">
             <nav class="absolute top-0 z-10 w-full">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-end h-16">
-                        <div class="hidden sm:flex sm:items-center sm:ml-6 sm:space-x-7">
 
+                        <div class="hidden sm:flex sm:items-center sm:ml-6 sm:space-x-7">
                             <!-- Home -->
                             <Link :href="route('dashboard')"
                                 :class="[route().current('dashboard') ? '' : '',
@@ -134,17 +142,23 @@ const showingNavigationDropdown = ref(false);
             </header>
 
             <!-- Page Content -->
-            <main class="relative">
+            <main class="relative mt-16">
                 <slot />
             </main>
 
-            <!-- show dock toggle -->
-            <div class="w-full flex justify-center absolute bottom-28">
+            <!-- Dock -->
+            <div class="fixed bottom-10 w-full flex justify-center">
                 <button @click="layoutStore.showDock = !layoutStore.showDock"
                     :class="[layoutStore.showDock ? '' : 'hidden',
                         'material-icons opacity-90 cursor-pointer'
                     ]"
                 > keyboard_double_arrow_up </button>
+
+                <Dock />
+            </div>
+
+            <div v-if="layoutStore.show_notification" class="fixed right-10 bottom-10">
+                <Notification />
             </div>
         </div>
     </div>
