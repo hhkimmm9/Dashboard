@@ -72,8 +72,12 @@
 <script setup>
 import InputField from '@/Components/BlockSix/InputField.vue'
 import { useForm } from '@inertiajs/vue3';
-import { computed, ref, watchEffect } from 'vue';
+import { onBeforeMount, ref, watchEffect } from 'vue';
 import { useTippy }from 'vue-tippy'
+
+const props = defineProps([
+    'existTodaysTasks'
+])
 
 const isDisabled = ref(true);
 
@@ -86,6 +90,11 @@ const tasks = useForm({
     slot6: null,
     type: 'task'
 });
+
+onBeforeMount(() => {
+    // TODO: loading to prevent having the create page flashed
+    if (props.existTodaysTasks) location.href = "/blocksix"
+})
 
 function createTasks() {
     tasks.post('/blocksix', {

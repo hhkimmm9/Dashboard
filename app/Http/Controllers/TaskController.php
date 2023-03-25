@@ -53,7 +53,16 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return Inertia::render('BlockSix/Create');
+        $today = now()->format('Y-m-d');
+        $existTodaysTasks = Task::query()
+            ->where('user_id', auth()->user()->id)
+            ->whereDate('created_at', $today)
+            ->whereNull('parent_id')
+            ->get();
+
+        return Inertia::render('BlockSix/Create', [
+            'existTodaysTasks' => isset($existTodaysTasks)
+        ]);
     }
 
     /**
