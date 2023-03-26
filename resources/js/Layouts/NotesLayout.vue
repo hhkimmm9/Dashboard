@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl mx-auto h-full flex flex-row">
+    <div class="container max-w-7xl mx-auto h-full flex flex-row">
         <div class="grid grid-cols-12 w-full">
             <div v-if="layoutStore.showSidePanels"
                 class="
@@ -78,6 +78,9 @@ watchEffect(() => {
 
     switch (componentName) {
         case 'Note/Create':
+            showEditor.value = true
+            break
+        case 'Note/Edit':
             showEditor.value = true
             break
         case 'Note/Show':
