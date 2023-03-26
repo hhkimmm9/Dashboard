@@ -25,6 +25,27 @@
                 ? 'lg:col-span-5'
                 : 'lg:col-span-12'
             ]">
+                <div class="flex justify-between bg-gray-300 items-center p-2">
+                    <!-- hide the side panels -->
+                    <div v-if="layoutStore.showSidePanels == true" @click="layoutStore.showSidePanels = false"
+                        class="flex gap-2 cursor-pointer items-center"
+                    >
+                        <span v-if="wideScreen" class="material-symbols-outlined text-2xl"> keyboard_arrow_left </span>
+                        <span v-else class="material-symbols-outlined text-2xl"> keyboard_arrow_up </span>
+                        <p class="text-lg"> Hide </p>
+                    </div>
+                    <!-- expand -->
+                    <div v-else @click="layoutStore.showSidePanels = true"
+                        class="flex gap-2 cursor-pointer items-center"
+                    >
+                        <span v-if="wideScreen" class="material-symbols-outlined text-2xl"> keyboard_arrow_right </span>
+                        <span v-else class="material-symbols-outlined text-2xl"> keyboard_arrow_down </span>
+                        <p class="text-lg"> Expand </p>
+                    </div>
+
+                    <Link v-if="!showEditor" href="create" class="material-symbols-outlined cursor-pointer mr-1"> note_alt </Link>
+                    <Link v-else href="/notes/0" class="material-symbols-outlined cursor-pointer mr-1"> close </Link>
+                </div>
                 <slot />
             </div>
         </div>
@@ -32,11 +53,32 @@
 </template>
 
 <script setup>
+import { Link, router } from '@inertiajs/vue3';
 import FoldersList from '@/Components/Notes/FoldersList.vue'
 import NotesList from '@/Components/Notes/NotesList.vue'
 import { useLayoutStore } from '@/Stores'
+import { ref, computed, watchEffect } from 'vue';
 
 const layoutStore = useLayoutStore()
+
+const wideScreen = computed(() => {
+    return window.innerWidth > 820 ? true : false
+})
+
+// TODO: tippyCreateNote
+
+var showEditor = ref(false);
+
+watchEffect(() => {
+    var componentName = router.page.component
+    console.log(componentName)
+    if (componentName == 'Note/Create') {
+        showEditor.value = true
+    }
+    else if (componentName == 'Note/Show') {
+        showEditor.value = false
+    }
+})
 
 </script>
 
