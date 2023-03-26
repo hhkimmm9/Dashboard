@@ -6,6 +6,9 @@ const useLayoutStore = defineStore('layoutStore', {
         show_notification: true,
         open_comment_modal: false,
         open_quick_edit_modal: false,
+
+        // Notes
+        showSidePanels: true,
     }),
 
     getters: {
