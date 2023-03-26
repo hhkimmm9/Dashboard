@@ -15,7 +15,10 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Note/Index', [
+            'notes' => Note::where('is_folder', 0)->get(),
+            'folders' => Note::where('is_folder', 1)->get(),
+        ]);
     }
 
     /**
@@ -37,7 +40,6 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'folder_id' => 'nullable',
             'is_folder' => 'boolean',
             'label' => 'string'
         ]);
@@ -46,13 +48,12 @@ class NoteController extends Controller
 
         Note::create([
             'user_id' => auth()->user()->id,
-            'folder_id' => $validated['folder_id'] ?? null,
             'is_folder' => $validated['is_folder'],
             'label' => $validated['label'],
             'content' => $content,
         ]);
 
-        return redirect('notes/0');
+        return redirect('notes');
     }
 
     /**
@@ -63,15 +64,11 @@ class NoteController extends Controller
      */
     public function show($id)
     {
-        // if id == 0 (initializing)
-        if ($id == 0) {
-            return Inertia::render('Note/Show');
-        }
-        else {
-            return Inertia::render('Note/Show', [
-                'note' => Note::where('id', $id)->first(),
-            ]);
-        }
+        // TODO: 404 not found
+
+        return Inertia::render('Note/Show', [
+            'note' => Note::where('id', $id)->first()
+        ]);
 
     }
 
@@ -107,7 +104,7 @@ class NoteController extends Controller
             'content' => $validated['content']
         ]);
 
-        return redirect('notes/0');
+        return redirect('notes');
     }
 
     /**

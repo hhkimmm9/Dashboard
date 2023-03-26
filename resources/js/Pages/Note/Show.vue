@@ -4,7 +4,7 @@
         <AuthenticatedLayout class="relative">
             <NotesLayout>
                 <div class="h-full p-3">
-                    <div v-if="note" class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-4">
                         <div>
                             <h3 class="text-2xl font-bold"> {{ note.label }} </h3>
                             <div class="flex justify-between">
@@ -23,10 +23,6 @@
                             <p> {{ note.content }} </p>
                         </div>
                     </div>
-
-                    <div v-else class="">
-                        <p class="text-3xl font-bold text-center mt-20"> Welcome to Notes </p>
-                    </div>
                 </div>
             </NotesLayout>
         </AuthenticatedLayout>
@@ -39,7 +35,7 @@ import NotesLayout from '@/Layouts/NotesLayout.vue'
 import { computed } from 'vue';
 
 const props = defineProps([
-    'note'
+    'note',
 ])
 
 const dateFormat = computed(() => {

@@ -43,7 +43,7 @@
                         <p class="text-lg"> Expand </p>
                     </div>
 
-                    <Link v-if="!showEditor" href="create" class="material-symbols-outlined cursor-pointer mr-1"> note_alt </Link>
+                    <Link v-if="!showEditor" href="notes/create" class="material-symbols-outlined cursor-pointer mr-1"> note_alt </Link>
                     <div v-else class="flex gap-2 mr-1">
                         <span @click="save" class="material-symbols-outlined cursor-pointer"> done </span>
                         <Link  href="/notes/0" class="material-symbols-outlined cursor-pointer"> close </Link>

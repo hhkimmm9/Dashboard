@@ -5,8 +5,8 @@
         </div>
         <div class="h-48 md:h-60 overflow-y-auto">
             <ul>
-                <li v-for="(item, index) in folders" :key="index" class="flex justify-between items-center hover:bg-gray-200 p-2">
-                    <span class="cursor-pointer"> {{ item.name }} </span>
+                <li v-for="(item, index) in generalStore.folders" :key="index" class="flex justify-between items-center hover:bg-gray-200 p-2">
+                    <span class="cursor-pointer"> {{ item.label }} </span>
                     <Dropdown>
                         <template v-slot:trigger>
                             <span class="material-symbols-outlined text-lg cursor-pointer"> more_horiz </span>
@@ -34,25 +34,9 @@
 
 <script setup>
 import Dropdown from '@/Components/Dropdown.vue'
+import { useGeneralStore } from '@/Stores/index'
 
-var folders = [
-    {
-        id: 1,
-        name: 'Folder 1'
-    },
-    {
-        id: 2,
-        name: 'Folder 2'
-    },
-    {
-        id: 3,
-        name: 'Folder 3'
-    },
-    {
-        id: 4,
-        name: 'Folder 4'
-    },
-]
+const generalStore = useGeneralStore()
 
 </script>
 

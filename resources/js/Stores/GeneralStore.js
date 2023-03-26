@@ -10,6 +10,9 @@ const useGeneralStore = defineStore('generalStore', {
                 message: null,
             },
             save: false,
+
+            notes: Array,
+            folders: Array,
         }
     },
 

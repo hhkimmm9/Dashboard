@@ -50,7 +50,7 @@ var modules = [
     {
         name: 'Notes',
         icon: 'note_alt',
-        url: '/notes/0',
+        url: '/notes',
     },
 ]
 
