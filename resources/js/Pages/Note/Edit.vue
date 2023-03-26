@@ -1,16 +1,14 @@
 <template>
     <div>
-        <Head title="Note (Create)" />
+        <Head title="Note (index)" />
         <AuthenticatedLayout class="relative">
             <NotesLayout>
                 <div class="h-full p-3 flex flex-col">
                     <input v-model="form.label" type="text"
-                        placeholder="Title..."
                         class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mb-4"
                     >
-                    <QuillEditor v-model:content="form.content" theme="snow"
+                    <QuillEditor v-model:content="form.content" :content="form.content" contentType="text" theme="snow"
                         @textChange="(text) => textChange(text)"
-                        placeholder="Content..."
                     />
                 </div>
             </NotesLayout>
@@ -32,25 +30,25 @@ const generalStore = useGeneralStore()
 const { save } = storeToRefs(generalStore)
 
 const form = useForm({
-    label: null,
-    content: null,
-    is_folder: false,
-    folder_id: null,
+    label: props.note.label,
+    content: props.note.content
 })
 
-// https://vueup.github.io/vue-quill/api/events.html
+const props = defineProps([
+    'note'
+])
+
 function textChange(text) {
-    // console.log(text)
+    // 
 }
 
 watch(save, () => {
-    form.post('/notes', {
+    form.patch(`/notes/${props.note.id}`, {
         onSuccess: () => {
             generalStore.reset()
         },
     })
 })
-
 </script>
 
 <style lang="scss" scoped>

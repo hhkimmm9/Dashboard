@@ -19,7 +19,8 @@ const useGeneralStore = defineStore('generalStore', {
 
     actions: {
         reset() {
-
+            // console.log('generalStore.reset() is called')
+            this.save = false
         },
     }
 });
