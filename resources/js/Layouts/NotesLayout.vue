@@ -44,7 +44,10 @@
                     </div>
 
                     <Link v-if="!showEditor" href="create" class="material-symbols-outlined cursor-pointer mr-1"> note_alt </Link>
-                    <Link v-else href="/notes/0" class="material-symbols-outlined cursor-pointer mr-1"> close </Link>
+                    <div v-else class="flex gap-2 mr-1">
+                        <span @click="save" class="material-symbols-outlined cursor-pointer"> done </span>
+                        <Link  href="/notes/0" class="material-symbols-outlined cursor-pointer"> close </Link>
+                    </div>
                 </div>
                 <slot />
             </div>
@@ -56,10 +59,11 @@
 import { Link, router } from '@inertiajs/vue3';
 import FoldersList from '@/Components/Notes/FoldersList.vue'
 import NotesList from '@/Components/Notes/NotesList.vue'
-import { useLayoutStore } from '@/Stores'
+import { useLayoutStore, useGeneralStore } from '@/Stores'
 import { ref, computed, watchEffect } from 'vue';
 
 const layoutStore = useLayoutStore()
+const generalStore = useGeneralStore()
 
 const wideScreen = computed(() => {
     return window.innerWidth > 820 ? true : false
@@ -71,14 +75,20 @@ var showEditor = ref(false);
 
 watchEffect(() => {
     var componentName = router.page.component
-    console.log(componentName)
-    if (componentName == 'Note/Create') {
-        showEditor.value = true
-    }
-    else if (componentName == 'Note/Show') {
-        showEditor.value = false
+
+    switch (componentName) {
+        case 'Note/Create':
+            showEditor.value = true
+            break
+        case 'Note/Show':
+            showEditor.value = false
+            break
     }
 })
+
+function save() {
+    generalStore.save = true
+}
 
 </script>
 

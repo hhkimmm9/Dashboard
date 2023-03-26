@@ -9,6 +9,7 @@ const useGeneralStore = defineStore('generalStore', {
                 icon_type: 'pass',
                 message: null,
             },
+            save: false,
         }
     },
 
@@ -17,7 +18,9 @@ const useGeneralStore = defineStore('generalStore', {
     },
 
     actions: {
+        reset() {
 
+        },
     }
 });
 
