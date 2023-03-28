@@ -24,5 +24,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Task::factory(18)->create();
         
         \App\Models\Comment::factory(5)->create();
+        
+        \App\Models\Note::factory(5)->create();
     }
 }
