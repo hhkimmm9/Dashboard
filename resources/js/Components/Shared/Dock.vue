@@ -8,7 +8,7 @@
                     hover:border hover:shadow-sm hover:bg-gray-100
                 "
             >
-                <Link :href="route(item.url)" class="flex flex-col w-20">
+                <Link :href="item.url" class="flex flex-col w-20">
                     <span class="material-icons mx-auto text-3xl">{{ item.icon }}</span>
                     <div class="text-center"> {{ item.name }} </div>
                 </Link >
@@ -33,29 +33,30 @@ const layoutStore = useLayoutStore();
 const generalStore = useGeneralStore();
 
 const isTodaysTasksCreated = computed(() => {
-    return generalStore.is_todays_tasks_created ? 'blocksix.index' : 'blocksix.create';
+    return generalStore.is_todays_tasks_created ? '/blocksix' : '/blocksix/create';
 });
 
 var modules = [
     {
         name: 'Dashboard',
         icon: 'dashboard',
-        url: 'dashboard',
+        url: '/dashboard',
     },
     {
         name: 'Block Six',
         icon: 'grid_view',
         url: isTodaysTasksCreated.value,
     },
-    // {
-    //     name: 'Notes',
-    //     icon: 'note_alt',
-    //     url: 'notes',
-    // },
+    {
+        name: 'Notes',
+        icon: 'note_alt',
+        url: '/notes/0',
+    },
 ]
 
 onMounted(() => {
     // console.log(route().current('dashboard'))
+    
 })
 
 </script>
