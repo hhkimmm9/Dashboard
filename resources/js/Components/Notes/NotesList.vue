@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="h-60 md:h-60 lg:h-full">
         <div class="bg-gray-400 p-2 text-center">
             <p class="font-bold text-2xl"> Notes </p>
         </div>
-        <div class="h-60 md:h-60 overflow-y-auto">
+        <div class="h-full overflow-y-auto">
             <ul>
                 <li v-for="(item, index) in generalStore.notes" :key="index" class="flex justify-between items-center hover:bg-gray-100 p-2">
                     <span class="cursor-pointer"> {{ item.label }} </span>
