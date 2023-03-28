@@ -81,7 +81,7 @@ class NoteController extends Controller
     public function edit($id)
     {
         return Inertia::render('Note/Edit', [
-            'note' => Note::find($id)->first(),
+            'note' => Note::where('id', $id)->first(),
         ]);
     }
 

@@ -4,9 +4,9 @@
             <p class="font-bold text-2xl"> Notes </p>
         </div>
         <div class="h-full overflow-y-auto">
-            <ul>
-                <li v-for="(item, index) in notesFilteredByFolder" :key="index" class="flex justify-between items-center hover:bg-gray-100 p-2">
-                    <span class="cursor-pointer"> {{ item.label }} </span>
+            <ul class="mt-2 space-y-2">
+                <li v-for="(item, index) in notesFilteredByFolder" :key="index" class="flex justify-between items-center hover:bg-gray-100 px-2">
+                    <Link :href="route('notes.show', { id: item.id })" class="cursor-pointer truncate mr-5"> {{ item.label }} </Link>
                     <Dropdown>
                         <template v-slot:trigger>
                             <span class="material-symbols-outlined text-lg cursor-pointer"> more_horiz </span>
@@ -14,14 +14,29 @@
                         <template v-slot:content>
                             <div class="flex flex-col px-3 py-1">
                                 <ul>
-                                    <li class="flex items-center gap-2">
+                                    <Link
+                                        :href="route('notes.edit', { id: item.id })"
+                                        as="li"
+                                        class="
+                                            flex items-center gap-2 cursor-pointer
+                                            hover:bg-gray-50
+                                        "
+                                    >
                                         <span class="material-symbols-outlined text-lg"> edit </span>
                                         <span> Edit </span>
-                                    </li>
-                                    <li class="flex items-center gap-2">
+                                    </Link>
+                                    <Link
+                                        :href="route('notes.destroy', { id: item.id })"
+                                        method="DELETE"
+                                        as="li"
+                                        class="
+                                            flex items-center gap-2 cursor-pointer
+                                            hover:bg-gray-50
+                                        "
+                                    >
                                         <span class="material-symbols-outlined text-lg"> delete </span>
                                         <span> Delete </span>
-                                    </li>
+                                    </Link>
                                 </ul>
                             </div>
                         </template>
@@ -36,6 +51,7 @@
 import Dropdown from '@/Components/Dropdown.vue'
 import { useGeneralStore } from '@/Stores/index'
 import { computed } from 'vue';
+import { Link } from '@inertiajs/vue3';
 
 const generalStore = useGeneralStore()
 
