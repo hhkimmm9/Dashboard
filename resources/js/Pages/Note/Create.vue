@@ -43,6 +43,7 @@ function textChange(text) {
     // console.log(text)
 }
 
+// https://pinia.vuejs.org/core-concepts/#using-the-store
 watch(save, () => {
     form.post('/notes', {
         onSuccess: () => {
