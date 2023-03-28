@@ -94,15 +94,29 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'label' => 'string',
-            'content' => 'string'
-        ]);
+        // update a note
+        if (isset($request['content'])) {
+            $validated = $request->validate([
+                'label' => 'string',
+                'content' => 'string'
+            ]);
+    
+            Note::find($id)->update([
+                'label' => $validated['label'],
+                'content' => $validated['content']
+            ]);
+        }
 
-        Note::find($id)->update([
-            'label' => $validated['label'],
-            'content' => $validated['content']
-        ]);
+        // update a folder
+        else {
+            $validated = $request->validate([
+                'folderName' => 'string'
+            ]);
+
+            Note::find($id)->update([
+                'label' => $validated['folderName'],
+            ]);
+        }
 
         return redirect('notes');
     }
@@ -115,7 +129,7 @@ class NoteController extends Controller
      */
     public function destroy($id)
     {
-        Note::find($id)->delete();
-        return redirect('notes/0');
+        Note::where('id', $id)->delete();
+        return redirect('notes');
     }
 }
