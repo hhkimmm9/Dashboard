@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="h-60 md:h-60 lg:h-full">
         <div class="bg-gray-400 p-2 text-center">
             <p class="font-bold text-2xl"> Notes </p>
         </div>
-        <div class="h-60 md:h-60 overflow-y-auto">
-            <ul>
-                <li v-for="(item, index) in notes" :key="index" class="flex justify-between items-center hover:bg-gray-100 p-2">
-                    <span class="cursor-pointer"> {{ item.name }} </span>
+        <div class="h-full overflow-y-auto">
+            <ul class="mt-2 space-y-2">
+                <li v-for="(item, index) in notesFilteredByFolder" :key="index" class="flex justify-between items-center hover:bg-gray-100 px-2">
+                    <Link :href="route('notes.show', { id: item.id })" class="cursor-pointer truncate mr-5"> {{ item.label }} </Link>
                     <Dropdown>
                         <template v-slot:trigger>
                             <span class="material-symbols-outlined text-lg cursor-pointer"> more_horiz </span>
@@ -14,14 +14,29 @@
                         <template v-slot:content>
                             <div class="flex flex-col px-3 py-1">
                                 <ul>
-                                    <li class="flex items-center gap-2">
+                                    <Link
+                                        :href="route('notes.edit', { id: item.id })"
+                                        as="li"
+                                        class="
+                                            flex items-center gap-2 cursor-pointer
+                                            hover:bg-gray-50
+                                        "
+                                    >
                                         <span class="material-symbols-outlined text-lg"> edit </span>
                                         <span> Edit </span>
-                                    </li>
-                                    <li class="flex items-center gap-2">
+                                    </Link>
+                                    <Link
+                                        :href="route('notes.destroy', { id: item.id })"
+                                        method="DELETE"
+                                        as="li"
+                                        class="
+                                            flex items-center gap-2 cursor-pointer
+                                            hover:bg-gray-50
+                                        "
+                                    >
                                         <span class="material-symbols-outlined text-lg"> delete </span>
                                         <span> Delete </span>
-                                    </li>
+                                    </Link>
                                 </ul>
                             </div>
                         </template>
@@ -34,37 +49,20 @@
 
 <script setup>
 import Dropdown from '@/Components/Dropdown.vue'
+import { useGeneralStore } from '@/Stores/index'
+import { computed } from 'vue';
+import { Link } from '@inertiajs/vue3';
 
-var notes = [
-    {
-        id: 1,
-        name: 'Note 1'
-    },
-    {
-        id: 2,
-        name: 'Note 2'
-    },
-    {
-        id: 3,
-        name: 'Note 3'
-    },
-    {
-        id: 4,
-        name: 'Note 4'
-    },
-    {
-        id: 5,
-        name: 'Note 5'
-    },
-    {
-        id: 6,
-        name: 'Note 6'
-    },
-    {
-        id: 7,
-        name: 'Note 7'
-    },
-]
+const generalStore = useGeneralStore()
+
+const notesFilteredByFolder = computed(() => {
+    if (generalStore.selectedFolderId == 0) {
+        return generalStore.notes
+    }
+    else {
+        return generalStore.notes.filter(item => item.folder_id == generalStore.selectedFolderId )
+    }
+})
 </script>
 
 <style lang="scss" scoped>

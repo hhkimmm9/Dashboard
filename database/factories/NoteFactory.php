@@ -17,7 +17,11 @@ class NoteFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => 1,
+            'folder_id' => null,
+            'is_folder' => false,
+            'label' => fake()->sentence(),
+            'content' => fake()->paragraph()
         ];
     }
 }
