@@ -15,7 +15,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import NotesLayout from '@/Layouts/NotesLayout.vue'
 import { useGeneralStore } from '@/Stores/index'
-import { onMounted } from 'vue';
+import { watchEffect } from 'vue';
 
 const props = defineProps([
     'notes',
@@ -24,10 +24,11 @@ const props = defineProps([
 
 const generalStore = useGeneralStore()
 
-onMounted(() => {
+watchEffect(() => {
     generalStore.notes = props.notes
-    generalStore.folders = props.folders
+    generalStore.folders = props.folders   
 })
+
 
 </script>
 
