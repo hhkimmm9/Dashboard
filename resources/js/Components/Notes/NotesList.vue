@@ -5,7 +5,7 @@
         </div>
         <div class="h-full overflow-y-auto">
             <ul>
-                <li v-for="(item, index) in generalStore.notes" :key="index" class="flex justify-between items-center hover:bg-gray-100 p-2">
+                <li v-for="(item, index) in notesFilteredByFolder" :key="index" class="flex justify-between items-center hover:bg-gray-100 p-2">
                     <span class="cursor-pointer"> {{ item.label }} </span>
                     <Dropdown>
                         <template v-slot:trigger>
@@ -35,8 +35,18 @@
 <script setup>
 import Dropdown from '@/Components/Dropdown.vue'
 import { useGeneralStore } from '@/Stores/index'
+import { computed } from 'vue';
 
 const generalStore = useGeneralStore()
+
+const notesFilteredByFolder = computed(() => {
+    if (generalStore.selectedFolderId == 0) {
+        return generalStore.notes
+    }
+    else {
+        return generalStore.notes.filter(item => item.folder_id == generalStore.selectedFolderId )
+    }
+})
 </script>
 
 <style lang="scss" scoped>
