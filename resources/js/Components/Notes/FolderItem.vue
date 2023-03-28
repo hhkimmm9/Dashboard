@@ -1,6 +1,6 @@
 <template>
     <div v-if="!showEditor" @click="generalStore.selectedFolderId=folder.id"
-        class="flex justify-between items-center hover:bg-gray-200"
+        class="flex justify-between items-center hover:bg-gray-200 rounded-sm"
     >
         <div class="flex items-center gap-2 cursor-pointer truncate">
             <span v-if="generalStore.selectedFolderId==folder.id" class="material-symbols-outlined text-lg"> folder_open </span>
