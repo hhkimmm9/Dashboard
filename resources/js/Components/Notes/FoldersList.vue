@@ -1,31 +1,18 @@
 <template>
-    <div>
+    <div class="h-48 md:h-60 lg:h-full">
         <div class="bg-gray-300 p-2 text-center">
             <p class="font-bold text-2xl"> Folders </p>
         </div>
-        <div class="h-48 md:h-60 overflow-y-auto">
-            <ul>
-                <li v-for="(item, index) in folders" :key="index" class="flex justify-between items-center hover:bg-gray-200 p-2">
-                    <span class="cursor-pointer"> {{ item.name }} </span>
-                    <Dropdown>
-                        <template v-slot:trigger>
-                            <span class="material-symbols-outlined text-lg cursor-pointer"> more_horiz </span>
-                        </template>
-                        <template v-slot:content>
-                            <div class="flex flex-col px-3 py-1">
-                                <ul>
-                                    <li class="flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-lg"> edit </span>
-                                        <span> Edit </span>
-                                    </li>
-                                    <li class="flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-lg"> delete </span>
-                                        <span> Delete </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </template>
-                    </Dropdown>
+        <div class="h-full overflow-y-auto">
+            <ul class="mt-2 px-2 space-y-2">
+                <li @click="generalStore.selectedFolderId=0" class="hover:bg-gray-200 cursor-pointer flex items-center gap-2">
+                    <span v-if="generalStore.selectedFolderId == 0" class="material-symbols-outlined text-lg"> folder_open </span>
+                    <span v-else class="material-symbols-outlined text-lg"> folder </span>
+                    <span> All folders </span>
+                </li>
+                <li v-for="(item, index) in generalStore.folders" :key="index">
+                    <FolderItem :folder="item" />
+                    
                 </li>
             </ul>
         </div>
@@ -33,26 +20,10 @@
 </template>
 
 <script setup>
-import Dropdown from '@/Components/Dropdown.vue'
+import { useGeneralStore } from '@/Stores/index'
+import FolderItem from '@/Components/Notes/FolderItem.vue'
 
-var folders = [
-    {
-        id: 1,
-        name: 'Folder 1'
-    },
-    {
-        id: 2,
-        name: 'Folder 2'
-    },
-    {
-        id: 3,
-        name: 'Folder 3'
-    },
-    {
-        id: 4,
-        name: 'Folder 4'
-    },
-]
+const generalStore = useGeneralStore()
 
 </script>
 

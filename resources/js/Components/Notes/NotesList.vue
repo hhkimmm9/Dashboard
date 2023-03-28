@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="h-60 md:h-60 lg:h-full">
         <div class="bg-gray-400 p-2 text-center">
             <p class="font-bold text-2xl"> Notes </p>
         </div>
-        <div class="h-60 md:h-60 overflow-y-auto">
+        <div class="h-full overflow-y-auto">
             <ul>
-                <li v-for="(item, index) in notes" :key="index" class="flex justify-between items-center hover:bg-gray-100 p-2">
-                    <span class="cursor-pointer"> {{ item.name }} </span>
+                <li v-for="(item, index) in notesFilteredByFolder" :key="index" class="flex justify-between items-center hover:bg-gray-100 p-2">
+                    <span class="cursor-pointer"> {{ item.label }} </span>
                     <Dropdown>
                         <template v-slot:trigger>
                             <span class="material-symbols-outlined text-lg cursor-pointer"> more_horiz </span>
@@ -34,37 +34,19 @@
 
 <script setup>
 import Dropdown from '@/Components/Dropdown.vue'
+import { useGeneralStore } from '@/Stores/index'
+import { computed } from 'vue';
 
-var notes = [
-    {
-        id: 1,
-        name: 'Note 1'
-    },
-    {
-        id: 2,
-        name: 'Note 2'
-    },
-    {
-        id: 3,
-        name: 'Note 3'
-    },
-    {
-        id: 4,
-        name: 'Note 4'
-    },
-    {
-        id: 5,
-        name: 'Note 5'
-    },
-    {
-        id: 6,
-        name: 'Note 6'
-    },
-    {
-        id: 7,
-        name: 'Note 7'
-    },
-]
+const generalStore = useGeneralStore()
+
+const notesFilteredByFolder = computed(() => {
+    if (generalStore.selectedFolderId == 0) {
+        return generalStore.notes
+    }
+    else {
+        return generalStore.notes.filter(item => item.folder_id == generalStore.selectedFolderId )
+    }
+})
 </script>
 
 <style lang="scss" scoped>
