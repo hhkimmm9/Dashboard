@@ -7,7 +7,7 @@
                     <div class="flex flex-col gap-4">
                         <div>
                             <h3 class="text-2xl font-bold"> {{ note.label }} </h3>
-                            <div class="flex justify-between">
+                            <div class="flex justify-between items-center mt-2">
                                 <p> {{ dateFormat }} </p>
                                 <div class="flex gap-2">
                                     <Link :href="`/notes/${note.id}/edit`" class="material-symbols-outlined text-lg cursor-pointer"> edit </Link>
