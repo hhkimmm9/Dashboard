@@ -12,7 +12,8 @@
 </template>
 
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import NProgress from 'nprogress'
+import { Head, Link, router } from '@inertiajs/vue3';
 import NotesLayout from '@/Layouts/NotesLayout.vue'
 import { useGeneralStore } from '@/Stores/index'
 import { watchEffect } from 'vue';
@@ -21,6 +22,9 @@ const props = defineProps([
     'notes',
     'folders'
 ])
+
+router.on('start', () => NProgress.start())
+router.on('finish', () => NProgress.done())
 
 const generalStore = useGeneralStore()
 
