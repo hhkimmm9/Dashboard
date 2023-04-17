@@ -33,6 +33,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('myself', function () {
+    return Inertia::render('Static/Myself'); 
+});
+
 Route::get('/dashboard', function () {
 
     $today = now()->format('Y-m-d');
