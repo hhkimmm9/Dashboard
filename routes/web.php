@@ -37,6 +37,10 @@ Route::get('myself', function () {
     return Inertia::render('Static/Myself'); 
 });
 
+Route::get('how-built', function () {
+    return Inertia::render('Static/HowBuilt'); 
+});
+
 Route::get('/dashboard', function () {
 
     $today = now()->format('Y-m-d');

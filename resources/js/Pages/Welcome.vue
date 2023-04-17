@@ -21,6 +21,13 @@ defineProps({
                 class="text-sm text-gray-700 dark:text-gray-500 underline mr-4"
                 > About Myself
             </Link>
+
+            <Link
+                href="/how-built"
+                class="text-sm text-gray-700 dark:text-gray-500 underline mr-4"
+                > About This Website
+            </Link>
+            
             <Link
                 v-if="$page.props.auth.user"
                 :href="route('dashboard')"
