@@ -33,12 +33,12 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('myself', function () {
-    return Inertia::render('Static/Myself'); 
+Route::get('about-myself', function () {
+    return Inertia::render('Static/AboutMyself'); 
 });
 
-Route::get('how-built', function () {
-    return Inertia::render('Static/HowBuilt'); 
+Route::get('about-this-website', function () {
+    return Inertia::render('Static/AboutThisWebsite'); 
 });
 
 Route::get('/dashboard', function () {
