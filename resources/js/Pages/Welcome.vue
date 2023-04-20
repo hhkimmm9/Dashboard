@@ -17,6 +17,18 @@ defineProps({
     >
         <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             <Link
+                href="/about-myself"
+                class="text-sm text-gray-700 dark:text-gray-500 underline mr-4"
+                > About Myself
+            </Link>
+
+            <Link
+                href="/about-this-website"
+                class="text-sm text-gray-700 dark:text-gray-500 underline mr-4"
+                > About This Website
+            </Link>
+            
+            <Link
                 v-if="$page.props.auth.user"
                 :href="route('dashboard')"
                 class="text-sm text-gray-700 dark:text-gray-500 underline"

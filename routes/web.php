@@ -33,6 +33,14 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('about-myself', function () {
+    return Inertia::render('Static/AboutMyself'); 
+});
+
+Route::get('about-this-website', function () {
+    return Inertia::render('Static/AboutThisWebsite'); 
+});
+
 Route::get('/dashboard', function () {
 
     $today = now()->format('Y-m-d');
