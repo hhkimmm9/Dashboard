@@ -9,6 +9,11 @@ const useGeneralStore = defineStore('generalStore', {
                 icon_type: 'pass',
                 message: null,
             },
+            save: false,
+
+            notes: Array,
+            folders: Array,
+            selectedFolderId: null,
         }
     },
 
@@ -17,7 +22,10 @@ const useGeneralStore = defineStore('generalStore', {
     },
 
     actions: {
-
+        reset() {
+            // console.log('generalStore.reset() is called')
+            this.save = false
+        },
     }
 });
 

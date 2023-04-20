@@ -33,6 +33,14 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('about-myself', function () {
+    return Inertia::render('Static/AboutMyself'); 
+});
+
+Route::get('about-this-website', function () {
+    return Inertia::render('Static/AboutThisWebsite'); 
+});
+
 Route::get('/dashboard', function () {
 
     $today = now()->format('Y-m-d');
@@ -56,6 +64,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('blocksix', TaskController::class);
 
     Route::resource('comment', CommentController::class);
+    
+    Route::resource('notes', NoteController::class);
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/settings/history', [SettingsController::class, 'history'])->name('settings.history');
