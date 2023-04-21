@@ -1,3 +1,3 @@
 <template>
-    logo placeholder
+    <!--  -->
 </template>

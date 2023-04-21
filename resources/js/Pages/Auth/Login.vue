@@ -4,8 +4,13 @@ import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import { useGeneralStore } from '@/Stores/index'
+import { router } from '@inertiajs/vue3'
+import { useTippy } from 'vue-tippy';
+import { ref } from '@vue/reactivity';
 
 defineProps({
     canResetPassword: Boolean,
@@ -18,11 +23,27 @@ const form = useForm({
     remember: false,
 });
 
+const generalStore = useGeneralStore();
+
 const submit = () => {
     form.post(route('login'), {
         onFinish: () => form.reset('password'),
     });
 };
+
+function turnGuestModeOn() {
+    generalStore.guestMode = true;
+    router.get('/welcome');
+};
+
+// const guestModeNotice = ref();
+// useTippy(guestModeNotice, {
+//     content: "Limited features available only",
+//     placement: 'top',
+//     animation: 'shift-away',
+//     theme: 'light',
+//     duration: [300, 0],
+// })
 </script>
 
 <template>
@@ -65,14 +86,13 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex justify-between mt-4">
+                <div class="block">
+                    <label class="flex items-center">
+                        <Checkbox name="remember" v-model:checked="form.remember" />
+                        <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                    </label>
+                </div>
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
@@ -80,8 +100,19 @@ const submit = () => {
                 >
                     Forgot your password?
                 </Link>
+            </div>
 
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="flex items-center justify-end mt-5">
+                
+
+                <SecondaryButton ref="guestModeNotice" @click="turnGuestModeOn"
+                    class="ml-4 whitespace-nowrap"
+                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                >
+                    Contiues as a guest
+                </SecondaryButton>
+
+                <PrimaryButton class="ml-4 whitespace-nowrap" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
                 </PrimaryButton>
             </div>
