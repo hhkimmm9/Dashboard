@@ -14,6 +14,8 @@ const useGeneralStore = defineStore('generalStore', {
             notes: Array,
             folders: Array,
             selectedFolderId: null,
+
+            guestMode: false,
         }
     },
 

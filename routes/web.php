@@ -25,20 +25,20 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', function () {
+    return Inertia::render('Static/AboutMyself'); 
+});
+
+Route::get('about-this-website', function () {
+    return Inertia::render('Static/AboutThisWebsite'); 
+});
+
+Route::get('welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
-
-Route::get('about-myself', function () {
-    return Inertia::render('Static/AboutMyself'); 
-});
-
-Route::get('about-this-website', function () {
-    return Inertia::render('Static/AboutThisWebsite'); 
 });
 
 Route::get('/dashboard', function () {
