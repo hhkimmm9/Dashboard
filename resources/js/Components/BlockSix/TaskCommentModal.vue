@@ -1,5 +1,5 @@
 <template>
-    <Modal :show="layoutStore.open_comment_modal">
+    <Modal :show="layoutStore.openCommentModal">
         <div class="space-y-3 p-5">
             <div class="flex space-x-2">
                 <div class="bg-yellow-200 px-2 text-violet-500 font-bold rounded-md">Keyword</div>
@@ -58,8 +58,8 @@ const layoutStore = useLayoutStore();
 const generalStore = useGeneralStore();
 
 const onCloseModal = () => {
-    layoutStore.open_comment_modal = false;
-    generalStore.modal_target_container = null;
+    layoutStore.openCommentModal = false;
+    generalStore.modalTargetContainer = null;
 };
 
 </script>

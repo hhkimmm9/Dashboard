@@ -33,7 +33,7 @@ const layoutStore = useLayoutStore();
 const generalStore = useGeneralStore();
 
 const isTodaysTasksCreated = computed(() => {
-    return generalStore.is_todays_tasks_created ? '/blocksix' : '/blocksix/create';
+    return generalStore.isTodaysTasksCreated ? '/blocksix' : '/blocksix/create';
 });
 
 var modules = [

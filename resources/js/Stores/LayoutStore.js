@@ -3,9 +3,15 @@ import { defineStore } from 'pinia';
 const useLayoutStore = defineStore('layoutStore', {
     state: () => ({
         showDock: true,
+        openCommentModal: false,
+        openQuickEditModal: false,
+
+        // Notifications
         show_notification: true,
-        open_comment_modal: false,
-        open_quick_edit_modal: false,
+        notification: {
+            icon_type: 'pass',
+            message: null,
+        },
 
         // Notes
         showSidePanels: true,
