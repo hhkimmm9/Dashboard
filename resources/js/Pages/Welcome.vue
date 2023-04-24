@@ -45,7 +45,15 @@ defineProps({
                 </div>
                 
                 <div class="mt-10">
-                    <Link href="/about-this-website" class="border p-2 rounded-lg hover:bg-gray-100"> About This Website </Link>
+                    <div class="flex flex-col gap-3">
+                        <Link href="/about-this-website"
+                            class="border p-2 rounded-lg hover:bg-gray-100"
+                        > About This Website </Link>
+
+                        <Link href="/try-chat-gpt"
+                        class="border p-2 rounded-lg hover:bg-gray-100"
+                        > Wanna try ChatGPT? 🤖 </Link>
+                    </div>
                 </div>
             </span>
         </div>
