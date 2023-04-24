@@ -157,9 +157,8 @@ const isOnBlockSix = computed(() => {
                 <Dock />
             </div>
 
-            <div v-if="layoutStore.show_notification" class="fixed right-10 bottom-10">
-                <Notification />
-            </div>
+
+            <Notification v-if="layoutStore.showNotification" class="fixed right-10 bottom-10" />
         </div>
     </div>
 </template>

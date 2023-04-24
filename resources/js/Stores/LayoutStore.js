@@ -7,9 +7,9 @@ const useLayoutStore = defineStore('layoutStore', {
         openQuickEditModal: false,
 
         // Notifications
-        show_notification: true,
+        showNotification: false,
         notification: {
-            icon_type: 'pass',
+            type: 'success',
             message: null,
         },
 
