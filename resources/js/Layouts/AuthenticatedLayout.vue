@@ -23,7 +23,7 @@ const isOnBlockSix = computed(() => {
 
 <template>
     <div>
-        <div :class="['min-h-screen flex flex-col', isOnBlockSix ? 'bg-violet-100' : '']">
+        <div :class="'min-h-screen flex flex-col'">
             <nav class="absolute top-0 z-10 w-full">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -157,9 +157,8 @@ const isOnBlockSix = computed(() => {
                 <Dock />
             </div>
 
-            <div v-if="layoutStore.show_notification" class="fixed right-10 bottom-10">
-                <Notification />
-            </div>
+
+            <Notification v-if="layoutStore.showNotification" class="fixed right-10 bottom-10" />
         </div>
     </div>
 </template>

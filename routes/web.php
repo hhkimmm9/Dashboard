@@ -41,6 +41,10 @@ Route::get('welcome', function () {
     ]);
 });
 
+Route::get('try-chat-gpt', function () {
+    return Inertia::render('Guest/TryChatGPT');
+});
+
 Route::get('/dashboard', function () {
 
     $today = now()->format('Y-m-d');

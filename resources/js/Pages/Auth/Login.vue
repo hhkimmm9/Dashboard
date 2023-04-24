@@ -102,19 +102,26 @@ function turnGuestModeOn() {
                 </Link>
             </div>
 
-            <div class="flex items-center justify-end mt-5">
-                
-
+            <div class="flex items-center justify-between mt-5">
                 <SecondaryButton ref="guestModeNotice" @click="turnGuestModeOn"
-                    class="ml-4 whitespace-nowrap"
+                    class="whitespace-nowrap"
                     :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
                 >
                     Contiues as a guest
                 </SecondaryButton>
+                <div>
+                    <Link href="/register">
+                        <SecondaryButton class="ml-4 whitespace-nowrap"
+                            :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                        > Register </SecondaryButton>
+                    </Link>
+    
+    
+                    <PrimaryButton class="ml-4 whitespace-nowrap" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Log in
+                    </PrimaryButton>
+                </div>
 
-                <PrimaryButton class="ml-4 whitespace-nowrap" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </PrimaryButton>
             </div>
         </form>
     </GuestLayout>
