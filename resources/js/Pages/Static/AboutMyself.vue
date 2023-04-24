@@ -29,7 +29,7 @@
             </div>
             <div class="flex justify-center">
                 <Link href="/login" as="button" class="mt-14 text-2xl px-4 py-2 rounded-lg bg-gray-100 text-black hover:bg-gray-300 font-bold">
-                    Enter
+                    Enter (TEST)
                 </Link>
             </div>
         </section>
