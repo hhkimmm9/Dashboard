@@ -1,7 +1,7 @@
 <template>
     <div :class="['max-w-7xl flex flex-col mx-auto', layoutStore.showDock ? 'hidden' : '']">
         <!-- modules -->
-        <div class="w-full rounded-xl shadow-lg bg-gray-50 p-4 flex flex-row justify-around">
+        <div class="w-80 rounded-xl shadow-lg bg-gray-50 p-4 flex flex-row justify-around overflow-x-auto">
             <span v-for="(item, index) in modules" :key="index"
                 class="
                     px-2 cursor-pointer py-1 space-y-1 h-16 rounded
