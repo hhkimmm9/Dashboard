@@ -7,9 +7,7 @@
             <ul v-if="notesFilteredByFolder.length > 0" class="mt-2 space-y-2">
                 
                     <li v-for="(item, index) in notesFilteredByFolder" :key="index">
-                        <Link :href="`/notes/${item.id}`">
-                            <NoteItem :note="item" />
-                        </Link>
+                        <NoteItem :note="item" />
                     </li>
             </ul>
             <div v-else class="text-center mt-2">
