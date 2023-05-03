@@ -1,6 +1,8 @@
 <template>
     <div class="container max-w-7xl mx-auto h-full flex flex-row">
         <div class="grid grid-cols-12 w-full">
+
+            <!-- Folders -->
             <div v-if="layoutStore.showSidePanels"
                 class="
                     bg-gray-100 col-span-12
@@ -10,6 +12,8 @@
             >
                 <FoldersList />
             </div>
+
+            <!-- Notes -->
             <div v-if="layoutStore.showSidePanels"
                 class="
                     bg-gray-200 col-span-12
@@ -19,6 +23,8 @@
             >
                 <NotesList />
             </div>
+
+            <!-- Top navbar of Notes -->
             <div :class="[
                 'h-screen bg-gray-100 col-span-12',
                 layoutStore.showSidePanels
