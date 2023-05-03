@@ -15,9 +15,26 @@ class NoteController extends Controller
      */
     public function index()
     {
+        $notes = Note::query()
+            ->where('user_id', auth()->user()->id)
+            ->where('is_folder', 0)
+            // ->whereNot('deleted_at')
+            ->get();
+
+        $folders = Note::query()
+            ->where('user_id', auth()->user()->id)
+            ->where('is_folder', 1)
+            ->get();
+
+        $deleted_notes = Note::query()
+            ->where('user_id', auth()->user()->id)
+            ->onlyTrashed()
+            ->get();
+
         return Inertia::render('Note/Index', [
-            'notes' => Note::where('is_folder', 0)->get(),
-            'folders' => Note::where('is_folder', 1)->get(),
+            'notes' => $notes,
+            'folders' => $folders,
+            'deleted_notes' => $deleted_notes
         ]);
     }
 
@@ -39,19 +56,41 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'is_folder' => 'boolean',
-            'label' => 'string'
-        ]);
+        // a new folder
+        if ($request['is_folder']) {
+            $validated = $request->validate([
+                'is_folder' => 'boolean',
+                'label' => 'string'
+            ]);
 
-        $content = $request['content']['ops'][0]['insert'];
+            Note::create([
+                'user_id' => auth()->user()->id,
+                'is_folder' => $validated['is_folder'],
+                'label' => $validated['label']
+            ]);
+        }
 
-        Note::create([
-            'user_id' => auth()->user()->id,
-            'is_folder' => $validated['is_folder'],
-            'label' => $validated['label'],
-            'content' => $content,
-        ]);
+        // a new note
+        else {
+            $validated = $request->validate([
+                'is_folder' => 'boolean',
+                'label' => 'string',
+                'folder_id' => 'integer'
+            ]);
+
+            if (isset($request['content']['ops'][0]['insert'])) {
+                $content = $request['content']['ops'][0]['insert'];
+            }
+            else $content = "";
+    
+            Note::create([
+                'user_id' => auth()->user()->id,
+                'folder_id' => $validated['folder_id'],
+                'is_folder' => $validated['is_folder'],
+                'label' => $validated['label'],
+                'content' => $content,
+            ]);
+        }
 
         return redirect('notes');
     }
@@ -94,27 +133,26 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // update a folder
+        if ($request['is_folder'] == true) {
+            $validated = $request->validate([
+                'label' => 'string'
+            ]);
+
+            Note::find($id)->update([
+                'label' => $validated['label']
+            ]);
+        }
+
         // update a note
-        if (isset($request['content'])) {
+        else {
             $validated = $request->validate([
                 'label' => 'string',
-                'content' => 'string'
             ]);
     
             Note::find($id)->update([
                 'label' => $validated['label'],
-                'content' => $validated['content']
-            ]);
-        }
-
-        // update a folder
-        else {
-            $validated = $request->validate([
-                'folderName' => 'string'
-            ]);
-
-            Note::find($id)->update([
-                'label' => $validated['folderName'],
+                'content' => $request['content'],
             ]);
         }
 

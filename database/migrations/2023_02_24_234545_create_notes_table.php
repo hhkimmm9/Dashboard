@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('content')->nullable();
             
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

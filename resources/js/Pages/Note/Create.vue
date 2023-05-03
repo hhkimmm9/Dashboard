@@ -35,7 +35,7 @@ const form = useForm({
     label: null,
     content: null,
     is_folder: false,
-    folder_id: null,
+    folder_id: generalStore.selectedFolderId,
 })
 
 // https://vueup.github.io/vue-quill/api/events.html

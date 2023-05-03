@@ -3,7 +3,7 @@
         <Head title="Note (index)" />
         <AuthenticatedLayout class="relative">
             <NotesLayout>
-                <div class="h-full p-3">
+                <div class="h-full mt-2 text-center">
                     Welcome to Notes
                 </div>
             </NotesLayout>
@@ -20,7 +20,8 @@ import { watchEffect } from 'vue';
 
 const props = defineProps([
     'notes',
-    'folders'
+    'folders',
+    'deleted_notes'
 ])
 
 router.on('start', () => NProgress.start())
@@ -29,7 +30,6 @@ router.on('finish', () => NProgress.done())
 const generalStore = useGeneralStore()
 
 watchEffect(() => {
-    generalStore.selectedFolderId = 0
     generalStore.notes = props.notes
     generalStore.folders = props.folders   
 })

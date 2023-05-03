@@ -10,7 +10,7 @@ const useGeneralStore = defineStore('generalStore', {
 
             notes: Array,
             folders: Array,
-            selectedFolderId: null,
+            selectedFolderId: 0,
 
             guestMode: false,
         }
