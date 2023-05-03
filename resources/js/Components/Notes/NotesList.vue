@@ -4,7 +4,7 @@
             <p class="font-bold text-2xl"> Notes </p>
         </div>
         <div class="h-full overflow-y-auto">
-            <ul class="mt-2 space-y-2">
+            <ul v-if="notesFilteredByFolder.lenght > 0" class="mt-2 space-y-2">
                 <li v-for="(item, index) in notesFilteredByFolder" :key="index" class="flex justify-between items-center hover:bg-gray-100 px-2">
                     <Link :href="route('notes.show', { id: item.id })" class="cursor-pointer truncate mr-5"> {{ item.label }} </Link>
                     <Dropdown>
@@ -43,6 +43,9 @@
                     </Dropdown>
                 </li>
             </ul>
+            <div v-else class="text-center mt-2">
+                <p>Empty</p>
+            </div>
         </div>
     </div>
 </template>

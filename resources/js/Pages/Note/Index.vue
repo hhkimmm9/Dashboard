@@ -3,7 +3,7 @@
         <Head title="Note (index)" />
         <AuthenticatedLayout class="relative">
             <NotesLayout>
-                <div class="h-full p-3">
+                <div class="h-full mt-2 text-center">
                     Welcome to Notes
                 </div>
             </NotesLayout>
