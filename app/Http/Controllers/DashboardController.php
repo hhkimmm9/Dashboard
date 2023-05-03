@@ -21,12 +21,11 @@ class DashboardController extends Controller
 
         $recently_updated_notes = Note::query()
             ->where('user_id', auth()->user()->id)
-            ->get();
-            // 업데이트 된 순서대로 정렬해서 최근꺼 5개만 줘 봐
+            ->latest()->limit(5)->get();
 
         return Inertia::render('Dashboard', [
             'todays_tasks' => $todays_tasks,
-            'recently_updated_tasks' => $recently_updated_notes
+            'recently_updated_notes' => $recently_updated_notes
         ]);
     }
 }
