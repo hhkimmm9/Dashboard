@@ -15,9 +15,26 @@ class NoteController extends Controller
      */
     public function index()
     {
+        $notes = Note::query()
+            ->where('user_id', auth()->user()->id)
+            ->where('is_folder', 0)
+            // ->whereNot('deleted_at')
+            ->get();
+
+        $folders = Note::query()
+            ->where('user_id', auth()->user()->id)
+            ->where('is_folder', 1)
+            ->get();
+
+        $deleted_notes = Note::query()
+            ->where('user_id', auth()->user()->id)
+            ->onlyTrashed()
+            ->get();
+
         return Inertia::render('Note/Index', [
-            'notes' => Note::where('is_folder', 0)->get(),
-            'folders' => Note::where('is_folder', 1)->get(),
+            'notes' => $notes,
+            'folders' => $folders,
+            'deleted_notes' => $deleted_notes
         ]);
     }
 

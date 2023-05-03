@@ -20,7 +20,8 @@ import { watchEffect } from 'vue';
 
 const props = defineProps([
     'notes',
-    'folders'
+    'folders',
+    'deleted_notes'
 ])
 
 router.on('start', () => NProgress.start())
