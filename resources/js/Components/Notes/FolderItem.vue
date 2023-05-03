@@ -42,7 +42,7 @@
         </Dropdown>
     </div>
     <div v-else class="flex justify-between gap-2">
-        <TextInput @update:modelValue="$event => form.folderName=$event" :value="folder.label" class="pl-2 py-1 w-full rounded-sm" />
+        <TextInput @update:modelValue="$event => form.label=$event" :value="folder.label" class="pl-2 py-1 w-full rounded-sm" />
         <div class="flex items-center">
             <span @click="updateFolderName(folder.id)" class="material-symbols-outlined cursor-pointer hover:shadow hover:bg-gray-200"> done </span>
             <span @click="showEditor = false" class="material-symbols-outlined cursor-pointer hover:shadow hover:bg-gray-200"> close </span> 
@@ -64,7 +64,8 @@ const generalStore = useGeneralStore()
 const showEditor = ref(false)
 
 const form = useForm({
-    folderName: '',
+    label: true,
+    is_folder: true,
 })
 
 function updateFolderName(id) {

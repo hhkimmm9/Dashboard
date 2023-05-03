@@ -92,7 +92,6 @@ class NoteController extends Controller
             ]);
         }
 
-
         return redirect('notes');
     }
 
@@ -134,27 +133,31 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // update a note
-        if (isset($request['content'])) {
+        // update a folder
+        if ($request['is_folder'] == true) {
             $validated = $request->validate([
-                'label' => 'string',
-                'content' => 'string'
+                'label' => 'string'
             ]);
-    
+
             Note::find($id)->update([
-                'label' => $validated['label'],
-                'content' => $validated['content']
+                'label' => $validated['label']
             ]);
         }
 
-        // update a folder
+        // update a note
         else {
             $validated = $request->validate([
-                'folderName' => 'string'
+                'label' => 'string',
             ]);
 
+            if (isset($request['content']['ops'][0]['insert'])) {
+                $content = $request['content']['ops'][0]['insert'];
+            }
+            else $content = "";
+    
             Note::find($id)->update([
-                'label' => $validated['folderName'],
+                'label' => $validated['label'],
+                'content' => $content,
             ]);
         }
 
