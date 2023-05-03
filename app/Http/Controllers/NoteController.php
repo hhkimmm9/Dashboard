@@ -149,15 +149,10 @@ class NoteController extends Controller
             $validated = $request->validate([
                 'label' => 'string',
             ]);
-
-            if (isset($request['content']['ops'][0]['insert'])) {
-                $content = $request['content']['ops'][0]['insert'];
-            }
-            else $content = "";
     
             Note::find($id)->update([
                 'label' => $validated['label'],
-                'content' => $content,
+                'content' => $request['content'],
             ]);
         }
 
