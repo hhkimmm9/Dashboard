@@ -61,7 +61,10 @@ class NoteController extends Controller
                 'folder_id' => 'integer'
             ]);
 
-            $content = $request['content']['ops'][0]['insert'];
+            if (isset($request['content']['ops'][0]['insert'])) {
+                $content = $request['content']['ops'][0]['insert'];
+            }
+            else $content = "";
     
             Note::create([
                 'user_id' => auth()->user()->id,
