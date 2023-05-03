@@ -5,14 +5,30 @@
         </div>
         <div class="h-full overflow-y-auto">
             <ul class="mt-2 px-2 space-y-2">
-                <li @click="generalStore.selectedFolderId=0" class="hover:bg-gray-200 cursor-pointer flex items-center gap-2">
-                    <span v-if="generalStore.selectedFolderId == 0" class="material-symbols-outlined text-lg"> folder_open </span>
-                    <span v-else class="material-symbols-outlined text-lg"> folder </span>
+                <!-- all folders -->
+                <li @click="generalStore.selectedFolderId=0"
+                    class="hover:bg-gray-200 cursor-pointer flex items-center gap-2"
+                >
+                    <span v-if="generalStore.selectedFolderId == 0"
+                        class="material-symbols-outlined text-lg"
+                    > folder_open </span>
+                    <span v-else
+                        class="material-symbols-outlined text-lg"
+                    > folder </span>
                     <span> All folders </span>
                 </li>
-                <li v-for="(item, index) in generalStore.folders" :key="index">
-                    <FolderItem :folder="item" />
-                    
+
+                <!-- general folders -->
+                <li v-for="item in generalStore.folders" :key="item.id"
+                    @click="generalStore.selectedFolderId=item.id"
+                > <FolderItem :folder="item" /> </li>
+
+                <!-- deleted folders -->
+                <li @click="generalStore.selectedFolderId=-1"
+                    class="hover:bg-gray-200 cursor-pointer flex items-center gap-2"
+                >
+                    <span class="material-symbols-outlined text-lg"> delete </span>
+                    Deleted folders
                 </li>
             </ul>
         </div>
