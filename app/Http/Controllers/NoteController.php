@@ -44,14 +44,25 @@ class NoteController extends Controller
             'label' => 'string'
         ]);
 
-        $content = $request['content']['ops'][0]['insert'];
+        if ($request['is_folder']) {
+            Note::create([
+                'user_id' => auth()->user()->id,
+                'is_folder' => $validated['is_folder'],
+                'label' => $validated['label']
+            ]);
+        }
+        else {
+            $content = $request['content']['ops'][0]['insert'];
+    
+            Note::create([
+                'user_id' => auth()->user()->id,
+                'folder_id' => null,
+                'is_folder' => $validated['is_folder'],
+                'label' => $validated['label'],
+                'content' => $content,
+            ]);
+        }
 
-        Note::create([
-            'user_id' => auth()->user()->id,
-            'is_folder' => $validated['is_folder'],
-            'label' => $validated['label'],
-            'content' => $content,
-        ]);
 
         return redirect('notes');
     }
