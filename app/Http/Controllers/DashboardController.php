@@ -21,6 +21,7 @@ class DashboardController extends Controller
 
         $recently_updated_notes = Note::query()
             ->where('user_id', auth()->user()->id)
+            ->where('is_folder', false)
             ->latest()->limit(5)->get();
 
         return Inertia::render('Dashboard', [
