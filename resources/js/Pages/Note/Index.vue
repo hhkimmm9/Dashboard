@@ -29,7 +29,6 @@ router.on('finish', () => NProgress.done())
 const generalStore = useGeneralStore()
 
 watchEffect(() => {
-    generalStore.selectedFolderId = 0
     generalStore.notes = props.notes
     generalStore.folders = props.folders   
 })
