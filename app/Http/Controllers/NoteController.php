@@ -39,24 +39,33 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'is_folder' => 'boolean',
-            'label' => 'string'
-        ]);
-
+        // a new folder
         if ($request['is_folder']) {
+            $validated = $request->validate([
+                'is_folder' => 'boolean',
+                'label' => 'string'
+            ]);
+
             Note::create([
                 'user_id' => auth()->user()->id,
                 'is_folder' => $validated['is_folder'],
                 'label' => $validated['label']
             ]);
         }
+
+        // a new note
         else {
+            $validated = $request->validate([
+                'is_folder' => 'boolean',
+                'label' => 'string',
+                'folder_id' => 'integer'
+            ]);
+
             $content = $request['content']['ops'][0]['insert'];
     
             Note::create([
                 'user_id' => auth()->user()->id,
-                'folder_id' => null,
+                'folder_id' => $validated['folder_id'],
                 'is_folder' => $validated['is_folder'],
                 'label' => $validated['label'],
                 'content' => $content,
